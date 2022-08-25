@@ -1,5 +1,7 @@
 import './App.css';
-import Navbar from './components/Navbar';
+import Sidebar from './Components/Sidebar/Sidebar';
+import Navbar from './Components/Navbar/Navbar';
+import Lsidebar from './Components/LandingSidebar/Lsidebar';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 // BrowserRouter aliased as Router to your app.js file in order to wrap all the other components
 // BrowserRouter is a parent component and can have only single child
@@ -10,7 +12,9 @@ function App() {
   return (
     <div className='App'>
       <Router>
-        <Navbar />
+        {/* <Sidebar /> */}
+        {/* <Navbar /> */}
+        <Lsidebar />
         <Routes>
           <Route path='/' />  
         </Routes>      
