@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 // will only re-render updated components matched with the URL path of the Route without reloading. 
 // It helps the Single-Page Applications to work faster while routing.
 import { sidebarData } from './SidebarData';
-import './Navbar.css'
-import {IconContext} from 'react-icons';
+import './Sidebar.css'
+// import {IconContext} from 'react-icons';
 
 function Navbar() {
     
@@ -16,9 +16,6 @@ function Navbar() {
     
     return (
     <div>
-        {/* Customize all the icons */}
-        <IconContext.Provider value={{color: '#fff'}}>
-            
             {/* Navbar */}
             <div className='navbar'>
                 <Link to="#" className="menu-bars"> 
@@ -49,7 +46,6 @@ function Navbar() {
                 </ul>
             
             </nav>
-        </IconContext.Provider>
     </div>
   )
 }
