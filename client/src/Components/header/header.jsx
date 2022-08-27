@@ -10,7 +10,7 @@ function header() {
           <table className='element-container'>
             <tr>
               <td>
-                <input type={'text'} placeholder="Search" className='search'></input>
+                <input type={'text'} placeholder="Search by title, author, ISBN & topic" className='search'></input>
               </td>
               <td>
                 <a href='#' className='search-logo'>

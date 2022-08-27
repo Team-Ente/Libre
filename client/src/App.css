@@ -4,7 +4,7 @@
     width: 100vw;
     display: grid; 
     /* Table representation required */
-    grid-template: 1fr 5fr 1fr / 1fr 6fr;
+    grid-template: 1fr 5fr 1fr / 1fr 4fr;
     /* Displaying the dimensions of the grid */
     grid-template-areas: 
     "logo header"
@@ -29,10 +29,23 @@
 }
 
 .content {
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
     grid-area: content;
+    margin-left: 50px;
 }
 .footer {
     background-color: brown;
     grid-area: footer;
+}
+
+.books {
+    display: flex;
+    gap: 50px;
+    /* flex-wrap: wrap; */
+    /* align-items: flex-start; */
+    margin-bottom: 60px;
+}
+.group {
+    margin-bottom: 20px;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
