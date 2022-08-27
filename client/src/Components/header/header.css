@@ -5,17 +5,17 @@
 }
 
 .children1 {
-    width: 90%;
+    width: 95%;
     /* background: green; */
 }
 
 .children2 {
-    width: 10%;
+    width: 5%;
     margin: auto;
     /* background: yellow; */
 }
 .box-container {
-    width: 90%;
+    width: 95%;
     height: 42px;
     border: 1px solid gray;
     padding: 0px 10px;
