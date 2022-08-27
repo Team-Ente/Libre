@@ -8,8 +8,8 @@ app.use(Express.urlencoded({ extended: false }));
 
 var results = DbService.getAllBooks();
 
-app.get("/books/data_communication_and_networking", (req, res) => {
-    
+app.get("/books/*", (req, res) => {
+    console.log(req["url"]);
     results.then((books) => {
         EPub.createAsync("files/" + books[1]["title"])
         .then(function (epub)
