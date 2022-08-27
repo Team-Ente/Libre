@@ -11,10 +11,6 @@ function Lsidebar() {
   return (
     <div className='header'>
         <div className='side-nav'>
-            <a href='#' className='logo'>
-                <i><IcoIcons.ImBooks /></i>
-                <p>Libre</p>
-            </a>
             <ul className='nav-links'>
                 <li><a href='#'><i><AiIcons.AiFillHome /></i><p>Home</p></a></li>
                 <li><a href='#'><i><FaIcons.FaRegCompass /></i><p>Discover</p></a></li>

@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    /* z-index: 1; */
+}
+.header {
+    background: #fff;
+}
+.side-nav {
+    background: #fff;
+    margin-top: 180px;
+    top: 0;
+    left: 0;
+    padding: 30px 30px;
+    position: fixed;
+}
+.nav-links {
+    list-style: none;
+    position: absolute;
+}
+.nav-links li {
+    padding: 10px 0px;
+}
+.nav-links li a {
+    color: black;
+    text-decoration: none;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    /* transition: 0.3s; */
+}
+.nav-links li a i {
+    font-size: 30px;
+    margin-right: 20px;
+}
+
+/* .nav-links li:hover a {
+    color: #fff;
+    transition: 0.5s;
+    background-color: #0d74F5;
+    border-radius: 6px;
+    box-shadow: 0px 5px 10px rgba(255,255,255,0.4);  
+} */
+
+.active {
+    background: #0d74F5;
+    width: 100%;
+    height: 47px;
+    position: absolute;
+    left: 0;
+    top: 3%;
+    z-index: -1;
+    border-radius: 6px;
+    box-shadow: 0px 5px 10px rgba(255,255,255,0.4);  
+    display: none;
+    transition: top 0.3s;
+}
+
+.nav-links li:hover a {
+    color: #fff;
+    transition: 0.3s;
+}
+
+.nav-links li:hover ~ .active {
+    display: block;
+}
+
+.nav-links li:nth-child(1):hover ~ .active {
+    top: 3%;
+}
+
+.nav-links li:nth-child(2):hover ~ .active {
+    top: 23%;
+}
+.nav-links li:nth-child(3):hover ~ .active {
+    top: 43%;
+}
+.nav-links li:nth-child(4):hover ~ .active {
+    top: 63%;
+}
+.nav-links li:nth-child(5):hover ~ .active {
+    top: 83%;
+}

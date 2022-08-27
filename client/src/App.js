@@ -1,24 +1,17 @@
 import './App.css';
-import Sidebar from './Components/Sidebar/Sidebar';
-import Navbar from './Components/Navbar/Navbar';
-import Lsidebar from './Components/LandingSidebar/Lsidebar';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-// BrowserRouter aliased as Router to your app.js file in order to wrap all the other components
-// BrowserRouter is a parent component and can have only single child
-// To render a single component, wrap all the routes inside the Routes Component
-// Route component will now help us to establish the link between component’s UI and the URL
-
+import Logo from './Components/Logo/logo';
+import Header from './Components/header/header';
+import Sidenav from './Components/Sidenav/Sidenav';
 function App() {
   return (
     <div className='App'>
-      <Router>
-        {/* <Sidebar /> */}
-        {/* <Navbar /> */}
-        <Lsidebar />
-        <Routes>
-          <Route path='/' />  
-        </Routes>      
-      </Router>
+        <div className='container'>
+          <div className='logo'><Logo /><Sidenav /></div>
+          <div className='header'><Header /></div>
+          {/* <div className='nav'><Sidenav /></div> */}
+          <div className='content'>Content</div>
+          <div className='footer'>footer</div>
+        </div>
     </div>
   );
 }
