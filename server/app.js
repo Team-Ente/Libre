@@ -6,28 +6,43 @@ const DbService = require('./DBService');
 
 app.use(Express.urlencoded({ extended: false }));
 
-var results = DbService.getAllBooks();
 
-app.get("/books/*", (req, res) => {
-    console.log(req["url"]);
-    results.then((books) => {
-        EPub.createAsync("files/" + books[1]["title"])
-        .then(function (epub)
-        {
-            epub.getFile(epub.metadata.cover, (err, coverData, mimeType) => {
-                var json = epub.metadata;
-                json["cover"] = Buffer.from(coverData).toString('base64');
-                res.send(`<div><h3>`+json["title"]+`</h3><p>`+json["creator"]+`</p>
-                        <img src="data:${mimeType};base64,${json['cover']}"/></div>`);
-                // res.send(json);
-            });
-        })
-        .catch(function (err)
-        {
-            console.log("ERROR\n-----");
-            throw err;
-        });
-    })
+async function getBookData(book) {
+    const epub = await EPub.createAsync("files/" + book["title"] + ".epub")
+    const [coverData, mimeType] = await epub.getFileAsync(epub.metadata.cover);
+    var json = epub.metadata;
+    json["cover"] = Buffer.from(coverData).toString('base64');
+    return json;
+
+    // for future purposes DO NOT DELETE... YOU WILL REGRET IT LATER
+    // retJson[json.title] = `<div><h3>`+json["title"]+`</h3><p>`+json["creator"]+`</p>
+    // <img src="data:${mimeType};base64,${json['cover']}"/></div>`;
+}
+
+app.get("/books*", async (req, res) => {
+    const title = req.path.substring(7);
+    console.log(title);
+    if(title === ""){
+        var books = await DbService.getAllBooks();
+        var retJson = [];
+        for (const book of books) {
+            const json = await getBookData(book);
+            retJson.push(json);
+        }
+
+        console.log("done");
+        res.send(retJson);        
+    } else {
+        var books = await DbService.getOneBook(title);
+        var retJson = [];
+        for (const book of books) {
+            const json = await getBookData(book);
+            retJson.push(json);
+        }
+        
+        console.log("done");
+        res.send(retJson);
+    }
     
 });
 
