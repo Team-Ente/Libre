@@ -4,7 +4,9 @@
   /* width: 90%; */
   /* justify-content: space-around;  */
 }
-
+#title {
+  font-size: 22px;
+}
 .card {
   width: 250px;
   height: 360px;
