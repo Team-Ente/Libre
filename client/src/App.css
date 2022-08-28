@@ -37,15 +37,3 @@
     background-color: brown;
     grid-area: footer;
 }
-
-.books {
-    display: flex;
-    gap: 50px;
-    /* flex-wrap: wrap; */
-    /* align-items: flex-start; */
-    margin-bottom: 60px;
-}
-.group {
-    margin-bottom: 20px;
-    font-family: "Montserrat", Arial, Helvetica, sans-serif;
-}
