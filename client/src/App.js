@@ -29,7 +29,7 @@ function App() {
               </Routes>
             </AnimatePresence>
           </div>
-          <div className='footer'>footer</div>
+          {/* <div className='footer'>footer</div> */}
         </div>
     </div>
     
