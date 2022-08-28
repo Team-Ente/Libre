@@ -1,31 +1,20 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Book from '../Components/Book/Book';
 import './Home.css';
 import Animation from './Animation';
 
-function createBookList(book) {
-    const imgUrl = "data:" + book.mimeType + ";base64," + book.cover;
-    return <Book 
-        img = {imgUrl}
-        title = {book.title}
-        author = {book.creator}
-        year = {2001}
-    />
-}
-
 function Home() {
 
-    const [readingList, setReadingList] = React.useState([]);
+    const [readingList, setReadingList] = useState([]);
     // const [trendingList, setTrendingList] = useState([]);
     // const [reacentList, setRecentList] = useState([]);
     // const [editorsPickList, setEditorsPickList] = useState([]);
 
 
-    React.useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
             const result = await fetch("http://localhost:3050/books");
             const jsonResult = await result.json();
-            console.log(jsonResult);
 
             setReadingList(jsonResult);
         }
@@ -35,12 +24,19 @@ function Home() {
     return (
     <Animation>
         <div>
-            <h2 className='group'>Now Reading</h2>
+            <h2 className='group'>Now Reading {readingList.length} Books</h2>
             <div className='books'>
 
-                {readingList.map(createBookList)}
+                {readingList.map((book) => 
+                    <Book 
+                        img = {"data:" + book.mimeType + ";base64," + book.cover}
+                        title = {book.title}
+                        author = {book.creator}
+                        year = {2001}
+                    />
+                )}
 
-                <Book
+                {/* <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
                     title='The Dictatorship Syndrome'
                     author='Alaa Al Aswany'
@@ -51,7 +47,7 @@ function Home() {
                     title='Boikoter Jibon'
                     author='Sami Khan'
                     year='2022'
-                />
+                /> */}
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
                     title='Boikoter Jibon'
