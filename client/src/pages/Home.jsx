@@ -35,7 +35,7 @@ function Home() {
     return (
     <Animation>
         <div>
-            <h2 className='group'>Now Reading</h2>
+            <h2 >Now Reading</h2>
             <div className='books'>
 
                 {readingList.map(createBookList)}
@@ -48,25 +48,25 @@ function Home() {
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'                         
                     year='2022'
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
             </div>
 
-            <h2 className='group'>Trending</h2>
+            <h2>Trending</h2>
             <div className='books'>
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
@@ -76,25 +76,25 @@ function Home() {
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
             </div>
 
-            <h2 className='group'>Recently Added</h2>
+            <h2>Recently Added</h2>
             <div className='books'>
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
@@ -104,25 +104,25 @@ function Home() {
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
             </div>
 
-            <h2 className='group'>Editors Pick</h2>
+            <h2>Editors Pick</h2>
             <div className='books'>
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
@@ -132,19 +132,19 @@ function Home() {
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
