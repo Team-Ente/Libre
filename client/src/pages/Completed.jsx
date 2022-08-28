@@ -1,10 +1,12 @@
 import React from 'react';
 import './Completed.css';
 import Book from '../Components/Book/Book';
+import Animation from './Animation';
 
 function Completed() {
     return (
-        <div className='group'>
+        <Animation>
+            <div className='group'>
             <h2>The Books You've Read</h2>
             <div className='books'>
                     <Book
@@ -33,6 +35,8 @@ function Completed() {
                     />
                 </div>
         </div>
+    </Animation>
+        
       )
 }
 
