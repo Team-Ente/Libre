@@ -1,6 +1,7 @@
 import React from 'react';
 import Book from '../Components/Book/Book';
 import './Home.css';
+import Animation from './Animation';
 
 function createBookList(book) {
     const imgUrl = "data:" + book.mimeType + ";base64," + book.cover;
@@ -32,6 +33,7 @@ function Home() {
     }, []);
 
     return (
+    <Animation>
         <div>
             <h2 className='group'>Now Reading</h2>
             <div className='books'>
@@ -53,7 +55,7 @@ function Home() {
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
                     title='Boikoter Jibon'
-                    author='Sami Khan'
+                    author='Sami Khan'                         
                     year='2022'
                 />
                 <Book
@@ -149,6 +151,8 @@ function Home() {
             </div>
 
         </div>
+    </Animation>
+    
     )
 }
 
