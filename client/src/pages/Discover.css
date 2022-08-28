@@ -1,0 +1,23 @@
+
+.items {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(3, 300px);
+    grid-template-rows: repeat(8, 80px);
+    margin-left: 100px;
+}
+.item {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.item p {
+    margin-left: 10px;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
