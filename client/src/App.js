@@ -15,9 +15,9 @@ function App() {
           <div className='logo'><Logo /><Sidenav /></div>
           <div className='header'><Header /></div>
           <div className='content'>    
-            <Discover />      
             <Routes>
               <Route exact path='/' element={<Home />} />
+              <Route exact path='/discover' element={<Discover />} />
               <Route exact path='/reading' element={<Reading />} /> 
             </Routes>
           </div>
