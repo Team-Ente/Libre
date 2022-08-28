@@ -34,24 +34,35 @@ async function getBookData(book) {
  * sends the metadata of the books as response
  */
 app.get("/books*", async (req, res) => {
+    // For CORS error
+    res.set({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials" : true 
+    });
+
     const title = req.path.substring(7);
     if(title === ""){
         // get all books
         var books = await DbService.getAllBooks();
-        var retJson = [];
+        var retJson = {
+            "books": []
+        };
         for (const book of books) {
             const json = await getBookData(book);
-            retJson.push(json);
+            retJson["books"].push(json);
         }
 
         res.send(retJson);        
     } else {
         // get all books containing `title` 
         var books = await DbService.getLikeBook(title);
-        var retJson = [];
+        var retJson = {
+            "books": []
+        };
         for (const book of books) {
             const json = await getBookData(book);
-            retJson.push(json);
+            retJson["books"].push(json);
         }
         
         res.send(retJson);
