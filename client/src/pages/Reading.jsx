@@ -16,19 +16,19 @@ function Reading() {
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
                 <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Boikoter Jibon'
+                    title='Liberation'
                     author='Sami Khan'
                     year='2022'
                 />
