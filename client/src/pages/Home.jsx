@@ -1,9 +1,10 @@
 import React from 'react';
 import Book from '../Components/Book/Book';
 import './Home.css';
-
+import Animation from './Animation';
 function Home() {
     return (
+    <Animation>
         <div>
             <h2 className='group'>Now Reading</h2>
             <div className='books'>
@@ -118,6 +119,8 @@ function Home() {
             </div>
 
         </div>
+    </Animation>
+    
     )
 }
 

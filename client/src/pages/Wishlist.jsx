@@ -1,9 +1,10 @@
 import React from 'react';
 import './Wishlist.css';
 import Book from '../Components/Book/Book';
-
+import Animation from './Animation';
 function Wishlist() {
     return (
+        <Animation>
         <div className='group'>
             <h2>Your Bucket List</h2>
             <div className='books'>
@@ -33,6 +34,7 @@ function Wishlist() {
                     />
                 </div>
         </div>
+        </Animation>
       )
 }
 

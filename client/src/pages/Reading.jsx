@@ -1,9 +1,10 @@
 import React from 'react';
 import Book from '../Components/Book/Book';
 import './Reading.css';
-
+import Animation from './Animation';
 function Reading() {
   return (
+    <Animation>
     <div className='group'>
         <h2>Resume From Where you left</h2>
         <div className='books'>
@@ -33,6 +34,7 @@ function Reading() {
                 />
             </div>
     </div>
+    </Animation>
   )
 }
 

@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Discover from './pages/Discover.jsx';
 import Wishlist from './pages/Wishlist';
 import Completed from './pages/Completed';
+import { AnimatePresense } from 'framer-motion';
 
 function App() {
   return (
