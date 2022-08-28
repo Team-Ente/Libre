@@ -5,6 +5,7 @@ import Sidenav from './Components/Sidenav/Sidenav';
 import Home from './pages/Home.jsx';
 import Reading from './pages/Reading';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Discover from './pages/Discover.jsx';
 function App() {
   return (
     <BrowserRouter>
@@ -13,7 +14,8 @@ function App() {
         <div className='container'>
           <div className='logo'><Logo /><Sidenav /></div>
           <div className='header'><Header /></div>
-          <div className='content'>          
+          <div className='content'>    
+            <Discover />      
             <Routes>
               <Route exact path='/' element={<Home />} />
               <Route exact path='/reading' element={<Reading />} /> 
