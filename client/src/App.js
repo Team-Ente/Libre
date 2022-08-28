@@ -10,6 +10,7 @@ import Wishlist from './pages/Wishlist';
 import Completed from './pages/Completed';
 
 function App() {
+
   return (
     <BrowserRouter>
 

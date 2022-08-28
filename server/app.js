@@ -20,6 +20,7 @@ async function getBookData(book) {
     const [coverData, mimeType] = await epub.getFileAsync(epub.metadata.cover);
     var json = epub.metadata;
     json["cover"] = Buffer.from(coverData).toString('base64');
+    json["mimeType"] = mimeType;
     return json;
 
     // for future purposes DO NOT DELETE... YOU WILL REGRET IT LATER
