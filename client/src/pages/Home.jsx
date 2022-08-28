@@ -3,20 +3,31 @@ import Book from '../Components/Book/Book';
 import './Home.css';
 import Animation from './Animation';
 
+function getBook(book) {
+    return (<Book 
+                img = {"data:" + book.mimeType + ";base64," + book.cover}
+                title = {book.title}
+                author = {book.creator}
+                year = {2001}
+            />);
+}
+
 function Home() {
 
     const [readingList, setReadingList] = useState([]);
-    // const [trendingList, setTrendingList] = useState([]);
-    // const [reacentList, setRecentList] = useState([]);
-    // const [editorsPickList, setEditorsPickList] = useState([]);
+    const [trendingList, setTrendingList] = useState([]);
+    const [recentList, setRecentList] = useState([]);
+    const [editorsPickList, setEditorsPickList] = useState([]);
 
 
     useEffect(() => {
         const fetchData = async () => {
             const result = await fetch("http://localhost:3050/books");
             const jsonResult = await result.json();
-
-            setReadingList(jsonResult);
+            setReadingList(jsonResult["books"]);
+            setTrendingList(jsonResult["books"]);
+            setRecentList(jsonResult["books"]);
+            setEditorsPickList(jsonResult["books"]);
         }
         fetchData();
     }, []);
@@ -24,17 +35,10 @@ function Home() {
     return (
     <Animation>
         <div>
-            <h2 >Now Reading</h2>
+            <h2 >Now Reading {readingList.length} books</h2>
             <div className='books'>
 
-                {readingList.map((book) => 
-                    <Book 
-                        img = {"data:" + book.mimeType + ";base64," + book.cover}
-                        title = {book.title}
-                        author = {book.creator}
-                        year = {2001}
-                    />
-                )}
+                {readingList.map(getBook)}
 
                 {/* <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
@@ -48,7 +52,7 @@ function Home() {
                     author='Sami Khan'
                     year='2022'
                 /> */}
-                <Book
+                {/* <Book
                     img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
                     title='Liberation'
                     author='Sami Khan'                         
@@ -59,91 +63,22 @@ function Home() {
                     title='Liberation'
                     author='Sami Khan'
                     year='2022'
-                />
+                /> */}
             </div>
 
             <h2>Trending</h2>
             <div className='books'>
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='The Dictatorship Syndrome'
-                    author='Alaa Al Aswany'
-                    year='2019'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                />
+                {trendingList.map(getBook)}
             </div>
 
             <h2>Recently Added</h2>
             <div className='books'>
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='The Dictatorship Syndrome'
-                    author='Alaa Al Aswany'
-                    year='2019'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                />
+                {recentList.map(getBook)}
             </div>
 
             <h2>Editors Pick</h2>
             <div className='books'>
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='The Dictatorship Syndrome'
-                    author='Alaa Al Aswany'
-                    year='2019'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                />
+                {editorsPickList.map(getBook)}
             </div>
 
         </div>
