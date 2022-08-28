@@ -16,6 +16,11 @@ connection.connect((err) => {
 
 class DbService {
 
+    /**
+     * 
+     * @returns list of all book paths
+     * 
+     */
     static async getAllBooks() {
         try {
             const response = await new Promise((resolve, reject) => {
@@ -33,10 +38,16 @@ class DbService {
         }
     }
 
-    static async getOneBook(title) {
+    /**
+     * 
+     * @param {string} title 
+     * @returns array of strings
+     * get all books containing `title`
+     */
+    static async getLikeBook(title) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM `book_info` WHERE `title` = '" + title + "';";
+                const query = "SELECT * FROM `book_info` WHERE `title` LIKE '%" + title + "%';";
                 connection.query(
                     query, 
                     (err, results) => {

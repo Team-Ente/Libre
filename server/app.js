@@ -6,7 +6,15 @@ const DbService = require('./DBService');
 
 app.use(Express.urlencoded({ extended: false }));
 
-
+/**
+ * getBookData(book_name: string) -> json
+ * 
+ * Returns the metadata of the book in json format
+ * 'cover' image is set as base64 encoding of the buffer
+ * to read 'cover' use:
+ * <img src="data:${mimeType};base64,${json['cover']}"/>
+ * 
+*/
 async function getBookData(book) {
     const epub = await EPub.createAsync("files/" + book["title"] + ".epub")
     const [coverData, mimeType] = await epub.getFileAsync(epub.metadata.cover);
@@ -19,10 +27,15 @@ async function getBookData(book) {
     // <img src="data:${mimeType};base64,${json['cover']}"/></div>`;
 }
 
+/**
+ * GET request in /books endpoint
+ * use /books/`book_name` to get a specific book
+ * sends the metadata of the books as response
+ */
 app.get("/books*", async (req, res) => {
     const title = req.path.substring(7);
-    console.log(title);
     if(title === ""){
+        // get all books
         var books = await DbService.getAllBooks();
         var retJson = [];
         for (const book of books) {
@@ -30,17 +43,16 @@ app.get("/books*", async (req, res) => {
             retJson.push(json);
         }
 
-        console.log("done");
         res.send(retJson);        
     } else {
-        var books = await DbService.getOneBook(title);
+        // get all books containing `title` 
+        var books = await DbService.getLikeBook(title);
         var retJson = [];
         for (const book of books) {
             const json = await getBookData(book);
             retJson.push(json);
         }
         
-        console.log("done");
         res.send(retJson);
     }
     
