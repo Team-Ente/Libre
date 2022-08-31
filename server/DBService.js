@@ -21,10 +21,61 @@ class DbService {
      * @returns list of all book paths
      * 
      */
-    static async getAllBooks() {
+    static async getAllBooks(count) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM book_info;";
+                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+
+                connection.execute(query, (err, results) => {
+                    if (err) reject(new Error(err.message));
+                    resolve(results);
+                })
+            });
+            // console.log(response);
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static async getRecentBooks(count) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+
+                connection.execute(query, (err, results) => {
+                    if (err) reject(new Error(err.message));
+                    resolve(results);
+                })
+            });
+            // console.log(response);
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static async getTrendingBooks(count) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+
+                connection.execute(query, (err, results) => {
+                    if (err) reject(new Error(err.message));
+                    resolve(results);
+                })
+            });
+            // console.log(response);
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static async getEditorsPickBooks(count) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "SELECT * FROM book_info LIMIT " + count + ";";
 
                 connection.execute(query, (err, results) => {
                     if (err) reject(new Error(err.message));
