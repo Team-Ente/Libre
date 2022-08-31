@@ -29,11 +29,37 @@ async function getBookData(book) {
 }
 
 /**
+ * 
+ * @param {query_type} qType 
+ * @param {query_argument} qArg 
+ * @returns list of books matching criteria
+ * Get a list of books following query_type. If searching by string query_argument is a string
+ */
+async function getBookList(qType, qArg) {
+    const books = await new Promise((resolve, reject) => {
+        if (qType === "all") 
+            resolve(DbService.getAllBooks(qArg));
+        else if (qType === "recent") 
+            resolve(DbService.getRecentBooks(qArg));
+        else if (qType === "trending") 
+            resolve(DbService.getTrendingBooks(qArg));
+        else if (qType === "editor") 
+            resolve(DbService.getEditorsPickBooks(qArg));
+        else if (qType === "search") 
+            resolve(DbService.getLikeBooks(qArg));
+        else 
+            reject(new Error("invalid request"));
+    });
+    return books;
+}
+
+
+/**
  * GET request in /books endpoint
  * use /books/`book_name` to get a specific book
  * sends the metadata of the books as response
  */
-app.get("/books*", async (req, res) => {
+app.get("/books/:qType/:qArg", async (req, res) => {
     // For CORS error
     res.set({
         "Content-Type": "application/json",
@@ -41,33 +67,20 @@ app.get("/books*", async (req, res) => {
         "Access-Control-Allow-Credentials" : true 
     });
 
-    const title = req.path.substring(7);
-    if(title === ""){
-        // get all books
-        var books = await DbService.getAllBooks();
-        var retJson = {
-            "books": []
-        };
-        for (const book of books) {
-            const json = await getBookData(book);
-            retJson["books"].push(json);
-        }
+    const qType = req.params.qType;  // The type of query (list criteria)
+    const qArg = req.params.qArg;  // The second argument of query (query_amount or query_string)
+ 
+    // Initialize empty return JSON
+    var retJson = {
+        "books": []
+    };
 
-        res.send(retJson);        
-    } else {
-        // get all books containing `title` 
-        var books = await DbService.getLikeBook(title);
-        var retJson = {
-            "books": []
-        };
-        for (const book of books) {
-            const json = await getBookData(book);
-            retJson["books"].push(json);
-        }
-        
-        res.send(retJson);
+    let books = await getBookList(qType, qArg); 
+    for (const book of books) {
+        const json = await getBookData(book);
+        retJson["books"].push(json);
     }
-    
+    res.send(retJson);
 });
 
 app.listen(3050, "localhost", () => {

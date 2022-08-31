@@ -22,13 +22,35 @@ function Home() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await fetch("http://localhost:3050/books");
-            const jsonResult = await result.json();
-            setReadingList(jsonResult["books"]);
-            setTrendingList(jsonResult["books"]);
-            setRecentList(jsonResult["books"]);
-            setEditorsPickList(jsonResult["books"]);
-        }
+            fetch("http://localhost:3050/books/all/4").then((result) => {
+                result.json().then((jsonResult) => {
+                    setReadingList(jsonResult.books);
+                });
+            }, (reason) => {
+                console.log(reason);
+            });
+            fetch("http://localhost:3050/books/trending/4").then((result) => {
+                result.json().then((jsonResult) => {
+                    setTrendingList(jsonResult.books);
+                });
+            }, (reason) => {
+                console.log(reason);
+            });
+            fetch("http://localhost:3050/books/recent/4").then((result) => {
+                result.json().then((jsonResult) => {
+                    setRecentList(jsonResult.books);
+                });
+            }, (reason) => {
+                console.log(reason);
+            });
+            fetch("http://localhost:3050/books/editor/4").then((result) => {
+                result.json().then((jsonResult) => {
+                    setEditorsPickList(jsonResult.books);
+                });
+            }, (reason) => {
+                console.log(reason);
+            });
+        };
         fetchData();
     }, []);
 
