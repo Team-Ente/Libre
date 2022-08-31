@@ -71,7 +71,7 @@ app.get("/books/:qType/:qArg", async (req, res) => {
     const qArg = req.params.qArg;  // The second argument of query (query_amount or query_string)
  
     // Initialize empty return JSON
-    var retJson = {
+    let retJson = {
         "books": []
     };
 
@@ -81,6 +81,39 @@ app.get("/books/:qType/:qArg", async (req, res) => {
         retJson["books"].push(json);
     }
     res.send(retJson);
+});
+
+/**
+ * get list of chapters of a book
+ * The list is rendered from the server
+ */
+app.get("/read/:bookName", async (req, res) => {
+    
+    const bookName = req.params.bookName;
+    // const chapterId = req.params.chapterId;
+
+    // let ret = {"chapters":[]};
+    let retHTML = "";
+
+    const epub = await EPub.createAsync("files/" + bookName + ".epub")
+    epub.flow.forEach((ch)=> retHTML += `<a href="/read/`+ bookName + "/" + ch.id + `">` + ch.title + `</a><br>`);
+    res.send(retHTML);
+
+});
+
+/**
+ * get a specific chapter of a book
+ * The chapter is rendered from the server
+ */
+app.get("/read/:bookName/:chapterId", async (req, res) => {
+    
+    const bookName = req.params.bookName;
+    const chapterId = req.params.chapterId;
+
+    const epub = await EPub.createAsync("files/" + bookName + ".epub")
+    const chapter = await epub.getChapterAsync(chapterId);
+    
+    res.send(chapter);
 });
 
 app.listen(3050, "localhost", () => {
