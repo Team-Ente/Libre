@@ -1,5 +1,5 @@
 import React from 'react';
-import Book from '../Components/Book/Book';
+import Book from '../../Components/Book/Book';
 import './Reading.css';
 import Animation from './Animation';
 function Reading() {
