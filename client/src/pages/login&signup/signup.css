@@ -5,13 +5,6 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-body{
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(120deg,#999966, #996633);
-  height: 100vh;
-  overflow: hidden;
-}
 .center{
   position: absolute;
   top: 50%;
