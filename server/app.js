@@ -1,5 +1,6 @@
 const Express = require("express");
 const EPub = require('epub2').EPub;
+const parse = require('node-html-parser').parse;
 const app = Express();
 
 const DbService = require('./DBService');
@@ -90,13 +91,12 @@ app.get("/books/:qType/:qArg", async (req, res) => {
 app.get("/read/:bookName", async (req, res) => {
     
     const bookName = req.params.bookName;
-    // const chapterId = req.params.chapterId;
 
-    // let ret = {"chapters":[]};
     let retHTML = "";
 
     const epub = await EPub.createAsync("files/" + bookName + ".epub")
-    epub.flow.forEach((ch)=> retHTML += `<a href="/read/`+ bookName + "/" + ch.id + `">` + ch.title + `</a><br>`);
+    epub.flow.forEach((ch)=> retHTML += ch.title ? `<a href="/read/`+ bookName + "/" + ch.id + `">` + ch.title + `</a><br>` : '');
+
     res.send(retHTML);
 
 });
@@ -113,7 +113,17 @@ app.get("/read/:bookName/:chapterId", async (req, res) => {
     const epub = await EPub.createAsync("files/" + bookName + ".epub")
     const chapter = await epub.getChapterAsync(chapterId);
     
-    res.send(chapter);
+    const root = parse(chapter);
+
+    const images = root.getElementsByTagName('img');
+
+    for(let i=0; i<images.length; i++) {
+        const imgId = Object.values(epub.manifest).find(o => images[i].attrs.src.endsWith(o.href)).id;
+        const [imageBuffer, mimeType] = await epub.getFileAsync(imgId);
+        images[i].setAttribute("src", "data:" + mimeType + ";base64," + imageBuffer.toString('base64'));
+    }
+    
+    res.send(root.innerHTML);
 });
 
 app.listen(3050, "localhost", () => {
