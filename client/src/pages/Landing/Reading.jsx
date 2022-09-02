@@ -1,37 +1,30 @@
-import React from 'react';
-import Book from '../../Components/Book/Book';
+import React, {useState, useEffect} from 'react';
+import {getBook} from '../../Components/Book/Book';
 import './Reading.css';
 import Animation from './Animation';
-function Reading() {
+function Reading() {  
+    const [readingList, setReadingList] = useState([]);
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            fetch("http://localhost:3050/books/all/4").then((result) => {
+                result.json().then((jsonResult) => {
+                    setReadingList(jsonResult.books);
+                });
+            }, (reason) => {
+                console.log(reason);
+            });
+        };
+        fetchData();
+    }, []);
+
   return (
     <Animation>
     <div className='group'>
         <h2>Resume From Where you left</h2>
         <div className='books'>
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='The Dictatorship Syndrome'
-                    author='Alaa Al Aswany'
-                    year='2019'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                />
+            {readingList.map(getBook)}
             </div>
     </div>
     </Animation>
