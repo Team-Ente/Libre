@@ -113,9 +113,9 @@ app.get("/read/:bookName/:chapterId", async (req, res) => {
     const epub = await EPub.createAsync("files/" + bookName + ".epub")
     const chapter = await epub.getChapterAsync(chapterId);
     
-    const root = parse(chapter);
+    const chapterElement = parse(chapter);
 
-    const images = root.getElementsByTagName('img');
+    const images = chapterElement.getElementsByTagName('img');
 
     for(let i=0; i<images.length; i++) {
         const imgId = Object.values(epub.manifest).find(o => images[i].attrs.src.endsWith(o.href)).id;
@@ -123,7 +123,7 @@ app.get("/read/:bookName/:chapterId", async (req, res) => {
         images[i].setAttribute("src", "data:" + mimeType + ";base64," + imageBuffer.toString('base64'));
     }
     
-    res.send(root.innerHTML);
+    res.send(chapterElement.innerHTML);
 });
 
 app.listen(3050, "localhost", () => {
