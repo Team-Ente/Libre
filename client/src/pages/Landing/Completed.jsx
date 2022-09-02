@@ -1,38 +1,31 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './Completed.css';
-import Book from '../../Components/Book/Book';
+import {getBook} from '../../Components/Book/Book';
 import Animation from './Animation';
 
 function Completed() {
+
+    const [completedList, setCompletedList] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            fetch("http://localhost:3050/books/completed/4").then((result) => {
+                result.json().then((jsonResult) => {
+                    setCompletedList(jsonResult.books);
+                });
+            }, (reason) => {
+                console.log(reason);
+            });
+        };
+        fetchData();
+    }, []);
+
     return (
         <Animation>
             <div className='group'>
             <h2>The Books You've Read</h2>
             <div className='books'>
-                    <Book
-                        img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                        title='The Dictatorship Syndrome'
-                        author='Alaa Al Aswany'
-                        year='2019'
-                    />
-                    <Book
-                        img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                        title='Liberation'
-                        author='Sami Khan'
-                        year='2022'
-                    />
-                    <Book
-                        img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                        title='Liberation'
-                        author='Sami Khan'
-                        year='2022'
-                    />
-                    <Book
-                        img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                        title='Liberation'
-                        author='Sami Khan'
-                        year='2022'
-                    />
+                    {completedList.map(getBook)}
                 </div>
         </div>
     </Animation>

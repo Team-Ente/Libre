@@ -28,6 +28,7 @@ function App() {
                 <Route exact path='/discover' element={<Discover />} />
                 <Route exact path='/reading' element={<Reading />} />
                 <Route exact path='/wishlist' element={<Wishlist />} />
+                <Route exact path='/completed' element={<Completed />} />
               </Routes>
             </AnimatePresence>
           </div>

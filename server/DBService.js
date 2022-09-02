@@ -38,6 +38,23 @@ class DbService {
         }
     }
 
+    static async getReadingBooks(count) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+
+                connection.execute(query, (err, results) => {
+                    if (err) reject(new Error(err.message));
+                    resolve(results);
+                })
+            });
+            // console.log(response);
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     static async getRecentBooks(count) {
         try {
             const response = await new Promise((resolve, reject) => {
@@ -73,6 +90,40 @@ class DbService {
     }
 
     static async getEditorsPickBooks(count) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+
+                connection.execute(query, (err, results) => {
+                    if (err) reject(new Error(err.message));
+                    resolve(results);
+                })
+            });
+            // console.log(response);
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static async getCompletedBooks(count) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+
+                connection.execute(query, (err, results) => {
+                    if (err) reject(new Error(err.message));
+                    resolve(results);
+                })
+            });
+            // console.log(response);
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static async getBucketBooks(count) {
         try {
             const response = await new Promise((resolve, reject) => {
                 const query = "SELECT * FROM book_info LIMIT " + count + ";";

@@ -8,7 +8,7 @@ function Reading() {
 
     useEffect(() => {
         const fetchData = async () => {
-            fetch("http://localhost:3050/books/all/4").then((result) => {
+            fetch("http://localhost:3050/books/reading/4").then((result) => {
                 result.json().then((jsonResult) => {
                     setReadingList(jsonResult.books);
                 });
