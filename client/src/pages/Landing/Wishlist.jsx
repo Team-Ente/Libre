@@ -1,6 +1,6 @@
 import React from 'react';
 import './Wishlist.css';
-import Book from '../Components/Book/Book';
+import Book from '../../Components/Book/Book';
 import Animation from './Animation';
 function Wishlist() {
     return (

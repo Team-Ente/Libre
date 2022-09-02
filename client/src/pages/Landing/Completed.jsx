@@ -1,6 +1,6 @@
 import React from 'react';
 import './Completed.css';
-import Book from '../Components/Book/Book';
+import Book from '../../Components/Book/Book';
 import Animation from './Animation';
 
 function Completed() {

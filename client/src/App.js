@@ -2,18 +2,21 @@ import './App.css';
 import Logo from './Components/Logo/logo';
 import Header from './Components/header/header';
 import Sidenav from './Components/Sidenav/Sidenav';
-import Home from './pages/Home.jsx';
-import Reading from './pages/Reading';
+import Home from './pages/Landing/Home';
+import Reading from './pages/Landing/Reading';
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Discover from './pages/Discover.jsx';
-import Wishlist from './pages/Wishlist';
-import Completed from './pages/Completed';
+import Discover from './pages/Landing/Discover';
+import Wishlist from './pages/Landing/Wishlist';
+import Completed from './pages/Landing/Completed';
+import login from './pages/login&signup/login';
+import signup from './pages/login&signup/signup';
 import { AnimatePresence } from 'framer-motion';
 
 function App() {
 
   const location = useLocation();
   return (
+    
       <div className='App'>
         <div className='container'>
           <div className='logo'><Logo /><Sidenav /></div>
@@ -25,7 +28,6 @@ function App() {
                 <Route exact path='/discover' element={<Discover />} />
                 <Route exact path='/reading' element={<Reading />} />
                 <Route exact path='/wishlist' element={<Wishlist />} />
-                <Route exact path='/completed' element={<Completed />} />
               </Routes>
             </AnimatePresence>
           </div>
