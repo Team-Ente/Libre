@@ -42,12 +42,18 @@ async function getBookList(qType, qArg) {
             resolve(DbService.getAllBooks(qArg));
         else if (qType === "recent") 
             resolve(DbService.getRecentBooks(qArg));
+        else if (qType === "reading") 
+            resolve(DbService.getReadingBooks(qArg));
         else if (qType === "trending") 
             resolve(DbService.getTrendingBooks(qArg));
         else if (qType === "editor") 
             resolve(DbService.getEditorsPickBooks(qArg));
         else if (qType === "search") 
             resolve(DbService.getLikeBooks(qArg));
+        else if (qType === "completed") 
+            resolve(DbService.getCompletedBooks(qArg));
+        else if (qType === "bucket") 
+            resolve(DbService.getBucketBooks(qArg));
         else 
             reject(new Error("invalid request"));
     });

@@ -1,16 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import Book from '../../Components/Book/Book';
+import {getBook} from '../../Components/Book/Book';
 import './Home.css';
 import Animation from './Animation';
-
-function getBook(book) {
-    return (<Book 
-                img = {"data:" + book.mimeType + ";base64," + book.cover}
-                title = {book.title}
-                author = {book.creator}
-                year = {2001}
-            />);
-}
 
 function Home() {
 
@@ -22,7 +13,7 @@ function Home() {
 
     useEffect(() => {
         const fetchData = async () => {
-            fetch("http://localhost:3050/books/all/4").then((result) => {
+            fetch("http://localhost:3050/books/reading/4").then((result) => {
                 result.json().then((jsonResult) => {
                     setReadingList(jsonResult.books);
                 });
