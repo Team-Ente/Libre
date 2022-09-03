@@ -89,15 +89,23 @@ app.get("/books/:qType/:qArg", async (req, res) => {
  * The list is rendered from the server
  */
 app.get("/read/:bookName", async (req, res) => {
-    
+    // For CORS error
+    // res.set({
+    //     "Content-Type": "application/json",
+    //     "Access-Control-Allow-Origin": "*",
+    //     "Access-Control-Allow-Credentials" : true 
+    // });
+
     const bookName = req.params.bookName;
 
     let retHTML = "";
 
     const epub = await EPub.createAsync("files/" + bookName + ".epub")
-    epub.flow.forEach((ch)=> retHTML += ch.title ? `<a href="/read/`+ bookName + "/" + ch.id + `">` + ch.title + `</a><br>` : '');
+    epub.flow.forEach((ch)=> retHTML += `<a href="/read/`+ bookName + "/" + ch.id + `">` + (ch.title ? ch.title : '-') + `</a><br>`);
 
     res.send(retHTML);
+
+    // res.send(epub.flow);
 
 });
 
