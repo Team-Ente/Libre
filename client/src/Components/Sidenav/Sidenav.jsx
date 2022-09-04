@@ -12,7 +12,7 @@ function Sidenav() {
     <div className='header'>
     <div className='side-nav'>
         <ul className='nav-links'>
-            <li><Link to='/'><i><AiIcons.AiFillHome /></i><p>Home</p></Link></li>
+            <li><Link to='/home'><i><AiIcons.AiFillHome /></i><p>Home</p></Link></li>
             <li><Link to='/discover'><i><AiIcons.AiFillCompass /></i><p>Discover</p></Link></li>
             <li><Link to='/reading'><i><AiIcons.AiFillEye /></i><p>Reading</p></Link></li>
             <li><Link to='/wishlist'><i><BsIcons.BsFillBookmarkFill /></i><p>Wishlist</p></Link></li>

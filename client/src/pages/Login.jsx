@@ -1,7 +1,7 @@
 import React from 'react';
 import "./login.css";
 
-function login() {
+function Login() {
   return (
     <div>
         <div className="center">
@@ -10,7 +10,7 @@ function login() {
             <div className="txt_field">
             <input type="text" required />
             <span></span>
-            <label>Username</label>
+            <label>Email</label>
             </div>
             <div className="txt_field">
             <input type="password" required />
@@ -20,7 +20,7 @@ function login() {
             <div className="pass">Forgot Password?</div>
             <input type="submit" value="Login" />
             <div className="signup_link">
-            Not a member? <a href="#">Signup</a>
+            Not a member? <a href="/signup">Signup</a>
             </div>
         </form>
         </div>
@@ -28,4 +28,4 @@ function login() {
   )
 }
 
-export default login
+export default Login
