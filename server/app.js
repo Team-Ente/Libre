@@ -20,13 +20,9 @@ async function getBookData(book) {
     const epub = await EPub.createAsync("files/" + book["title"] + ".epub")
     const [coverData, mimeType] = await epub.getFileAsync(epub.metadata.cover);
     var json = epub.metadata;
-    json["cover"] = Buffer.from(coverData).toString('base64');
+    json["cover"] = coverData.toString('base64');
     json["mimeType"] = mimeType;
     return json;
-
-    // for future purposes DO NOT DELETE... YOU WILL REGRET IT LATER
-    // retJson[json.title] = `<div><h3>`+json["title"]+`</h3><p>`+json["creator"]+`</p>
-    // <img src="data:${mimeType};base64,${json['cover']}"/></div>`;
 }
 
 /**
@@ -82,54 +78,94 @@ app.get("/books/:qType/:qArg", async (req, res) => {
         "books": []
     };
 
-    let books = await getBookList(qType, qArg); 
-    for (const book of books) {
-        const json = await getBookData(book);
-        retJson["books"].push(json);
+    try {
+        let books = await getBookList(qType, qArg); 
+        for (const book of books) {
+            const json = await getBookData(book);
+            retJson["books"].push(json);
+        }
+        return res.status(200).send(retJson);    
+        
+    } catch (error) {
+        return res.status(404).send('invalid request');
     }
-    res.send(retJson);
+    
 });
 
 /**
  * get list of chapters of a book
- * The list is rendered from the server
+ * list sent as json
+ * all chapters including no title chapters
  */
 app.get("/read/:bookName", async (req, res) => {
-    
+    // For CORS error
+    res.set({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials" : true 
+    });
+
     const bookName = req.params.bookName;
+    try {
+        const epub = await EPub.createAsync("files/" + bookName + ".epub");
+    
+        // let retHTML = "";
+        // epub.flow.forEach((ch)=> retHTML += `<a href="/read/`+ bookName + "/" + ch.id + `">` + (ch.title ? ch.title : '-') + `</a><br>`);
 
-    let retHTML = "";
+        return res.status(200).send({'chapters' : epub.flow}); // all chapter including whose without title    
 
-    const epub = await EPub.createAsync("files/" + bookName + ".epub")
-    epub.flow.forEach((ch)=> retHTML += ch.title ? `<a href="/read/`+ bookName + "/" + ch.id + `">` + ch.title + `</a><br>` : '');
-
-    res.send(retHTML);
-
+    } catch (error) {
+        return res.status(404).send('Resource not found');
+    }
+    
 });
 
 /**
  * get a specific chapter of a book
- * The chapter is rendered from the server
+ * replace all img tag sources
+ * get stylesheet file
+ * send as string
  */
 app.get("/read/:bookName/:chapterId", async (req, res) => {
-    
+    // For CORS error
+    res.set({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials" : true 
+    });
+
+
     const bookName = req.params.bookName;
     const chapterId = req.params.chapterId;
-
-    const epub = await EPub.createAsync("files/" + bookName + ".epub")
-    const chapter = await epub.getChapterAsync(chapterId);
+    try {
+        const epub = await EPub.createAsync("files/" + bookName + ".epub");
+        // get style as string from all the css files in the epub
     
-    const chapterElement = parse(chapter);
+        let stylesheet = '';
+        const styles = Object.values(epub.manifest).filter(o => o["media-type"] === 'text/css');
+        for(let i=0; i<styles.length; i++){
+            const [cssBuffer, mimeType] = await epub.getFileAsync(styles[i].id);
+            stylesheet += cssBuffer.toString('utf-8');
+        }
 
-    const images = chapterElement.getElementsByTagName('img');
+        // get chapter from epub and parse
+        const chapter = await epub.getChapterAsync(chapterId);
+        const chapterElement = parse(chapter);
 
-    for(let i=0; i<images.length; i++) {
-        const imgId = Object.values(epub.manifest).find(o => images[i].attrs.src.endsWith(o.href)).id;
-        const [imageBuffer, mimeType] = await epub.getFileAsync(imgId);
-        images[i].setAttribute("src", "data:" + mimeType + ";base64," + imageBuffer.toString('base64'));
+        // replace all the image tag src with actual base64 buffer
+        const images = chapterElement.getElementsByTagName('img');
+        for(let i=0; i<images.length; i++) {
+            const imgId = Object.values(epub.manifest).find(o => images[i].attrs.src.endsWith(o.href)).id;
+            const [imageBuffer, mimeType] = await epub.getFileAsync(imgId);
+            images[i].setAttribute("src", "data:" + mimeType + ";base64," + imageBuffer.toString('base64'));
+        }
+
+        return res.status(200).send({'chapter' : chapterElement.innerHTML, 'style' : stylesheet});
+
+    } catch (error) {
+        return res.status(404).send('Resource not found');
     }
     
-    res.send(chapterElement.innerHTML);
 });
 
 app.listen(3050, "localhost", () => {
