@@ -5,7 +5,6 @@ import Animation from './Animation';
 function Reading() {  
     const [readingList, setReadingList] = useState([]);
 
-
     useEffect(() => {
         const fetchData = async () => {
             fetch("http://localhost:3050/books/reading/4").then((result) => {
