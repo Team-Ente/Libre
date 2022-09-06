@@ -1,9 +1,19 @@
-const Express = require("express");
-const EPub = require('epub2').EPub;
-const parse = require('node-html-parser').parse;
+import Express from "express";
+import { EPub } from 'epub2';
+import parse from "node-html-parser";
+
 const app = Express();
 
-const DbService = require('./DBService');
+import  {
+    getAllBooks, 
+    getRecentBooks, 
+    getReadingBooks, 
+    getTrendingBooks, 
+    getEditorsPickBooks, 
+    getLikeBooks, 
+    getCompletedBooks, 
+    getBucketBooks
+} from "./controllers/Books.js";
 
 app.use(Express.urlencoded({ extended: false }));
 
@@ -17,7 +27,7 @@ app.use(Express.urlencoded({ extended: false }));
  * 
 */
 async function getBookData(book) {
-    const epub = await EPub.createAsync("files/" + book["title"] + ".epub")
+    const epub = await EPub.createAsync("files/" + book.title + ".epub")
     const [coverData, mimeType] = await epub.getFileAsync(epub.metadata.cover);
     var json = epub.metadata;
     json["cover"] = coverData.toString('base64');
@@ -35,21 +45,21 @@ async function getBookData(book) {
 async function getBookList(qType, count, genre) {
     const books = await new Promise((resolve, reject) => {
         if (qType === "all") 
-            resolve(DbService.getAllBooks(count, genre));
+            resolve(getAllBooks(count, genre));
         else if (qType === "recent") 
-            resolve(DbService.getRecentBooks(count));
+            resolve(getRecentBooks(count));
         else if (qType === "reading") 
-            resolve(DbService.getReadingBooks(count));
+            resolve(getReadingBooks(count));
         else if (qType === "trending") 
-            resolve(DbService.getTrendingBooks(count));
+            resolve(getTrendingBooks(count));
         else if (qType === "editor") 
-            resolve(DbService.getEditorsPickBooks(count));
+            resolve(getEditorsPickBooks(count));
         else if (qType === "search") 
-            resolve(DbService.getLikeBooks(count, genre));
+            resolve(getLikeBooks(count, genre));
         else if (qType === "completed") 
-            resolve(DbService.getCompletedBooks(count));
+            resolve(getCompletedBooks(count));
         else if (qType === "bucket") 
-            resolve(DbService.getBucketBooks(count));
+            resolve(getBucketBooks(count));
         else 
             reject(new Error("invalid request"));
     });
