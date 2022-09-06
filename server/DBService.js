@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "1234",
-    database: "libre",
+    database: "libredbbeta",
 });
 
 connection.connect((err) => {
@@ -21,10 +21,10 @@ class DbService {
      * @returns list of all book paths
      * 
      */
-    static async getAllBooks(count) {
+    static async getAllBooks(count, genre) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+                const query = "SELECT * FROM book LIMIT " + count + ";";
 
                 connection.execute(query, (err, results) => {
                     if (err) reject(new Error(err.message));
@@ -41,7 +41,7 @@ class DbService {
     static async getReadingBooks(count) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+                const query = "SELECT * FROM book LIMIT " + count + ";";
 
                 connection.execute(query, (err, results) => {
                     if (err) reject(new Error(err.message));
@@ -58,7 +58,7 @@ class DbService {
     static async getRecentBooks(count) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+                const query = "SELECT * FROM book LIMIT " + count + ";";
 
                 connection.execute(query, (err, results) => {
                     if (err) reject(new Error(err.message));
@@ -75,7 +75,7 @@ class DbService {
     static async getTrendingBooks(count) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+                const query = "SELECT * FROM book LIMIT " + count + ";";
 
                 connection.execute(query, (err, results) => {
                     if (err) reject(new Error(err.message));
@@ -92,7 +92,7 @@ class DbService {
     static async getEditorsPickBooks(count) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+                const query = "SELECT * FROM book LIMIT " + count + ";";
 
                 connection.execute(query, (err, results) => {
                     if (err) reject(new Error(err.message));
@@ -109,7 +109,7 @@ class DbService {
     static async getCompletedBooks(count) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+                const query = "SELECT * FROM book LIMIT " + count + ";";
 
                 connection.execute(query, (err, results) => {
                     if (err) reject(new Error(err.message));
@@ -126,7 +126,7 @@ class DbService {
     static async getBucketBooks(count) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM book_info LIMIT " + count + ";";
+                const query = "SELECT * FROM book LIMIT " + count + ";";
 
                 connection.execute(query, (err, results) => {
                     if (err) reject(new Error(err.message));
@@ -146,10 +146,10 @@ class DbService {
      * @returns array of strings
      * get all books containing `title`
      */
-    static async getLikeBook(title) {
+    static async getLikeBook(title, genre) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM `book_info` WHERE `title` LIKE '%" + title + "%';";
+                const query = "SELECT * FROM `book` WHERE `title` LIKE '%" + title + "%';";
                 connection.query(
                     query, 
                     (err, results) => {
