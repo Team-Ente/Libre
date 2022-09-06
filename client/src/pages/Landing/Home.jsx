@@ -13,28 +13,28 @@ function Home() {
 
     useEffect(() => {
         const fetchData = async () => {
-            fetch("http://localhost:3050/books/reading/4").then((result) => {
+            fetch("http://localhost:3050/books/reading?count=4").then((result) => {
                 result.json().then((jsonResult) => {
                     setReadingList(jsonResult.books);
                 });
             }, (reason) => {
                 console.log(reason);
             });
-            fetch("http://localhost:3050/books/trending/4").then((result) => {
+            fetch("http://localhost:3050/books/trending?count=4").then((result) => {
                 result.json().then((jsonResult) => {
                     setTrendingList(jsonResult.books);
                 });
             }, (reason) => {
                 console.log(reason);
             });
-            fetch("http://localhost:3050/books/recent/4").then((result) => {
+            fetch("http://localhost:3050/books/recent?count=4").then((result) => {
                 result.json().then((jsonResult) => {
                     setRecentList(jsonResult.books);
                 });
             }, (reason) => {
                 console.log(reason);
             });
-            fetch("http://localhost:3050/books/editor/4").then((result) => {
+            fetch("http://localhost:3050/books/editor?count=4").then((result) => {
                 result.json().then((jsonResult) => {
                     setEditorsPickList(jsonResult.books);
                 });
@@ -53,30 +53,6 @@ function Home() {
 
                 {readingList.map(getBook)}
 
-                {/* <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='The Dictatorship Syndrome'
-                    author='Alaa Al Aswany'
-                    year='2019'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                /> */}
-                {/* <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'                         
-                    year='2022'
-                />
-                <Book
-                    img="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&fit=crop&w=667&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                    title='Liberation'
-                    author='Sami Khan'
-                    year='2022'
-                /> */}
             </div>
 
             <h2>Trending</h2>

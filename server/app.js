@@ -32,24 +32,24 @@ async function getBookData(book) {
  * @returns list of books matching criteria
  * Get a list of books following query_type. If searching by string query_argument is a string
  */
-async function getBookList(qType, qArg) {
+async function getBookList(qType, count, genre) {
     const books = await new Promise((resolve, reject) => {
         if (qType === "all") 
-            resolve(DbService.getAllBooks(qArg));
+            resolve(DbService.getAllBooks(count, genre));
         else if (qType === "recent") 
-            resolve(DbService.getRecentBooks(qArg));
+            resolve(DbService.getRecentBooks(count));
         else if (qType === "reading") 
-            resolve(DbService.getReadingBooks(qArg));
+            resolve(DbService.getReadingBooks(count));
         else if (qType === "trending") 
-            resolve(DbService.getTrendingBooks(qArg));
+            resolve(DbService.getTrendingBooks(count));
         else if (qType === "editor") 
-            resolve(DbService.getEditorsPickBooks(qArg));
+            resolve(DbService.getEditorsPickBooks(count));
         else if (qType === "search") 
-            resolve(DbService.getLikeBooks(qArg));
+            resolve(DbService.getLikeBooks(count, genre));
         else if (qType === "completed") 
-            resolve(DbService.getCompletedBooks(qArg));
+            resolve(DbService.getCompletedBooks(count));
         else if (qType === "bucket") 
-            resolve(DbService.getBucketBooks(qArg));
+            resolve(DbService.getBucketBooks(count));
         else 
             reject(new Error("invalid request"));
     });
@@ -62,7 +62,7 @@ async function getBookList(qType, qArg) {
  * use /books/`book_name` to get a specific book
  * sends the metadata of the books as response
  */
-app.get("/books/:qType/:qArg", async (req, res) => {
+app.get("/books/:qType", async (req, res) => {
     // For CORS error
     res.set({
         "Content-Type": "application/json",
@@ -71,15 +71,16 @@ app.get("/books/:qType/:qArg", async (req, res) => {
     });
 
     const qType = req.params.qType;  // The type of query (list criteria)
-    const qArg = req.params.qArg;  // The second argument of query (query_amount or query_string)
- 
+    const count = req.query.count ? Number(req.query.count) : 10;  // The number of results returned
+    const genre = req.query.genre ? req.query.genre.split(',') : []; // advanced search by filtering genre
+
     // Initialize empty return JSON
     let retJson = {
         "books": []
     };
 
     try {
-        let books = await getBookList(qType, qArg); 
+        let books = await getBookList(qType, count, genre); 
         for (const book of books) {
             const json = await getBookData(book);
             retJson["books"].push(json);
