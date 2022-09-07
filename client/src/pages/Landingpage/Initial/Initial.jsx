@@ -2,11 +2,13 @@ import React from 'react';
 import Discover from '../../Homepage/Discover/Discover';
 import Logo from '../../../Components/Logo/Logo';
 import * as IcoIcons from 'react-icons/im'; 
-
+import Animation from '../Animation';
 import './Initial.css';
 import { Link } from 'react-router-dom';
 function Topbar() {
   return (
+    <Animation>
+
     <div>
       <div className="top-row">
         
@@ -72,9 +74,9 @@ function Topbar() {
         </div>
         <Discover />
       </div>
-      
-
     </div>
+  </Animation>
+    
   )
 }
 

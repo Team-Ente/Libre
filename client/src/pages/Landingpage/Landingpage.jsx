@@ -10,8 +10,8 @@ function Landingpage() {
     <div>
       <Routes key={location.pathname} location={location}>
         <Route exact path = '/' element={<Initial />} />
-        <Route exact path = '/login' element={<Login />} />
-        <Route exact path = '/signup' element={<Signup />} />
+        <Route path = '/login' element={<Login />} />
+        <Route path = '/signup' element={<Signup />} />
       </Routes>
     </div>
   )
