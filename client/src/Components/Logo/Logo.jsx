@@ -1,8 +1,8 @@
 import React from 'react';
 import * as IcoIcons from 'react-icons/im'; 
-import './logo.css';
+import './Logo.css';
 
-function logo() {
+function Logo() {
   return (
     <div className='parent-logo'>
       <div class="child1">
@@ -16,4 +16,4 @@ function logo() {
   )
 }
 
-export default logo
+export default Logo

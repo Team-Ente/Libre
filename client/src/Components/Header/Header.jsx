@@ -1,6 +1,6 @@
 import React from 'react';
 import * as IcoIcons from 'react-icons/im'; 
-import './header.css';
+import './Header.css';
 
 function header() {
   return (

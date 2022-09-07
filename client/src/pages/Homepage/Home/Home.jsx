@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {getBook} from '../../Components/Book/Book';
+import {getBook} from '../../../Components/Book/Book';
 import './Home.css';
-import Animation from './Animation';
-
+import Animation from '../Animation';
 function Home() {
 
     const [readingList, setReadingList] = useState([]);

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './Wishlist.css';
-import {getBook} from '../../Components/Book/Book';
-import Animation from './Animation';
+import {getBook} from '../../../Components/Book/Book';
+import Animation from '../Animation';
 function Wishlist() {
 
     const [bucketList, setBucketList] = useState([]);

@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './Completed.css';
-import {getBook} from '../../Components/Book/Book';
-import Animation from './Animation';
-
+import {getBook} from '../../../Components/Book/Book';
+import Animation from '../Animation';
 function Completed() {
 
     const [completedList, setCompletedList] = useState([]);

@@ -9,8 +9,7 @@ import * as VsIcons from 'react-icons/vsc';
 import * as GrIcons from 'react-icons/gr';
 import * as MdIcons from 'react-icons/md';
 import * as IoIcons from 'react-icons/io5';
-import Animation from './Animation';
-
+import Animation from '../Animation';
 function Discover() {
   return (
     <Animation>
