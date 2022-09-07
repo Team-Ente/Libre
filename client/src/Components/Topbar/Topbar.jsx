@@ -39,7 +39,29 @@ function Topbar() {
             </tr>
           </table>
         </div>
+        <div className="showoff">
+          <div className='sitem'>
+            <img src="https://cdn-icons-png.flaticon.com/512/3389/3389081.png" alt="books" />
+            <p>Unlimited access to 900,000 books</p>
+          </div>
+
+          <div className='sitem'>
+            <img src="https://cdn-icons-png.flaticon.com/512/718/718970.png" alt="books" />
+            <p>Over 950 Topics and subtopics to choose from</p>
+          </div>
+
+          <div className='sitem'>
+            <img src="https://cdn-icons-png.flaticon.com/512/2443/2443649.png" alt="books" />
+            <p>Save your time using our built in Ebook Tools</p>
+          </div>
+
+          <div className='sitem'>
+            <img src="https://cdn-icons-png.flaticon.com/512/896/896317.png" alt="books" />
+            <p>Read anytime, anywhere, on any device</p>
+          </div>  
+        </div>
       </div>
+
       
 
     </div>
