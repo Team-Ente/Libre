@@ -39,6 +39,11 @@
 .search:focus {
     outline: none;
 }
+.search-logo {
+    font-size: 30px;
+    margin-left: -30px;
+    color: gray;
+}
 .logged-user {
     height: 40px;
     width: 40px;
@@ -46,8 +51,3 @@
     background-color: #0d74F5;
 }
 
-.search-logo {
-    font-size: 30px;
-    margin-left: -30px;
-    color: gray;
-}
