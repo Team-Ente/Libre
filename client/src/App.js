@@ -7,10 +7,10 @@ function App() {
   return (
       <div className='App'>
         <Landingpage />
-        <Routes key={location.pathname} location={location}>
-          <Route exact path='/' element={<Landingpage />} />
-          <Route exact path='/home' element={<Homepage />} />
-        </Routes>
+        {/* <Routes key={location.pathname} location={location}>
+          <Route path='/' element={<Landingpage />} />
+          <Route path='/home' element={<Homepage />} />
+        </Routes> */}
       </div>
   );
 }
