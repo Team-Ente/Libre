@@ -1,8 +1,10 @@
 import React from 'react';
-import Logo from '../Logo/Logo';
+import Discover from '../../Homepage/Discover/Discover';
+import Logo from '../../../Components/Logo/Logo';
 import * as IcoIcons from 'react-icons/im'; 
 
-import './Topbar.css';
+import './Initial.css';
+import { Link } from 'react-router-dom';
 function Topbar() {
   return (
     <div>
@@ -16,7 +18,7 @@ function Topbar() {
             <li>Discover</li>
             <li>Pricing</li>
             <li>Contact</li>
-            <li>Login</li>
+            <li><Link to='/login'>Login</Link></li>
           </ul>
           <p>Menu</p>
         </div>
@@ -39,6 +41,7 @@ function Topbar() {
             </tr>
           </table>
         </div>
+
         <div className="showoff">
           <div className='sitem'>
             <img src="https://cdn-icons-png.flaticon.com/512/3389/3389081.png" alt="books" />
@@ -62,6 +65,13 @@ function Topbar() {
         </div>
       </div>
 
+      <div className="discover">
+        <div className="dis-title">
+          <p>Go beyond your Reading list</p>
+          <p>View All topics</p>
+        </div>
+        <Discover />
+      </div>
       
 
     </div>

@@ -1,10 +1,15 @@
 import React from 'react';
-import "./signup.css";
+import * as IcoIcons from 'react-icons/im'; 
+import { Link } from 'react-router-dom';
+import "./Signup.css";
+import Animation from '../Animation';
 function Signup() {
   return (
-    <div>
+    <Animation>
+
+    <div className='Signup'>
         <div className="center">
-        <h1>Signup</h1>
+        <Link to='/'><h1 className='icon'><i className='libre-icon'><IcoIcons.ImBooks /></i>Signup</h1></Link>
         <form method="post">
             <div className="txt_field">
             <input type="text" required />
@@ -24,11 +29,12 @@ function Signup() {
             <div className="pass">Forgot Password?</div>
             <input type="submit" value="Login" />
             <div className="signup_link">
-            Have an account? <a href="/login">Login</a>
+            Have an account? <Link to="/login">Login</Link>
             </div>
         </form>
         </div>
     </div>
+  </Animation>  
   )
 }
 
