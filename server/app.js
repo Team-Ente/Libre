@@ -2,9 +2,7 @@ import Express from "express";
 import { EPub } from 'epub2';
 import parse from "node-html-parser";
 
-import bcrypt from 'bcrypt';
-
-const saltRounds = 10;
+import cookieParser from "cookie-parser";
 
 const app = Express();
 
@@ -18,9 +16,11 @@ import  {
     getCompletedBooks, 
     getBucketBooks
 } from "./controllers/Books.js";
-import {register, login} from "./controllers/Users.js";
+import {register, login, verifyToken} from "./controllers/Users.js";
 
 app.use(Express.urlencoded({ extended: false }));
+
+app.use(cookieParser());
 
 /**
  * getBookData(book_name: string) -> json
@@ -188,18 +188,21 @@ app.post('/register', async (req, res) => {
     const {handle, email, firstName, lastName, password} = req.body;
     register(handle, email, firstName, lastName, password).then((result) => {
         res.json(result);
-    }).catch((reason)=>{
-        res.status(400).json(reason)
+    }).catch((err)=>{
+        res.status(400).json(err);
     });
     
 });
 
-app.post('/login', async (req, res) => {
-    console.log(req.body);
+app.post('/login', verifyToken, async (req, res) => {
     const {emailOrHandle, password} = req.body;
-
-    login(emailOrHandle, password).then((result) => {
-        res.json(result);
+    login(emailOrHandle, password).then((user) => {
+        res.cookie('access_token', user.accessToken,{
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000 // 24 hours
+        });
+        console.log('Authentication Success');
+        res.json(user);
     }, (reason) => {
         res.status(400).json(reason);
     });
