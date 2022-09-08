@@ -5,15 +5,12 @@ import Login from './Login/Login';
 import Signup from './Signup/Signup';
 
 function Landingpage() {
-  const location = useLocation();
   return (
-    <div>
-      <Routes key={location.pathname} location={location}>
-        <Route exact path = '/' element={<Initial />} />
-        <Route path = '/login' element={<Login />} />
-        <Route path = '/signup' element={<Signup />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path = '/' element={<Initial />} />
+      <Route path = '/login' element={<Login />} />
+      <Route path = '/signup' element={<Signup />} />
+    </Routes>
   )
 }
 
