@@ -30,12 +30,14 @@ export const register = async(handle, email, firstName, lastName, password) => {
         [handle, email, hashPassword, firstName, lastName], 
         (err, results) => {
         if (err) {
-            reject(new Error(err.message));
+            reject(err.message);
         }
         resolve(results);
     })
     });
-    return response;
+
+    if(response) return response;
+    else return {"msg":"Invalid entry"}
   } catch (error) {
     console.log(error);
     throw error;
@@ -50,28 +52,29 @@ export const login = async(emailOrHandle, password) => {
         [emailOrHandle, emailOrHandle], 
         (err, results) => {
         if (err) {
-            reject(new Error(err.message));
+            reject(err.message);
         }
         resolve(results);
       });
+    }).catch((err) => {
+        return {error: err};
     });
 
     // User not found case
-    if(user.length === 0) return {msg: "User not found"};
+    if(user.length === 0) return {error: "User not found"};
 
     // Compare user password
     const match = await bcrypt.compare(password, user[0].password);
-    if(!match) return {msg: "Wrong Password"};
+    if(!match) return {error: "Wrong Password"};
 
-    const handle = user[0].handle;
+    // const handle = user[0].handle;
     const email = user[0].email;
-    const firstName = user[0].first_name;
-    const lastName = user[0].last_name;
+    // const firstName = user[0].first_name;
+    // const lastName = user[0].last_name;
 
-    return user[0];
-    // const accessToken = jwt.sign({userId, name, email}, process.env.ACCESS_TOKEN_SECRET,{
-    //     expiresIn: '15s'
-    // });
+    user[0].accessToken = jwt.sign({email}, "thisIsAnAccessTokenSecret69Loser!",{
+        expiresIn: '15m'
+    });
     // const refreshToken = jwt.sign({userId, name, email}, process.env.REFRESH_TOKEN_SECRET,{
     //     expiresIn: '1d'
     // });
@@ -80,14 +83,48 @@ export const login = async(emailOrHandle, password) => {
     //           id: userId
     //       }
     //   });
-    //   res.cookie('refreshToken', refreshToken,{
-    //       httpOnly: true,
-    //       maxAge: 24 * 60 * 60 * 1000
-    //   });
-    //   res.json({ accessToken });
+    
+
+    return user[0];
   } catch (error) {
-      res.status(404).json({msg:"Email not found"});
+    console.log(error);
+      throw error;
   }
+}
+
+export const verifyToken = async(req, res, next) => {
+    const accessToken = req.cookies['access_token'];
+    if(accessToken) {
+        try {
+            const payload = jwt.verify(accessToken, "thisIsAnAccessTokenSecret69Loser!");
+            const email = payload.email;
+
+            const user = await new Promise((resolve, reject) => {
+                db.execute(
+                    'SELECT * FROM `user` WHERE `email` = ?',
+                    [email], 
+                    (err, results) => {
+                    if (err) {
+                        reject(err.message);
+                    }
+                    resolve(results);
+                });
+            }).catch((err) => {
+                res.status(400).json(err);
+            });
+
+            // User not found case
+            if(user.length === 0) return res.status(400).json("User not found");
+            else {
+                console.log('Token Verified');
+                return res.json(user[0]);
+            }
+        } catch (error) {
+            console.log(error);
+            next();
+        }
+    }
+    next();
 }
 
 export const Logout = async(req, res) => {
