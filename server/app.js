@@ -2,6 +2,10 @@ import Express from "express";
 import { EPub } from 'epub2';
 import parse from "node-html-parser";
 
+import bcrypt from 'bcrypt';
+
+const saltRounds = 10;
+
 const app = Express();
 
 import  {
@@ -14,6 +18,7 @@ import  {
     getCompletedBooks, 
     getBucketBooks
 } from "./controllers/Books.js";
+import {register, login} from "./controllers/Users.js";
 
 app.use(Express.urlencoded({ extended: false }));
 
@@ -81,7 +86,7 @@ app.get("/books/:qType", async (req, res) => {
     });
 
     const qType = req.params.qType;  // The type of query (list criteria)
-    const count = req.query.count ? Number(req.query.count) : 10;  // The number of results returned
+    const count = req.query.count ? req.query.count : '10';  // The number of results returned
     const genre = req.query.genre ? req.query.genre.split(',') : []; // advanced search by filtering genre
 
     // Initialize empty return JSON
@@ -177,6 +182,27 @@ app.get("/read/:bookName/:chapterId", async (req, res) => {
         return res.status(404).send('Resource not found');
     }
     
+});
+
+app.post('/register', async (req, res) => {
+    const {handle, email, firstName, lastName, password} = req.body;
+    register(handle, email, firstName, lastName, password).then((result) => {
+        res.json(result);
+    }).catch((reason)=>{
+        res.status(400).json(reason)
+    });
+    
+});
+
+app.post('/login', async (req, res) => {
+    console.log(req.body);
+    const {emailOrHandle, password} = req.body;
+
+    login(emailOrHandle, password).then((result) => {
+        res.json(result);
+    }, (reason) => {
+        res.status(400).json(reason);
+    });
 });
 
 app.listen(3050, "localhost", () => {
