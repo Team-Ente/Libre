@@ -8,9 +8,8 @@ import db from "../config/Database.js";
 export const getAllBooks = async (count, genre) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            const query = "SELECT * FROM book LIMIT " + count + ";";
-
-            db.execute(query, (err, results) => {
+            db.execute('SELECT * FROM `book` LIMIT ?', 
+            [count], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
             })
@@ -25,9 +24,8 @@ export const getAllBooks = async (count, genre) => {
 export const getReadingBooks = async (count) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            const query = "SELECT * FROM book LIMIT " + count + ";";
-
-            db.execute(query, (err, results) => {
+            db.execute('SELECT * FROM `book` LIMIT ?', 
+            [count], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
             })
@@ -42,9 +40,8 @@ export const getReadingBooks = async (count) => {
 export const getRecentBooks = async (count) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            const query = "SELECT * FROM book LIMIT " + count + ";";
-
-            db.execute(query, (err, results) => {
+            db.execute('SELECT * FROM `book` LIMIT ?', 
+            [count], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
             })
@@ -59,9 +56,8 @@ export const getRecentBooks = async (count) => {
 export const getTrendingBooks = async (count) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            const query = "SELECT * FROM book LIMIT " + count + ";";
-
-            db.execute(query, (err, results) => {
+            db.execute('SELECT * FROM `book` LIMIT ?', 
+            [count], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
             })
@@ -76,9 +72,8 @@ export const getTrendingBooks = async (count) => {
 export const getEditorsPickBooks = async (count) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            const query = "SELECT * FROM book LIMIT " + count + ";";
-
-            db.execute(query, (err, results) => {
+            db.execute('SELECT * FROM `book` LIMIT ?', 
+            [count], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
             })
@@ -93,9 +88,8 @@ export const getEditorsPickBooks = async (count) => {
 export const  getCompletedBooks = async (count) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            const query = "SELECT * FROM book LIMIT " + count + ";";
-
-            db.execute(query, (err, results) => {
+            db.execute('SELECT * FROM `book` LIMIT ?', 
+            [count], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
             })
@@ -110,9 +104,8 @@ export const  getCompletedBooks = async (count) => {
 export const getBucketBooks = async (count) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            const query = "SELECT * FROM book LIMIT " + count + ";";
-
-            db.execute(query, (err, results) => {
+            db.execute('SELECT * FROM `book` LIMIT ?', 
+            [count], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
             })
@@ -133,12 +126,10 @@ export const getBucketBooks = async (count) => {
 export const getLikeBooks = async (title, genre) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            const query = "SELECT * FROM `book` WHERE `title` LIKE '%" + title + "%';";
-            db.query(
-                query, 
-                (err, results) => {
-                    if (err) reject(new Error(err.message));
-                    resolve(results);
+            db.execute('SELECT * FROM `book` WHERE `title` LIKE ?', 
+            ['%'+title+'%'], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
             })
         });
         // console.log(response);
