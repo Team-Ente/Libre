@@ -13,10 +13,10 @@ function Sidenav() {
     <div className='side-nav'>
         <ul className='nav-links'>
             <li><Link to='/home'><i><AiIcons.AiFillHome /></i><p>Home</p></Link></li>
-            <li><Link to='/discover'><i><AiIcons.AiFillCompass /></i><p>Discover</p></Link></li>
-            <li><Link to='/reading'><i><AiIcons.AiFillEye /></i><p>Reading</p></Link></li>
-            <li><Link to='/wishlist'><i><BsIcons.BsFillBookmarkFill /></i><p>Wishlist</p></Link></li>
-            <li><Link to='/completed'><i><AiIcons.AiFillCheckCircle /></i><p>Completed</p></Link></li>
+            <li><Link to='/home/discover'><i><AiIcons.AiFillCompass /></i><p>Discover</p></Link></li>
+            <li><Link to='/home/reading'><i><AiIcons.AiFillEye /></i><p>Reading</p></Link></li>
+            <li><Link to='/home/wishlist'><i><BsIcons.BsFillBookmarkFill /></i><p>Wishlist</p></Link></li>
+            <li><Link to='/home/completed'><i><AiIcons.AiFillCheckCircle /></i><p>Completed</p></Link></li>
             <div className='active'></div>
         </ul>
     </div>

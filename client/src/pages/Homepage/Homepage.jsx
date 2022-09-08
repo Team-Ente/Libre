@@ -16,7 +16,6 @@ import {Routes, Route, useLocation} from 'react-router-dom';
 import './Homepage.css';
 
 function Homepage() {
-  const location = useLocation();
   return (
     <div className='Homepage'>
       <div className='container'>
@@ -24,12 +23,12 @@ function Homepage() {
         <div className='header'><Header /></div>
         <div className='content'>
           <AnimatePresence exitBeforeEnter>    
-            <Routes key={location.pathname} location={location}>
-              <Route exact path='/home' element={<Home />} />
-              <Route exact path='/discover' element={<Discover />} />
-              <Route exact path='/reading' element={<Reading />} />
-              <Route exact path='/wishlist' element={<Wishlist />} />
-              <Route exact path='/completed' element={<Completed />} />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/discover' element={<Discover />} />
+              <Route path='/reading' element={<Reading />} />
+              <Route path='/wishlist' element={<Wishlist />} />
+              <Route path='/completed' element={<Completed />} />
             </Routes>
           </AnimatePresence>
         </div>
