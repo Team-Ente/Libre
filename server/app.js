@@ -16,7 +16,7 @@ import  {
     getCompletedBooks, 
     getBucketBooks
 } from "./controllers/Books.js";
-import {register, login, verifyToken} from "./controllers/Users.js";
+import {register, login, verifyToken, logout} from "./controllers/Users.js";
 
 app.use(Express.urlencoded({ extended: false }));
 
@@ -207,6 +207,8 @@ app.post('/login', verifyToken, async (req, res) => {
         res.status(400).json(reason);
     });
 });
+
+app.post('/logout', logout);
 
 app.listen(3050, "localhost", () => {
     console.log("Server is running at http://localhost:3050");

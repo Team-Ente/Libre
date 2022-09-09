@@ -73,7 +73,7 @@ export const login = async(emailOrHandle, password) => {
     // const lastName = user[0].last_name;
 
     user[0].accessToken = jwt.sign({email}, "thisIsAnAccessTokenSecret69Loser!",{
-        expiresIn: '15m'
+        expiresIn: '1d'
     });
     // const refreshToken = jwt.sign({userId, name, email}, process.env.REFRESH_TOKEN_SECRET,{
     //     expiresIn: '1d'
@@ -127,21 +127,44 @@ export const verifyToken = async(req, res, next) => {
     next();
 }
 
-export const Logout = async(req, res) => {
-  const refreshToken = req.cookies.refreshToken;
-  if(!refreshToken) return res.sendStatus(204);
-  const user = await Users.findAll({
-      where:{
-          refresh_token: refreshToken
-      }
-  });
-  if(!user[0]) return res.sendStatus(204);
-  const userId = user[0].id;
-  await Users.update({refresh_token: null},{
-      where:{
-          id: userId
-      }
-  });
-  res.clearCookie('refreshToken');
-  return res.sendStatus(200);
+export const logout = async(req, res) => {
+  const accessToken = req.cookies["access_token"];
+  if(!accessToken) {
+    console.log("no access token");
+    return res.status(200).json("no session stored");
+  }
+
+  try {
+    const payload = jwt.verify(accessToken, "thisIsAnAccessTokenSecret69Loser!");
+    const email = payload.email;
+
+    const user = await new Promise((resolve, reject) => {
+      db.execute(
+        'SELECT * FROM `user` WHERE `email` = ?',
+        [email], 
+        (err, results) => {
+        if (err) {
+            reject(err.message);
+        }
+        resolve(results);
+      });
+    }).catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
+    });
+
+    // User not found case
+    if(user.length === 0) {
+      console.log("User not logged in");
+      return res.status(200).json("User not logged in");
+    }
+    else {
+      res.clearCookie('access_token');
+      console.log("cookie cleared");
+      return res.status(200).json('User logged out successfuly');
+    }
+  } catch (error) {
+    console.log("invalid access token");
+    res.status(200).json(error);
+  }  
 }
