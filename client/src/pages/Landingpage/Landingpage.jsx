@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import Initial from './Initial/Initial';
 import Login from './Login/Login';
 import Signup from './Signup/Signup';
+import Home from '../Homepage/Home/Home';
 
 function Landingpage() {
   return (
@@ -10,6 +11,7 @@ function Landingpage() {
       <Route path = '/' element={<Initial />} />
       <Route path = '/login' element={<Login />} />
       <Route path = '/signup' element={<Signup />} />
+      <Route path = '/home' element={<Home />} />
     </Routes>
   )
 }

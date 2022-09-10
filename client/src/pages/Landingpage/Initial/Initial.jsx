@@ -5,6 +5,7 @@ import * as IcoIcons from 'react-icons/im';
 import Animation from '../Animation';
 import './Initial.css';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 function Topbar() {
   return (
     <Animation>
@@ -20,7 +21,7 @@ function Topbar() {
             <li>Discover</li>
             <li>Pricing</li>
             <li>Contact</li>
-            <li><Link to='/login'>Login</Link></li>
+            <li><Link to={Cookies.get('access_token')?'/home':'/login'}>Login</Link></li>
           </ul>
           <p>Menu</p>
         </div>

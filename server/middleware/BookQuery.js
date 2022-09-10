@@ -1,5 +1,6 @@
 import { EPub } from 'epub2';
 import Jimp from 'jimp';
+import editJsonFile from 'edit-json-file';
 
 import  {
     getAllBooks, 
@@ -20,15 +21,27 @@ import  {
  * Opens Book Cover file, compresses and sends as base64 encoded string
  */
 async function getBookData(book) {
-  const epub = await EPub.createAsync("files/" + book.title + ".epub")
+
+  let file = editJsonFile("files/bookInfo.json");
+  const bookInfo = file.get(book.title);
+  if(bookInfo) return bookInfo;
+
+  const epub = await EPub.createAsync("files/" + book.title + ".epub")  // Expensive (>500ms / book)
+  
   const [coverData, mimeType] = await epub.getFileAsync(epub.metadata.cover);
 
-  const img = await Jimp.read(coverData);
-  const compressedCoverData = await img.resize(250,360).quality(50).getBufferAsync(mimeType);
+  const img = await Jimp.read(coverData);  // Expensive (>200ms / book)
+  const compressedCoverData = await img.resize(250,360).quality(50).getBufferAsync(mimeType); // Expensive (>500ms / book)
 
   var json = epub.metadata;
   json["cover"] = compressedCoverData.toString('base64');
   json["mimeType"] = mimeType;
+
+  // append to bookInfo object
+  file.set(book.title,json);
+
+  file.save();
+
   return json;
 }
 
@@ -88,6 +101,7 @@ export const query = async (req, res) => {
   };
 
   try {
+
       let books = await getBookList(handle, qType, count, genre); 
       for (const book of books) {
           const json = await getBookData(book);
@@ -96,7 +110,8 @@ export const query = async (req, res) => {
       return res.status(200).send(retJson);    
       
   } catch (error) {
-      return res.status(404).send('invalid request');
+    console.log(error);
+    return res.status(404).json({error: error});
   }
   
 };
