@@ -31,7 +31,6 @@ function Signup() {
                 <span></span>
                 <label>Confirm Password</label>
             </div>
-            <div className="pass">Forgot Password?</div>
               <input type="submit" value="Sign up" />
               <div className="signup_link">
               Have an account? <Link to="/login">Login</Link>
