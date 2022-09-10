@@ -10,7 +10,7 @@ function Signup() {
     <div className='Signup'>
         <div className="center">
         <Link to='/'><h1 className='icon'><i className='libre-icon'><IcoIcons.ImBooks /></i>Sign up</h1></Link>
-        <form method="post" action='/signup'>
+        <form method="post" action='/signup_user'>
             <div className="txt_field">
               <input type="text" name='username' required />
               <span></span>
