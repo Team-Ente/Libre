@@ -12,14 +12,19 @@ function Signup() {
         <Link to='/'><h1 className='icon'><i className='libre-icon'><IcoIcons.ImBooks /></i>Signup</h1></Link>
         <form method="post">
             <div className="txt_field">
-            <input type="text" required />
-            <span></span>
-            <label>Email</label>
+              <input type="text" required />
+              <span></span>
+              <label>Username</label>
             </div>
             <div className="txt_field">
-            <input type="password" required />
-            <span></span>
-            <label>Password</label>
+              <input type="text" required />
+              <span></span>
+              <label>Email</label>
+            </div>
+            <div className="txt_field">
+              <input type="password" required />
+              <span></span>
+              <label>Password</label>
             </div>
             <div className="txt_field">
                 <input type="password" required />
@@ -27,9 +32,9 @@ function Signup() {
                 <label>Confirm Password</label>
             </div>
             <div className="pass">Forgot Password?</div>
-            <input type="submit" value="Login" />
-            <div className="signup_link">
-            Have an account? <Link to="/login">Login</Link>
+              <input type="submit" value="Login" />
+              <div className="signup_link">
+              Have an account? <Link to="/login">Login</Link>
             </div>
         </form>
         </div>
