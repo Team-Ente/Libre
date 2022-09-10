@@ -195,6 +195,10 @@ app.post('/register', async (req, res) => {
 });
 
 app.post('/login', verifyToken, async (req, res) => {
+    if(req.user) {
+        console.log(req.user.handle, "already logged in");
+        return res.json(req.user);
+    }
     const {emailOrHandle, password} = req.body;
     login(emailOrHandle, password).then((user) => {
         res.cookie('access_token', user.accessToken,{
@@ -208,7 +212,7 @@ app.post('/login', verifyToken, async (req, res) => {
     });
 });
 
-app.post('/logout', logout);
+app.post('/logout', verifyToken, logout);
 
 app.listen(3050, "localhost", () => {
     console.log("Server is running at http://localhost:3050");
