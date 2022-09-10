@@ -9,7 +9,7 @@ function Signup() {
 
     <div className='Signup'>
         <div className="center">
-        <Link to='/'><h1 className='icon'><i className='libre-icon'><IcoIcons.ImBooks /></i>Signup</h1></Link>
+        <Link to='/'><h1 className='icon'><i className='libre-icon'><IcoIcons.ImBooks /></i>Sign up</h1></Link>
         <form method="post">
             <div className="txt_field">
               <input type="text" required />
@@ -32,7 +32,7 @@ function Signup() {
                 <label>Confirm Password</label>
             </div>
             <div className="pass">Forgot Password?</div>
-              <input type="submit" value="Login" />
+              <input type="submit" value="Sign up" />
               <div className="signup_link">
               Have an account? <Link to="/login">Login</Link>
             </div>
