@@ -1,7 +1,9 @@
 import { EPub } from 'epub2';
-import parse from "node-html-parser";
+import { parse } from "node-html-parser";
 
 /**
+ * @query {book_name} book
+ * @query {chapter_id} chapter
  * get list of chapters of a book
  * list sent as json
  * all chapters including no title chapters
@@ -14,40 +16,30 @@ export const getContents = async (req, res) => {
       "Access-Control-Allow-Credentials" : true 
   });
 
-  const bookName = req.params.bookName;
-  try {
-      const epub = await EPub.createAsync("files/" + bookName + ".epub");
+  // check for user authentication
+  if(!req.user) {
+    console.log("Not Authorized");
+    return res.status(401).json({error: "User unauthenticated"});
+  }
+
+  const book = req.query.book;
+  if(! req.query.chapter){  // book contents
+    try {
+      const epub = await EPub.createAsync("files/" + book + ".epub");
   
       // let retHTML = "";
       // epub.flow.forEach((ch)=> retHTML += `<a href="/read/`+ bookName + "/" + ch.id + `">` + (ch.title ? ch.title : '-') + `</a><br>`);
 
       return res.status(200).json({'contents' : epub.flow}); // all chapter including whose without title    
 
-  } catch (error) {
-      return res.status(404).json({error: 'Resource not found'});
-  }
-  
-};
-
-/**
-* get a specific chapter of a book
-* replace all img tag sources
-* get stylesheet file
-* send as string
-*/
-export const readChapter = async (req, res) => {
-  // For CORS error
-  res.set({
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials" : true 
-  });
-
-
-  const bookName = req.params.bookName;
-  const chapterId = req.params.chapterId;
-  try {
-      const epub = await EPub.createAsync("files/" + bookName + ".epub");
+    } catch (error) {
+      return res.status(404).json({error: error});
+    }
+  } else { // chapter contents
+    
+    const chapter = req.query.chapter;
+    try {
+      const epub = await EPub.createAsync("files/" + book + ".epub");
       // get style as string from all the css files in the epub
   
       let stylesheet = '';
@@ -58,8 +50,8 @@ export const readChapter = async (req, res) => {
       }
 
       // get chapter from epub and parse
-      const chapter = await epub.getChapterAsync(chapterId);
-      const chapterElement = parse(chapter);
+      const chapterString = await epub.getChapterAsync(chapter);
+      const chapterElement = parse(chapterString);
 
       // replace all the image tag src with actual base64 buffer
       const images = chapterElement.getElementsByTagName('img');
@@ -71,8 +63,10 @@ export const readChapter = async (req, res) => {
 
       return res.status(200).json({'chapter' : chapterElement.innerHTML, 'style' : stylesheet});
 
-  } catch (error) {
-      return res.status(404).json({error: 'Resource not found'});
+    } catch (error) {
+        return res.status(404).json({error: "Resource not found"});
+    }
+
   }
   
 };

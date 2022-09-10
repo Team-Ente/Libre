@@ -39,26 +39,26 @@ async function getBookData(book) {
 * @returns list of books matching criteria
 * Get a list of books following query_type. If searching by string query_argument is a string
 */
-async function getBookList(qType, count, genre) {
+async function getBookList(handle, qType, count, genre) {
   const books = await new Promise((resolve, reject) => {
-      if (qType === "all") 
-          resolve(getAllBooks(count, genre));
-      else if (qType === "recent") 
-          resolve(getRecentBooks(count));
-      else if (qType === "reading") 
-          resolve(getReadingBooks(count));
-      else if (qType === "trending") 
-          resolve(getTrendingBooks(count));
-      else if (qType === "editor") 
-          resolve(getEditorsPickBooks(count));
-      else if (qType === "search") 
-          resolve(getLikeBooks(count, genre));
-      else if (qType === "completed") 
-          resolve(getCompletedBooks(count));
-      else if (qType === "bucket") 
-          resolve(getBucketBooks(count));
-      else 
-          reject(new Error("invalid request"));
+    if (qType === "all") 
+      resolve(getAllBooks(count, genre));
+    else if (qType === "reading") 
+      resolve(getReadingBooks(handle, count));
+    else if (qType === "completed") 
+      resolve(getCompletedBooks(handle, count));
+    else if (qType === "bucket") 
+      resolve(getBucketBooks(handle, count));
+    else if (qType === "recent") 
+      resolve(getRecentBooks(count));
+    else if (qType === "trending") 
+      resolve(getTrendingBooks(count));
+    else if (qType === "editor") 
+      resolve(getEditorsPickBooks(count));
+    else if (qType === "search") 
+      resolve(getLikeBooks(count, genre));
+    else 
+      reject(new Error("invalid request"));
   });
   return books;
 }
@@ -78,6 +78,12 @@ export const query = async (req, res) => {
       "Access-Control-Allow-Credentials" : true 
   });
 
+  if(!req.user) {
+    console.log("Not Authorized");
+    return res.status(401).json({error: "User unauthenticated"});
+  }
+
+  const handle = req.user.handle;
   const qType = req.params.qType;  // The type of query (list criteria)
   const count = req.query.count ? req.query.count : '10';  // The number of results returned
   const genre = req.query.genre ? req.query.genre.split(',') : []; // advanced search by filtering genre
@@ -88,7 +94,7 @@ export const query = async (req, res) => {
   };
 
   try {
-      let books = await getBookList(qType, count, genre); 
+      let books = await getBookList(handle, qType, count, genre); 
       for (const book of books) {
           const json = await getBookData(book);
           retJson["books"].push(json);
