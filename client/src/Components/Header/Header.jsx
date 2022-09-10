@@ -3,6 +3,7 @@ import * as IcoIcons from 'react-icons/im';
 import * as BsIcons from 'react-icons/bs';
 import './Header.css';
 import { Link } from 'react-router-dom';
+import Loggeduser from '../Loggeduser/Loggeduser';
 
 function header() {
   return (
@@ -30,7 +31,7 @@ function header() {
         <p className='advanced-search'><Link to='/home/search'><i><BsIcons.BsFilter /></i>Filter</Link></p>
       </div>
       <div className='children3'>
-        <div className='logged-user'></div>
+        <Loggeduser />
       </div>
 
     </div>
