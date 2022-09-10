@@ -37,8 +37,8 @@ function Login() {
       } else {
         // invalid login
       }
-    });
-}
+    }); 
+  };
 
   return (
     <Animation>
