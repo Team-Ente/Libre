@@ -9,11 +9,27 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const checkEmail = (e) =>{
+    console.log(e.target.value);
     setEmail(e.target.value);
     if(regex.test(email)===false) {
       setError('Please enter valid Email')
     } else {
       setError('');
+      return true;
+    }
+  }
+  
+  const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const [pass, setPass] = useState('');
+  const [pvalid, setPvalid] = useState('');
+
+  const checkPass = (e) => {
+    console.log(e.target.value);
+    setPass(e.target.value);
+    if(passRegex.test(pass)===false) {
+      setPvalid('Please enter a valid password');
+    } else {
+      setPvalid('');
       return true;
     }
   }
@@ -25,36 +41,38 @@ function Signup() {
         <Link to='/'><h1 className='icon'><i className='libre-icon'><IcoIcons.ImBooks /></i>Sign up</h1></Link>
         <form method="post" action='/signup_user'>
             <div className="txt_field">
-              <input type="text" name='handle' required />
+              <input type="text" name='handle' autoComplete='off' required />
               <span></span>
               <label>Username</label>
             </div>
             <div className="txt_field">
-              <input type="text" name='email' onChange={checkEmail} required />
+              <input type="text" name='email' onChange={checkEmail} autoComplete='off' required />
               <span></span>
               <label>Email</label>
             </div>
-            <p className='email-error'>{error}</p>
+              <p className='email-error'>{error}</p>
 
             <div className="txt_field">
-              <input type="text" name='firstName' required />
+              <input type="text" name='firstName' autoComplete='off' required />
               <span></span>
               <label>First Name</label>
             </div>
 
 
             <div className="txt_field">
-              <input type="text" name='lastName' required />
+              <input type="text" name='lastName' autoComplete='off' required />
               <span></span>
               <label>Last Name</label>
             </div>
             <div className="txt_field">
-              <input type="password" name='password' required />
+              <input type="password" name='password' onChange={checkPass} autoComplete='off' required />
               <span></span>
               <label>Password</label>
             </div>
+            <p className='email-error'>{pvalid}</p>
+
             <div className="txt_field">
-                <input type="password" name='confirm_password' required />
+                <input type="password" name='confirm_password' autoComplete='off' required />
                 <span></span>
                 <label>Confirm Password</label>
             </div>
