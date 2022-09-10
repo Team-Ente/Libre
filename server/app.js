@@ -194,23 +194,7 @@ app.post('/register', async (req, res) => {
     
 });
 
-app.post('/login', verifyToken, async (req, res) => {
-    if(req.user) {
-        console.log(req.user.handle, "already logged in");
-        return res.json(req.user);
-    }
-    const {emailOrHandle, password} = req.body;
-    login(emailOrHandle, password).then((user) => {
-        res.cookie('access_token', user.accessToken,{
-            httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000 // 24 hours
-        });
-        console.log('Authentication Success');
-        res.json(user);
-    }, (reason) => {
-        res.status(400).json(reason);
-    });
-});
+app.post('/login', verifyToken, login);
 
 app.post('/logout', verifyToken, logout);
 
