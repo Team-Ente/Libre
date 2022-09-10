@@ -1,14 +1,14 @@
 import React from 'react';
 import './AdvancedSearch.css';
+import DropdownSearch from '../../Components/DropdownSearch/DropdownSearch';
 function AdvancedSearch() {
   return (
     <div>
         <div className="filter">
-                <button>Author</button>
-                <button>Author</button>
-                <button>Author</button>
-                <button>Author</button>
-                <button>Author</button>
+          <DropdownSearch />
+          <DropdownSearch />
+          <DropdownSearch />
+          <DropdownSearch />
 
         </div>
     </div>
