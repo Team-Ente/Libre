@@ -75,7 +75,6 @@ export const verifyToken = async(req, res, next) => {
     try {
       const payload = jwt.verify(accessToken, "thisIsAnAccessTokenSecret69Loser!");
       const handle = payload.handle;
-
       const user = await getUser(handle);
 
       if(user.length != 0) {

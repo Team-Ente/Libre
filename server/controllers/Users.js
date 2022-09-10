@@ -27,7 +27,6 @@ export const getUser = async(emailOrHandle) => {
     });
     return user;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }

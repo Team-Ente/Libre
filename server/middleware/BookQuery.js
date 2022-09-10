@@ -71,12 +71,6 @@ async function getBookList(handle, qType, count, genre) {
  * @returns json containing book list
  */
 export const query = async (req, res) => {
-  // For CORS error
-  res.set({
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials" : true 
-  });
 
   if(!req.user) {
     console.log("Not Authorized");
@@ -106,3 +100,4 @@ export const query = async (req, res) => {
   }
   
 };
+

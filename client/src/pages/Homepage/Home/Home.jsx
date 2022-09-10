@@ -12,28 +12,40 @@ function Home() {
 
     useEffect(() => {
         const fetchData = async () => {
-            fetch("http://localhost:3050/books/reading?count=4").then((result) => {
+            fetch("http://localhost:3050/books/reading?count=4", {
+                mode: "cors",
+                credentials: "include"
+            }).then((result) => {
                 result.json().then((jsonResult) => {
                     setReadingList(jsonResult.books);
                 });
             }, (reason) => {
                 console.log(reason);
             });
-            fetch("http://localhost:3050/books/trending?count=4").then((result) => {
+            fetch("http://localhost:3050/books/trending?count=4", {
+                mode: "cors",
+                credentials: "include"
+            }).then((result) => {
                 result.json().then((jsonResult) => {
                     setTrendingList(jsonResult.books);
                 });
             }, (reason) => {
                 console.log(reason);
             });
-            fetch("http://localhost:3050/books/recent?count=4").then((result) => {
+            fetch("http://localhost:3050/books/recent?count=4", {
+                mode: "cors",
+                credentials: "include"
+            }).then((result) => {
                 result.json().then((jsonResult) => {
                     setRecentList(jsonResult.books);
                 });
             }, (reason) => {
                 console.log(reason);
             });
-            fetch("http://localhost:3050/books/editor?count=4").then((result) => {
+            fetch("http://localhost:3050/books/editor?count=4", {
+                mode: "cors",
+                credentials: "include"
+            }).then((result) => {
                 result.json().then((jsonResult) => {
                     setEditorsPickList(jsonResult.books);
                 });
