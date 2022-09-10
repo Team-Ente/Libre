@@ -14,7 +14,7 @@ function Login() {
             <div className="txt_field">
             <input type="text" required />
             <span></span>
-            <label>Email</label>
+            <label>Username or Email</label>
             </div>
             <div className="txt_field">
             <input type="password" required />
