@@ -16,7 +16,7 @@ import  {
     getCompletedBooks, 
     getBucketBooks
 } from "./controllers/Books.js";
-import {register, login, verifyToken, logout} from "./controllers/Users.js";
+import {register, login, verifyToken, logout} from "./middleware/Auth.js";
 
 app.use(Express.urlencoded({ extended: false }));
 
@@ -184,15 +184,7 @@ app.get("/read/:bookName/:chapterId", async (req, res) => {
     
 });
 
-app.post('/register', async (req, res) => {
-    const {handle, email, firstName, lastName, password} = req.body;
-    register(handle, email, firstName, lastName, password).then((result) => {
-        res.json(result);
-    }).catch((err)=>{
-        res.status(400).json(err);
-    });
-    
-});
+app.post('/register', register);
 
 app.post('/login', verifyToken, login);
 
