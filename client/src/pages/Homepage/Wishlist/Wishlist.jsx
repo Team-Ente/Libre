@@ -8,7 +8,10 @@ function Wishlist() {
 
     useEffect(() => {
         const fetchData = async () => {
-            fetch("http://localhost:3050/books/bucket?count=4").then((result) => {
+            fetch("http://localhost:3050/books/bucket?count=4", {
+                mode: "cors",
+                credentials: "include"
+            }).then((result) => {
                 result.json().then((jsonResult) => {
                     setBucketList(jsonResult.books);
                 });

@@ -39,7 +39,7 @@ function Signup() {
     <div className='Signup'>
         <div className="center">
         <Link to='/'><h1 className='icon'><i className='libre-icon'><IcoIcons.ImBooks /></i>Sign up</h1></Link>
-        <form method="post" action='/signup_user'>
+        <form method="post" action='http://localhost:3050/register'>
             <div className="txt_field">
               <input type="text" name='handle' autoComplete='off' required />
               <span></span>
@@ -72,7 +72,7 @@ function Signup() {
             <p className='email-error'>{pvalid}</p>
 
             <div className="txt_field">
-                <input type="password" name='confirm_password' autoComplete='off' required />
+                <input type="password" autoComplete='off' required />
                 <span></span>
                 <label>Confirm Password</label>
             </div>

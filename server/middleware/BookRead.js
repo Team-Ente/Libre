@@ -9,12 +9,6 @@ import { parse } from "node-html-parser";
  * all chapters including no title chapters
  */
 export const getContents = async (req, res) => {
-  // For CORS error
-  res.set({
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials" : true 
-  });
 
   // check for user authentication
   if(!req.user) {
