@@ -23,13 +23,35 @@ function Signup() {
   const [pass, setPass] = useState('');
   const [pvalid, setPvalid] = useState('');
 
+
+
+  const [confirmpass, setConfirmPass] = useState('');
+  const [confirmmsg, setConfirmMsg] = useState('');
+  
   const checkPass = (e) => {
     console.log(e.target.value);
     setPass(e.target.value);
+    if(e.target.value===confirmpass) {
+      setConfirmMsg('');
+    } else {
+      setConfirmMsg('Passwords do not match');
+    }
     if(passRegex.test(pass)===false) {
       setPvalid('Please enter a valid password');
     } else {
       setPvalid('');
+      return true;
+    }
+  }
+
+  const checkConfirmPass = (e) => {
+    console.log(pass);
+    setConfirmPass(e.target.value);
+    console.log(e.target.value);
+    if(e.target.value===pass) {
+      setConfirmMsg('');
+    } else {
+      setConfirmMsg('Passwords do not match');
       return true;
     }
   }
@@ -72,10 +94,11 @@ function Signup() {
             <p className='email-error'>{pvalid}</p>
 
             <div className="txt_field">
-                <input type="password" autoComplete='off' required />
+                <input type="password" onChange={checkConfirmPass} autoComplete='off' required />
                 <span></span>
                 <label>Confirm Password</label>
             </div>
+            <p className='email-error'>{confirmmsg}</p>
               <input type="submit" name='submit_btn' value="Sign up" />
               <div className="signup_link">
               Have an account? <Link to="/login">Login</Link>
