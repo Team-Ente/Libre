@@ -61,23 +61,28 @@ export const register = async(handle, email, firstName, lastName, password) => {
   }
 }
 
-export const login = async(emailOrHandle, password) => {
+export const login = async(req, res, next) => {
+  if(req.user) {
+      console.log(req.user.handle, "already logged in");
+      return res.json(req.user);
+  }
+
+  const {emailOrHandle, password} = req.body;
   try {
     const user = await getUser(emailOrHandle);
-    if(!user) {
-      console.log("undefined");
-      return {error: "Undefined"}
-    }
-    // User not found case
-    if(user.length === 0) return {error: "User not found"};
+   
+    // ERROR: User not found 
+    if(user.length === 0) return res.status(401).json({error: "User not found"});
 
-    // Compare user password
     const match = await bcrypt.compare(password, user[0].password);
-    if(!match) return {error: "Wrong Password"};
+    
+    // ERROR: Wrong password
+    if(!match) return res.status(401).json({error: "Wrong Password"});
 
     const handle = user[0].handle;
 
-    user[0].accessToken = jwt.sign({handle}, "thisIsAnAccessTokenSecret69Loser!",{
+    // Create access token (24 hours)
+    const accessToken = jwt.sign({handle}, "thisIsAnAccessTokenSecret69Loser!",{
         expiresIn: '1d'
     });
     // const refreshToken = jwt.sign({userId, name, email}, process.env.REFRESH_TOKEN_SECRET,{
@@ -89,10 +94,18 @@ export const login = async(emailOrHandle, password) => {
     //       }
     //   });
 
-    return user[0];
+    // Set cookie (24 hours)
+    res.cookie('access_token', accessToken, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    });
+
+    console.log('Authentication Success');
+    return res.json(user[0]);  
+    
   } catch (error) {
     console.log(error);
-      throw error;
+    return res.status(400).json({error: error});
   }
 }
 
