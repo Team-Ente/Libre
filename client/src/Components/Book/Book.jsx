@@ -7,7 +7,7 @@ function getBook(book) {
         img = {"data:" + book.mimeType + ";base64," + book.cover}
         title = {book.title}
         author = {book.creator}
-        year = {2001}
+        // year = {2001}
     />
   );
 };
