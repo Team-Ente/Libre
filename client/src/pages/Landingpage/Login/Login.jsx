@@ -12,7 +12,7 @@ function Login() {
         <Link to='/'><h1 className='icon'><i className='libre-icon'><IcoIcons.ImBooks /></i>Login</h1></Link>
         <form method="post" action='/login_user'>
             <div className="txt_field">
-              <input type="text" name='username_email' required />
+              <input type="text" name='emailOrHandle' required />
               <span></span>
               <label>Username or Email</label>
             </div>
