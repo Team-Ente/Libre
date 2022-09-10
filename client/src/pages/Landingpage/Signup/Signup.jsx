@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import * as IcoIcons from 'react-icons/im'; 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./Signup.css";
 import Animation from '../Animation';
 function Signup() {
@@ -55,13 +55,54 @@ function Signup() {
       return true;
     }
   }
+
+
+  const navigate = useNavigate();
+
+  const Auth = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      handle: e.target.handle.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value
+    };
+
+    var formBody = [];
+    for (var property in data) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(data[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+    
+
+    fetch('http://localhost:3050/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: formBody,
+      credentials: 'include' 
+    }).then((response) => {
+      if (! response.error) {
+        navigate("/login");
+      } else {
+        // invalid login
+      }
+    }); 
+  };
+
+
   return (
     <Animation>
 
     <div className='Signup'>
         <div className="center">
         <Link to='/'><h1 className='icon'><i className='libre-icon'><IcoIcons.ImBooks /></i>Sign up</h1></Link>
-        <form method="post" action='http://localhost:3050/register'>
+        <form onSubmit={Auth}>
             <div className="txt_field">
               <input type="text" name='handle' autoComplete='off' required />
               <span></span>
