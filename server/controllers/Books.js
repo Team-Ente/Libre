@@ -21,7 +21,39 @@ export const getAllBooks = async (count, genre) => {
     }
 }
 
-export const getReadingBooks = async (count) => {
+export const getReadingBooks = async (handle, count) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT * FROM `book` LIMIT ?', 
+            [count], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const  getCompletedBooks = async (handle, count) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT * FROM `book` LIMIT ?', 
+            [count], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getBucketBooks = async (handle, count) => {
     try {
         const response = await new Promise((resolve, reject) => {
             db.execute('SELECT * FROM `book` LIMIT ?', 
@@ -70,38 +102,6 @@ export const getTrendingBooks = async (count) => {
 }
 
 export const getEditorsPickBooks = async (count) => {
-    try {
-        const response = await new Promise((resolve, reject) => {
-            db.execute('SELECT * FROM `book` LIMIT ?', 
-            [count], (err, results) => {
-                if (err) reject(new Error(err.message));
-                resolve(results);
-            })
-        });
-        // console.log(response);
-        return response;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-export const  getCompletedBooks = async (count) => {
-    try {
-        const response = await new Promise((resolve, reject) => {
-            db.execute('SELECT * FROM `book` LIMIT ?', 
-            [count], (err, results) => {
-                if (err) reject(new Error(err.message));
-                resolve(results);
-            })
-        });
-        // console.log(response);
-        return response;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-export const getBucketBooks = async (count) => {
     try {
         const response = await new Promise((resolve, reject) => {
             db.execute('SELECT * FROM `book` LIMIT ?', 

@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 
 import { register, login, verifyToken, logout } from "./middleware/Auth.js";
 import {query} from "./middleware/BookQuery.js"
-import { readChapter, getContents } from "./middleware/BookRead.js";
+import { getContents } from "./middleware/BookRead.js";
 
 const app = Express();
 
@@ -11,12 +11,10 @@ app.use(Express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // book query
-app.get("/books/:qType", query);
+app.get("/books/:qType", verifyToken, query);
 
 // read book
-app.get("/read/:bookName", getContents);
-
-app.get("/read/:bookName/:chapterId", readChapter);
+app.get("/read", verifyToken, getContents);
 
 // user authentication
 app.post('/register', register);
