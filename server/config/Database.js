@@ -3,8 +3,8 @@ import mysql from "mysql2";
 var db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "1234",
-    database: "libredbbeta",
+    password: "8664",
+    database: "librebeta",
 });
 
 db.connect((err) => {
