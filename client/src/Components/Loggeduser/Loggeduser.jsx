@@ -19,7 +19,7 @@ function Loggeduser() {
 
         return (
         <div className="dropdown">
-                <div className="dropdown-btn" onClick={(e) => setIsActive(!isActive)}>Welcome, Boikot</div>
+                <div className="dropdown-btn" onClick={(e) => setIsActive(!isActive)}>Welcome, Saikat</div>
                 {isActive && 
                 <div className="dropdown-content">
                         <a href="/settings" className="dropdown-item">

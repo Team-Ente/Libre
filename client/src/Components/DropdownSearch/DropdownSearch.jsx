@@ -1,20 +1,13 @@
 import React from 'react';
 import Select from 'react-select';
 
-const aquaticCreatures = [
-        { label: 'Shark', value: 'Shark' },
-        { label: 'Dolphin', value: 'Dolphin' },
-        { label: 'Whale', value: 'Whale' },
-        { label: 'Octopus', value: 'Octopus' },
-        { label: 'Crab', value: 'Crab' },
-        { label: 'Lobster', value: 'Lobster' },
-];
-function DropdownSearch() {
+
+function DropdownSearch(props) {
         return (
-                <div>
-                        <Select options={aquaticCreatures} 
-                        isMulti
-                        />                        
+                <div className='dropitems'>
+                        <Select options={props.dat} placeholder={props.plc} className='dropitem'
+                        isMulti={props.mul}
+                        />                     
                 </div>
         )
 }
