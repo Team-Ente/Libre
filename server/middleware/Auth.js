@@ -1,5 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 import {addUser,getUser} from "../controllers/Users.js"
 
@@ -42,7 +44,7 @@ export const login = async(req, res, next) => {
     const handle = user[0].handle;
 
     // Create access token (24 hours)
-    const accessToken = jwt.sign({handle}, "thisIsAnAccessTokenSecret69Loser!",{
+    const accessToken = jwt.sign({handle}, process.env.ACCESS_TOKEN_SECRET,{
         expiresIn: '1d'
     });
     // const refreshToken = jwt.sign({userId, name, email}, process.env.REFRESH_TOKEN_SECRET,{
@@ -73,7 +75,7 @@ export const verifyToken = async(req, res, next) => {
   const accessToken = req.cookies['access_token'];
   if(accessToken) {
     try {
-      const payload = jwt.verify(accessToken, "thisIsAnAccessTokenSecret69Loser!");
+      const payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
       const handle = payload.handle;
       const user = await getUser(handle);
 
