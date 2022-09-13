@@ -33,9 +33,11 @@ function Login() {
       credentials: 'include' 
     }).then((response) => {
       if (! response.error) {
+        console.log(response);
         navigate("/home");
       } else {
         // invalid login
+        console.log(response.error);
       }
     }); 
   };

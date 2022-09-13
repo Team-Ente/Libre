@@ -8,7 +8,10 @@ function Completed() {
 
     useEffect(() => {
         const fetchData = async () => {
-            fetch("http://localhost:3050/books/completed?count=4").then((result) => {
+            fetch("http://localhost:3050/books/completed?count=4", {
+                mode: "cors",
+                credentials: "include"
+            }).then((result) => {
                 result.json().then((jsonResult) => {
                     setCompletedList(jsonResult.books);
                 });
