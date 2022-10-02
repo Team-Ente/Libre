@@ -1,6 +1,8 @@
 import Express from "express";
 import cookieParser from "cookie-parser";
 import multer from "multer";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 import { register, login, verifyToken, logout } from "./middleware/Auth.js";
 import {query} from "./middleware/BookQuery.js"
@@ -33,6 +35,6 @@ app.post('/upload', uploadBook, (req, res) => {
 });
 
 
-app.listen(3050, "localhost", () => {
-    console.log("Server is running at http://localhost:3050");
+app.listen(process.env.PORT, "0.0.0.0", () => {
+    console.log("Server is running at 0.0.0.0:$PORT");
 });
