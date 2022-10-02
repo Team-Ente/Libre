@@ -35,6 +35,6 @@ app.post('/upload', uploadBook, (req, res) => {
 });
 
 
-app.listen(process.env.PORT, "0.0.0.0", () => {
-    console.log("Server is running at 0.0.0.0:$PORT");
+app.listen(process.env.PORT, process.env.HOST, () => {
+    console.log("Server is running");
 });
