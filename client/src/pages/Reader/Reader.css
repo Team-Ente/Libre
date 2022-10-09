@@ -1,0 +1,49 @@
+.body {
+    min-height: 100vh;
+    /* background-color: blue; */
+}
+
+header {
+    height: 70px;
+    /* background-color: lightblue; */
+    display: flex;
+    margin: auto;
+    text-align: center;
+}
+.main-container {
+    display: flex;
+    min-height: calc(100vh-70px);
+}
+.sidebar {
+    min-width: 320px;
+    /* background-color: lightgray; */
+    display: flex;
+}
+.content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.book {
+    display: flex;
+    /* background-color: brown; */
+    height: 980px;
+    overflow-y: scroll;
+}
+.page-control {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px 10px;
+}
+.page-control > button {
+    font-size: 18px;
+    padding: 10px;
+    width: 100px;
+}
+.inner-text {
+    font-weight: 700;
+    font-size: 24px;
+    margin: auto auto;
+}
