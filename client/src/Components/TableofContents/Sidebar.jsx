@@ -9,13 +9,13 @@ import { sidebarData } from './SidebarData';
 import './Sidebar.css'
 // import {IconContext} from 'react-icons';
 
-function Navbar() {
+function Sidebar() {
     
     const [sidebar, setSidebar] = useState(false); // sidebar state initially set to false
     const showSidebar = () =>setSidebar(!sidebar); // function to toggle the state of the sidebar
     
     return (
-    <div>
+        <div className={sidebar ? 'scrollable-sidebar-active' : 'scrollable-sidebar'}>
             {/* Navbar */}
             <div className='navbar'>
                 <Link to="#" className="menu-bars"> 
@@ -28,11 +28,7 @@ function Navbar() {
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}> 
             {/* checks whether Nav-Menu is active or not */}
                 <ul className='nav-menu-items' onClick={showSidebar}>
-                    <li className='navbar-toggle'>
-                        <Link to="#" className='menu-bars'>
-                            <AiIcons.AiOutlineClose />
-                        </Link>
-                    </li>
+                <p className='Table-header'>Chapters</p>
                     {sidebarData.map((item, index) => {
                         return (
                             <li key={index} className={item.cName}>
@@ -50,4 +46,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default Sidebar

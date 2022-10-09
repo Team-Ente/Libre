@@ -1,6 +1,7 @@
 import React from 'react'
 import Homepage from './pages/Homepage/Homepage';
 import Landingpage from './pages/Landingpage/Landingpage';
+import Reader from './pages/Reader/Reader';
 import { Route, Routes, useLocation } from 'react-router-dom';
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
         <Routes>
           <Route path='/*' element={<Landingpage />} />
           <Route path='/home/*' element={<Homepage />} />
+          <Route path='/reader/*' element={<Reader />} />
         </Routes>
       </div>
   );

@@ -4,6 +4,17 @@ import * as IcoIcons from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
 import "./Signup.css";
 import Animation from '../Animation';
+
+function showPassFunc() {
+  var x = document.getElementById("passInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
+
 function Signup() {
   const regex = /\S+@\S+\.\S+/;
   const [email, setEmail] = useState('');
@@ -128,7 +139,7 @@ function Signup() {
               <label>Last Name</label>
             </div>
             <div className="txt_field">
-              <input type="password" name='password' onChange={checkPass} autoComplete='off' required />
+              <input type="password" name='password' onChange={checkPass} autoComplete='off' id='passInput' required />
               <span></span>
               <label>Password</label>
             </div>
@@ -139,6 +150,7 @@ function Signup() {
                 <span></span>
                 <label>Confirm Password</label>
             </div>
+            <div className='showpass'><input type="checkbox" onClick={showPassFunc}/>Show Password</div>
             <p className='email-error'>{confirmmsg}</p>
               <input type="submit" name='submit_btn' value="Sign up" />
               <div className="signup_link">

@@ -1,8 +1,7 @@
 .navbar {
     background-color: #fff;
-    height: 80px;
+    height: 70px;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
 }
 
@@ -14,11 +13,11 @@
 
 .nav-menu {
     background-color: #fff;
-    width: 250px;
+    width: 300px;
     height: 100vh;
     display: flex;
     justify-content: center;
-    position: fixed;
+    position: relative;
     top: 0;
     left: -100%; /* To fully hide the navbar initially */
     transition: 850ms;
@@ -27,8 +26,12 @@
 .nav-menu.active {
     left: 0;
     transition: 350ms;
+    z-index: 3;
 }
-
+.Table-header {
+    padding: 0px 30px;
+    font-size: 24px;
+}
 .nav-text {
     display: flex;
     justify-content: flex-start;
@@ -67,7 +70,13 @@
     justify-content: flex-start;
     align-items: center;
 }
-
+.scrollable-sidebar {
+    height:fit-content;
+}
+.scrollable-sidebar-active {
+    height: fit-content;
+    overflow-x: scroll;
+}
 span {
     margin-left: 16px;
 }
