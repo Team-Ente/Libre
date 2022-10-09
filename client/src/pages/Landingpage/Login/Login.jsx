@@ -3,6 +3,16 @@ import * as IcoIcons from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
 import "./Login.css";
 import Animation from '../Animation';
+
+function showPassFunc() {
+  var x = document.getElementById("passInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
 function Login() {
   
   const navigate = useNavigate();
@@ -55,10 +65,11 @@ function Login() {
               <label>Username or Email</label>
             </div>
             <div className="txt_field">
-              <input type="password" name='password' required />
+              <input type="password" name='password' id='passInput' required />
               <span></span>
               <label>Password</label>
             </div>
+              <div className='showpass'><input type="checkbox" onClick={showPassFunc}/>Show Password</div>
               <div className="pass">Forgot Password?</div>
               <input type="submit" name='login_btn' value="Login" />
               <div className="signup_link">Not a member? <Link to="/signup">Signup</Link>
