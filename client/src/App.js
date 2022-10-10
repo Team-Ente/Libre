@@ -9,7 +9,7 @@ function App() {
         <Routes>
           <Route path='/*' element={<Landingpage />} />
           <Route path='/home/*' element={<Homepage />} />
-          <Route path='/reader/*' element={<Reader book="LN_test_1" chapter="toc"/>} />
+          <Route path='/reader/*' element={<Reader book="LN_test_1" chapter="chapter004"/>} />
         </Routes>
       </div>
   );

@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import './Reader.css'
+import './Reader.css';
 import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
 function Reader(props) {
   const book = props.book;
   const chapter = props.chapter;
   const [content, setContent] = useState("");
+  const [style, setStyle] = useState("");
   useEffect(() => {
 
     // check logged in user
@@ -15,13 +16,17 @@ function Reader(props) {
         }).then((result) => {
             result.json().then((jsonResult) => {
                 setContent(jsonResult.chapter);
+                // setStyle(jsonResult.style);
             });
+            // result.blob().then((blobResult) => {
+            //   setContent(blobResult.)
+            // })
         }, (reason) => {
             console.log(reason);
         });
     };
     fetchData();
-}, [book, chapter]);
+  }, [book, chapter]);
   return (
     <div className='body'>
       
@@ -39,7 +44,10 @@ function Reader(props) {
         <main className='content'>
           <div className='book'>
             
-            <div dangerouslySetInnerHTML={{__html: content}}/>
+            {/* <div dangerouslySetInnerHTML={{__html: content}}/> */}
+            <iframe sandbox="allow-scripts" title="content" srcDoc={content} width="100%" height="100%"></iframe>
+            {/* <iframe srcdoc="http://localhost:3050/read?book=LN_test_1&chapter=toc"></iframe> */}
+            {/* <iframe srcDoc={content}></iframe> */}
             {/* <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/2' element={<Discover />} />
