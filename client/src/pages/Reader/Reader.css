@@ -35,8 +35,9 @@ header {
 .page-control {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     margin: 5px 10px;
+    gap: 10px;
 }
 .page-control > button {
     font-size: 18px;
