@@ -32,8 +32,8 @@ function Login() {
       body: formBody,
       credentials: 'include' 
     }).then((response) => {
+      console.log(response)
       if (! response.error) {
-        console.log(response);
         navigate("/home");
       } else {
         // invalid login

@@ -26,23 +26,23 @@ async function getBookData(book) {
   const bookInfo = file.get(book.title);
   if(bookInfo) return bookInfo;
 
-  const epub = await EPub.createAsync("files/" + book.title + ".epub")  // Expensive (>500ms / book)
+  // const epub = await EPub.createAsync("files/" + book.title + ".epub")  // Expensive (>500ms / book)
   
-  const [coverData, mimeType] = await epub.getFileAsync(epub.metadata.cover);
+  // const [coverData, mimeType] = await epub.getFileAsync(epub.metadata.cover);
 
-  const img = await Jimp.read(coverData);  // Expensive (>200ms / book)
-  const compressedCoverData = await img.resize(250,360).quality(50).getBufferAsync(mimeType); // Expensive (>500ms / book)
+  // const img = await Jimp.read(coverData);  // Expensive (>200ms / book)
+  // const compressedCoverData = await img.resize(250,360).quality(50).getBufferAsync(mimeType); // Expensive (>500ms / book)
 
-  var json = epub.metadata;
-  json["cover"] = compressedCoverData.toString('base64');
-  json["mimeType"] = mimeType;
+  // var json = epub.metadata;
+  // json["cover"] = compressedCoverData.toString('base64');
+  // json["mimeType"] = mimeType;
 
-  // append to bookInfo object
-  file.set(book.title,json);
+  // // append to bookInfo object
+  // file.set(book.title,json);
 
-  file.save();
+  // file.save();
 
-  return json;
+  // return json;
 }
 
 /**
