@@ -1,12 +1,32 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './Reader.css'
 import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
 function Reader(props) {
+  const book = props.book;
+  const chapter = props.chapter;
+  const [content, setContent] = useState("");
+  useEffect(() => {
+
+    // check logged in user
+    const fetchData = async () => {
+        fetch("http://localhost:3050/read?book="+book+"&chapter="+chapter, {
+            mode: "cors",
+            credentials: "include"
+        }).then((result) => {
+            result.json().then((jsonResult) => {
+                setContent(jsonResult.chapter);
+            });
+        }, (reason) => {
+            console.log(reason);
+        });
+    };
+    fetchData();
+}, [book, chapter]);
   return (
     <div className='body'>
       
       <header>
-        <span className='inner-text'>Book Name</span>
+        <span className='inner-text'>{book}</span>
       </header>
 
       <div className='main-container'>
@@ -18,7 +38,8 @@ function Reader(props) {
       
         <main className='content'>
           <div className='book'>
-            <span className='inner-text'>Content Area</span>
+            
+            <div dangerouslySetInnerHTML={{__html: content}}/>
             {/* <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/2' element={<Discover />} />
