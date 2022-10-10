@@ -55,7 +55,23 @@ export const getContents = async (req, res) => {
           images[i].setAttribute("src", "data:" + mimeType + ";base64," + imageBuffer.toString('base64'));
       }
 
-      return res.status(200).json({'chapter' : chapterElement.innerHTML, 'style' : stylesheet});
+
+
+      return res.status(200).json({'chapter' : 
+        `
+        <!DOCTYPE html>
+          <head>
+            <style>
+              ${stylesheet}
+            </style>
+          </head>
+          <body>
+            ${chapterElement.innerHTML}
+          </body>
+        </html>
+        `
+      });
+      // return res.status(200).send("<HTML><BODY>"+chapterElement.innerHTML+"</BODY></HTML>");
 
     } catch (error) {
         return res.status(404).json({error: "Resource not found"});
