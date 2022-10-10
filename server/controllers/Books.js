@@ -138,3 +138,20 @@ export const getLikeBooks = async (title, genre) => {
         console.log(error);
     }
 }
+
+
+export const addNewBook = async (title) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT * FROM `book` WHERE `title` LIKE ?', 
+            ['%'+title+'%'], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
