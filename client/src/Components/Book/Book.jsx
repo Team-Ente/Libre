@@ -12,7 +12,13 @@ function getBook(book) {
   );
 };
 
+
 function Book(props) {
+
+  const readBook = async () => {
+    console.log(props);
+  }
+
   return (
     <div className='wrapper'>
         <div className='card'>
@@ -21,7 +27,7 @@ function Book(props) {
                 <h1 id='title'>{props.title}</h1>
                 <p>{props.author}</p>
                 <p>{props.year}</p>
-                <button className='button'>Read Now</button>
+                <button className='button' onClick={readBook}>Read Now</button>
             </div>
         </div>
     </div>

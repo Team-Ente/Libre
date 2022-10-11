@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import './Reader.css';
 import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
+
 function Reader(props) {
   const book = props.book;
   const chapter = props.chapter;
+  const toc = props.toc;
+  const pages = props.pages;
   const [content, setContent] = useState("");
-  const [style, setStyle] = useState("");
-  useEffect(() => {
 
+  useEffect(() => {
     // check logged in user
     const fetchData = async () => {
         fetch("http://localhost:3050/read?book="+book+"&chapter="+chapter, {
@@ -23,6 +25,8 @@ function Reader(props) {
     };
     fetchData();
   }, [book, chapter]);
+
+
   return (
     <div className='body'>
       
@@ -34,7 +38,7 @@ function Reader(props) {
       
         <aside className='sidebar'>
           {/* <span className='inner-text'>Sidebar</span> */}
-          <Sidebar />
+          <Sidebar toc={toc}/>
         </aside>
       
         <main className='content'>

@@ -9,11 +9,12 @@ import { sidebarData } from './SidebarData';
 import './Sidebar.css'
 // import {IconContext} from 'react-icons';
 
-function Sidebar() {
+function Sidebar(props) {
     
     const [sidebar, setSidebar] = useState(false); // sidebar state initially set to false
     const showSidebar = () =>setSidebar(!sidebar); // function to toggle the state of the sidebar
-    
+    const data = props.toc ? props.toc : sidebarData;
+    console.log(data);
     return (
         <div className={sidebar ? 'scrollable-sidebar-active' : 'scrollable-sidebar'}>
             {/* Navbar */}
@@ -29,10 +30,10 @@ function Sidebar() {
             {/* checks whether Nav-Menu is active or not */}
                 <ul className='nav-menu-items' onClick={showSidebar}>
                 <p className='Table-header'>Chapters</p>
-                    {sidebarData.map((item, index) => {
+                    {data.map((item, index) => {
                         return (
                             <li key={index} className={item.cName}>
-                                <Link to={item.path}>
+                                <Link to={'/'+item.id}>
                                     {item.icon}
                                     <span>{item.title}</span>
                                 </Link>
