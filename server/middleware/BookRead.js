@@ -21,10 +21,16 @@ export const getContents = async (req, res) => {
     try {
       const epub = await EPub.createAsync("files/" + book + ".epub");
   
+      // doesn't work for some reason
       // let retHTML = "";
       // epub.flow.forEach((ch)=> retHTML += `<a href="/read/`+ bookName + "/" + ch.id + `">` + (ch.title ? ch.title : '-') + `</a><br>`);
+      // return res.send(retHTML);
 
-      return res.status(200).json({'contents' : epub.flow}); // all chapter including whose without title    
+
+      return res.status(200).json({
+        'contents' : epub.toc,  // for sidebar navigation
+        'pages': epub.flow  // for page navigation
+      });  
 
     } catch (error) {
       return res.status(404).json({error: error});
@@ -55,23 +61,29 @@ export const getContents = async (req, res) => {
           images[i].setAttribute("src", "data:" + mimeType + ";base64," + imageBuffer.toString('base64'));
       }
 
+      // replace all anchor tags with text
+      const links = chapterElement.getElementsByTagName('a');
+      for(let i=0; i<links.length; i++) {
+        const text = links[i].innerHTML;
+        links[i].replaceWith(text);
+      }
 
+      const retHTML = `
+      <!DOCTYPE html>
+        <head>
+          <style>
+            ${stylesheet}
+          </style>
+        </head>
+        <body>
+          ${chapterElement.innerHTML}
+        </body>
+      </html>
+      `;
 
-      return res.status(200).json({'chapter' : 
-        `
-        <!DOCTYPE html>
-          <head>
-            <style>
-              ${stylesheet}
-            </style>
-          </head>
-          <body>
-            ${chapterElement.innerHTML}
-          </body>
-        </html>
-        `
-      });
-      // return res.status(200).send("<HTML><BODY>"+chapterElement.innerHTML+"</BODY></HTML>");
+      return res.status(200).json({'chapter' : retHTML });
+      
+      // return res.status(200).send(retHTML); // for debugging
 
     } catch (error) {
         return res.status(404).json({error: "Resource not found"});

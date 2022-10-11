@@ -16,11 +16,7 @@ function Reader(props) {
         }).then((result) => {
             result.json().then((jsonResult) => {
                 setContent(jsonResult.chapter);
-                // setStyle(jsonResult.style);
-            });
-            // result.blob().then((blobResult) => {
-            //   setContent(blobResult.)
-            // })
+            });   
         }, (reason) => {
             console.log(reason);
         });
@@ -44,10 +40,8 @@ function Reader(props) {
         <main className='content'>
           <div className='book'>
             
-            {/* <div dangerouslySetInnerHTML={{__html: content}}/> */}
             <iframe sandbox="allow-scripts" title="content" srcDoc={content} width="100%" height="100%"></iframe>
-            {/* <iframe srcdoc="http://localhost:3050/read?book=LN_test_1&chapter=toc"></iframe> */}
-            {/* <iframe srcDoc={content}></iframe> */}
+            {/* <iframe sandbox="allow-top-navigation" title="content" src='http://localhost:3050/read?book=LN_test_1&chapter=toc' width="100%" height="100%"></iframe> */}
             {/* <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/2' element={<Discover />} />
