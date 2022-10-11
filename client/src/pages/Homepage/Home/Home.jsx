@@ -11,6 +11,8 @@ function Home() {
 
 
     useEffect(() => {
+
+        // check logged in user
         const fetchData = async () => {
             fetch("http://localhost:3050/books/reading?count=4", {
                 mode: "cors",
