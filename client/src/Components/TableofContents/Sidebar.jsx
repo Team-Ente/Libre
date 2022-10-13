@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as FaIcons from 'react-icons/fa'; //for fontawesome icons
 import * as AiIcons from 'react-icons/ai'; //for aiICons icons
 import { Link } from 'react-router-dom';
@@ -11,10 +11,15 @@ import './Sidebar.css'
 
 function Sidebar(props) {
     
-    const [sidebar, setSidebar] = useState(false); // sidebar state initially set to false
+    const [sidebar, setSidebar] = useState(
+        JSON.parse(localStorage.getItem('sidebar-is-open')) || false); // sidebar state initially set to false
     const showSidebar = () =>setSidebar(!sidebar); // function to toggle the state of the sidebar
     const data = props.toc ? props.toc : sidebarData;
-    console.log(data);
+
+    useEffect(() => {
+        localStorage.setItem('is-open', JSON.stringify(sidebar));
+    }, [sidebar]);
+
     return (
         <div className={sidebar ? 'scrollable-sidebar-active' : 'scrollable-sidebar'}>
             {/* Navbar */}
@@ -28,15 +33,15 @@ function Sidebar(props) {
             {/* Nav Menu */}
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}> 
             {/* checks whether Nav-Menu is active or not */}
-                <ul className='nav-menu-items' onClick={showSidebar}>
+                <ul className='nav-menu-items' >
                 <p className='Table-header'>Chapters</p>
                     {data.map((item, index) => {
                         return (
-                            <li key={index} className={item.cName}>
-                                <Link to={'/'+item.id}>
-                                    {item.icon}
-                                    <span>{item.title}</span>
-                                </Link>
+                            <li key={index} className="nav-text" onClick={() => {
+                                props.navigateToChapter(item.id)
+                            }}>
+                                <span>{item.title}</span>
+                                
                             </li>
                         )
                     })}

@@ -1,13 +1,26 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import './Reader.css';
 import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
 
 function Reader(props) {
-  const book = props.book;
-  const chapter = props.chapter;
   const toc = props.toc;
   const pages = props.pages;
   const [content, setContent] = useState("");
+  const [book, setBook] = useState(props.book);
+  const [chapter, setChapter] = useState(props.chapter);
+
+  const iframeRef = useRef();
+  const [scrollPercentage, setScrollPercentage] = useState("");
+  const handleScroll = () => {
+    const iframe = iframeRef.current.contentWindow;
+    const scrollY = iframe.window.scrollY;
+    const height = iframe.document.body.scrollHeight - iframe.window.innerHeight;
+    setScrollPercentage(Math.floor(100 * scrollY / height));
+  }
+  
+  const navigateToChapter = (chapter) => {
+    setChapter(chapter);
+  }
 
   useEffect(() => {
     // check logged in user
@@ -23,9 +36,17 @@ function Reader(props) {
             console.log(reason);
         });
     };
+
+    iframeRef.current.addEventListener('load', e => {
+      e.target.contentWindow.document.addEventListener('scroll', handleScroll);
+    });
+    
     fetchData();
   }, [book, chapter]);
 
+
+  
+  
 
   return (
     <div className='body'>
@@ -38,13 +59,24 @@ function Reader(props) {
       
         <aside className='sidebar'>
           {/* <span className='inner-text'>Sidebar</span> */}
-          <Sidebar toc={toc}/>
+          <Sidebar toc={toc} navigateToChapter={navigateToChapter}/>
         </aside>
       
         <main className='content'>
           <div className='book'>
             
-            <iframe sandbox="allow-scripts" title="content" srcDoc={content} width="100%" height="100%"></iframe>
+            <iframe 
+              ref={iframeRef}
+              // sandbox="allow-scripts" 
+              title="content" 
+              srcDoc={content} 
+              width="100%" 
+              height="100%" 
+              // onScroll={handleScroll}
+            ></iframe>
+
+
+
             {/* <iframe sandbox="allow-top-navigation" title="content" src='http://localhost:3050/read?book=LN_test_1&chapter=toc' width="100%" height="100%"></iframe> */}
             {/* <Routes>
               <Route path='/' element={<Home />} />
