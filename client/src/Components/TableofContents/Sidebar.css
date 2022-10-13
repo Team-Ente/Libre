@@ -3,15 +3,13 @@
     height: fit-content;
     display: flex;
     align-items: center;
+    padding: 10px;
 }
 
 .menu-bars {
     margin-left: 2rem;
     font-size: 2rem;
     background: none;
-}
-.navbar {
-    padding: 10px;
 }
 
 .nav-menu {
@@ -31,6 +29,7 @@
     z-index: 3;
     width: max-content;
     content-visibility: visible;
+    
 }
 .Table-header {
     padding: 0px 30px;
@@ -60,10 +59,15 @@
     background-color: #1a83ff;
     font-weight: bold;
     color: #fff;
+    cursor: pointer;
+}
+.nav-text span:hover {
+    cursor:pointer; 
 }
 
 .nav-menu-items {
     width: 100%;
+    margin-left: 15px;
 }
 
 .navbar-toggle {
