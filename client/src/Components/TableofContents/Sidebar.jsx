@@ -13,7 +13,10 @@ function Sidebar(props) {
     
     const [sidebar, setSidebar] = useState(
         JSON.parse(localStorage.getItem('sidebar-is-open')) || false); // sidebar state initially set to false
-    const showSidebar = () =>setSidebar(!sidebar); // function to toggle the state of the sidebar
+    const showSidebar = () => {
+        setSidebar(!sidebar); // function to toggle the state of the sidebar
+        props.reloadIframe();
+    }
     const data = props.toc ? props.toc : sidebarData;
 
     useEffect(() => {

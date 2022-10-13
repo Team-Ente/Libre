@@ -22,6 +22,10 @@ function Reader(props) {
     setChapter(chapterID);
   }
 
+  const reloadIframe = () => {
+    iframeRef.current.contentWindow.location.reload();
+  }
+
   const prevPage = () => {
     const currentPageIndex = pages.findIndex((pg) => pg.id === chapter);
     if(currentPageIndex === 0) {
@@ -80,7 +84,7 @@ function Reader(props) {
       <div className='main-container'>
       
         <aside className='sidebar'>
-          <Sidebar toc={toc} navigateToChapter={navigateToChapter}/>
+          <Sidebar toc={toc} navigateToChapter={navigateToChapter} reloadIframe={reloadIframe}/>
         </aside>
       
         <main className='content'>
