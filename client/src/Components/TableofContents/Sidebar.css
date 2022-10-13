@@ -10,6 +10,9 @@
     font-size: 2rem;
     background: none;
 }
+.navbar {
+    padding: 10px;
+}
 
 .nav-menu {
     background-color: #fff;
@@ -20,16 +23,14 @@
     position: relative;
     top: 0;
     left: -100%; 
-    transition: all 850ms ease-out;
 }
 
 .nav-menu.active {
     left: 0;
-    transition: 350ms;
+    /* transition: 350ms; */
     z-index: 3;
     width: max-content;
     content-visibility: visible;
-    transition: all 850ms ease-in;
 }
 .Table-header {
     padding: 0px 30px;
