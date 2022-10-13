@@ -17,13 +17,14 @@ header {
     min-height: calc(100vh-70px);
 }
 .sidebar {
-    min-width: 320px;
+    /* min-width: 320px; */
+    width: fit-content;
     /* background-color: lightgray; */
-    display: flex;
+    /* display: flex; */
 }
 .content {
     flex-grow: 1;
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     margin: 0 auto;
 }
