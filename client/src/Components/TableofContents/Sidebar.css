@@ -13,20 +13,23 @@
 
 .nav-menu {
     background-color: #fff;
-    width: 300px;
+    content-visibility: hidden;
     height: 100vh;
     display: flex;
     justify-content: center;
     position: relative;
     top: 0;
-    left: -100%; /* To fully hide the navbar initially */
-    transition: 850ms;
+    left: -100%; 
+    transition: all 850ms ease-out;
 }
 
 .nav-menu.active {
     left: 0;
     transition: 350ms;
     z-index: 3;
+    width: max-content;
+    content-visibility: visible;
+    transition: all 850ms ease-in;
 }
 .Table-header {
     padding: 0px 30px;
