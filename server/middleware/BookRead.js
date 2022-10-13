@@ -11,10 +11,10 @@ import { parse } from "node-html-parser";
 export const getContents = async (req, res) => {
 
   // check for user authentication
-  if(!req.user) {
-    console.log("Not Authorized");
-    return res.status(401).json({error: "User unauthenticated"});
-  }
+  // if(!req.user) {
+  //   console.log("Not Authorized");
+  //   return res.status(401).json({error: "User unauthenticated"});
+  // }
 
   const book = req.query.book;
   if(! req.query.chapter){  // book contents
