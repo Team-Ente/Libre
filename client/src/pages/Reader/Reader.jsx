@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useCallback} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './Reader.css';
 import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
 
@@ -18,8 +18,28 @@ function Reader(props) {
     setScrollPercentage(Math.floor(100 * scrollY / height));
   }
   
-  const navigateToChapter = (chapter) => {
-    setChapter(chapter);
+  const navigateToChapter = (chapterID) => {
+    setChapter(chapterID);
+  }
+
+  const prevPage = () => {
+    const currentPageIndex = pages.findIndex((pg) => pg.id === chapter);
+    if(currentPageIndex === 0) {
+      // give feedback to user (Tariq)
+      return;
+    }
+    const prevPage = pages[currentPageIndex - 1]
+    setChapter(prevPage.id);
+  }
+
+  const nextPage = () => {
+    const currentPageIndex = pages.findIndex((pg) => pg.id === chapter);
+    if(currentPageIndex === pages.length - 1) {
+      // give feedback to user (Tariq)
+      return;
+    }
+    const nextPage = pages[currentPageIndex + 1]
+    setChapter(nextPage.id);
   }
 
   useEffect(() => {
@@ -38,9 +58,11 @@ function Reader(props) {
     };
 
     iframeRef.current.addEventListener('load', e => {
-      e.target.contentWindow.document.addEventListener('scroll', handleScroll);
+      // e.target.contentWindow.document.addEventListener('scroll', handleScroll);
+      iframeRef.current.style.height = iframeRef.current.contentWindow.document.body.scrollHeight + 50 + 'px';
+      iframeRef.current.style.height = iframeRef.current.contentWindow.document.documentElement.scrollHeight + 5 + 'px';
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     });
-    
     fetchData();
   }, [book, chapter]);
 
@@ -58,7 +80,6 @@ function Reader(props) {
       <div className='main-container'>
       
         <aside className='sidebar'>
-          {/* <span className='inner-text'>Sidebar</span> */}
           <Sidebar toc={toc} navigateToChapter={navigateToChapter}/>
         </aside>
       
@@ -66,12 +87,12 @@ function Reader(props) {
           <div className='book'>
             
             <iframe 
+              className='iframe'
               ref={iframeRef}
               // sandbox="allow-scripts" 
               title="content" 
               srcDoc={content} 
-              width="100%" 
-              height="100%" 
+              
               // onScroll={handleScroll}
             ></iframe>
 
@@ -84,8 +105,8 @@ function Reader(props) {
             </Routes> */}
           </div>
           <div className='page-control'>
-            <button>Prev</button>
-            <button>Next</button>
+            <button onClick={prevPage}>Prev</button>
+            <button onClick={nextPage}>Next</button>
           </div>
         </main>
       
