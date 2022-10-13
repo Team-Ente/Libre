@@ -32,6 +32,7 @@ function Sidebar(props) {
                     {/* top left bar icon, a clickable react component */}
                 </Link>
             </div>
+            
 
             {/* Nav Menu */}
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}> 

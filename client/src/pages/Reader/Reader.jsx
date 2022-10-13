@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
+import * as AiIcons from 'react-icons/ai'; //for aiICons icons
 import './Reader.css';
 import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
 
@@ -61,11 +62,13 @@ function Reader(props) {
         });
     };
 
-    iframeRef.current.addEventListener('load', e => {
+    iframeRef.current.addEventListener('load', () => {
       // e.target.contentWindow.document.addEventListener('scroll', handleScroll);
       iframeRef.current.style.height = iframeRef.current.contentWindow.document.body.scrollHeight + 50 + 'px';
       iframeRef.current.style.height = iframeRef.current.contentWindow.document.documentElement.scrollHeight + 5 + 'px';
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+
+      // iframeRef.current.contentWindow.document.body.style.fontSize = 3 + 'em';
     });
     fetchData();
   }, [book, chapter]);
@@ -77,8 +80,12 @@ function Reader(props) {
   return (
     <div className='body'>
       
-      <header>
-        <span className='inner-text'>{book}</span>
+      <header className='book-name'>
+        <span>{book}</span>
+
+        <div className='zoom'><AiIcons.AiOutlineZoomIn /></div>
+        <div className='zoom'><AiIcons.AiOutlineZoomOut /></div>
+        
       </header>
 
       <div className='main-container'>
