@@ -15,6 +15,7 @@ function Loggeduser() {
                         },
                         credentials: 'include' 
                 });
+                localStorage.removeItem('logged-in-user');
         }
 
         return (

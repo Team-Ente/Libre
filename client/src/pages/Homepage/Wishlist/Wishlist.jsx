@@ -7,6 +7,14 @@ function Wishlist() {
     const [bucketList, setBucketList] = useState([]);
 
     useEffect(() => {
+        if(!localStorage.getItem('logged-in-user')) {
+            console.log("unauthorized access...");
+            /// redirect to 401 page
+        } else {
+            const user = JSON.parse(localStorage.getItem('logged-in-user'))
+            console.log(user.handle);
+        }
+
         const fetchData = async () => {
             fetch("http://localhost:3050/books/bucket?count=4", {
                 mode: "cors",
