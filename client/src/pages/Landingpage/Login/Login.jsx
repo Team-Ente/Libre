@@ -42,13 +42,17 @@ function Login() {
       body: formBody,
       credentials: 'include' 
     }).then((response) => {
-      console.log(response)
-      if (! response.error) {
-        navigate("/home");
-      } else {
-        // invalid login
-        console.log(response.error);
-      }
+      response.json().then((jsonResponse) => {
+        if (! jsonResponse.error) {
+          console.log(jsonResponse);
+          localStorage.setItem('logged-in-user', JSON.stringify(jsonResponse));
+          navigate("/home");
+        } else {
+          // invalid login
+          console.log(jsonResponse.error);
+        }
+      });  
+      
     }); 
   };
 
