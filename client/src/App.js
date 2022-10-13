@@ -10,7 +10,7 @@ function App() {
   const [pages, setPages] = useState([]);
 
   const book = "LN_test_1";
-  const chapter = "chapter004";
+  const chapter = "chapter002";
 
   useEffect(() => {
     // check logged in user
