@@ -11,7 +11,16 @@
     font-size: 2rem;
     background: none;
 }
-
+.zoom-vertical {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.zoom-horizontal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 .nav-menu {
     background-color: #fff;
     content-visibility: hidden;
