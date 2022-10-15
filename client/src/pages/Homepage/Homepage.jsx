@@ -22,7 +22,7 @@ function Homepage() {
       <div className='container'>
         <div className='logo'><Logo /><Sidenav /></div>
         <div className='header'><Header /></div>
-        <div className='content'>
+        <div className='sidenav-content'>
           <AnimatePresence exitBeforeEnter>    
             <Routes>
               <Route path='/' element={<Home />} />
