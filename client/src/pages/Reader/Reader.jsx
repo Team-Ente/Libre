@@ -2,13 +2,18 @@ import React, {useState, useEffect, useRef} from 'react';
 import * as AiIcons from 'react-icons/ai'; //for aiICons icons
 import './Reader.css';
 import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
+import { useLocation } from 'react-router-dom';
 
-function Reader(props) {
-  const toc = props.toc;
-  const pages = props.pages;
+function Reader() {
+
+  const location = useLocation();
+  const data = location.state;
+
+  const toc = data.toc;
+  const pages = data.pages;
   const [content, setContent] = useState("");
-  const [book, setBook] = useState(props.book);
-  const [chapter, setChapter] = useState(props.chapter);
+  const [book, setBook] = useState(data.book);
+  const [chapter, setChapter] = useState(pages[0].id);
 
   const iframeRef = useRef();
   const [scrollPercentage, setScrollPercentage] = useState("");

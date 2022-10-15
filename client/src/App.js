@@ -9,33 +9,45 @@ function App() {
   const [toc, setToc] = useState([]);
   const [pages, setPages] = useState([]);
 
-  const book = "LN_test_1";
-  const chapter = "chapter002";
+  const [book, setBook] = useState("LN_test_1");
+  const [chapter, setChapter] = useState("chapter002");
 
-  useEffect(() => {
-    // check logged in user
-    const fetchData = async () => {
-        fetch("http://localhost:3050/read?book="+book, {
-            mode: "cors",
-            credentials: "include"
-        }).then((result) => {
-            result.json().then((jsonResult) => {
-                setToc(jsonResult.contents);
-                setPages(jsonResult.pages)
-            });   
-        }, (reason) => {
-            console.log(reason);
-        });
-    };
-    fetchData();
-  }, []);
+  // const setReaderBook = async (newBook, newChapter) => {
+  //   setBook(newBook);
+  //   if(chapter) setChapter(newChapter);
+  //   fetch("http://localhost:3050/read?book="+book, {
+  //       mode: "cors",
+  //       credentials: "include"
+  //   }).then((result) => {
+  //       result.json().then((jsonResult) => {
+  //           setToc(jsonResult.contents);
+  //           setPages(jsonResult.pages)
+  //       });   
+  //   }, (reason) => {
+  //       console.log(reason);
+  //   });
+  // }
+
+  // useEffect(() => {
+  //   // check logged in user
+
+  //   setReaderBook(book, chapter);
+  // });
 
   return (
       <div className='App'>
         <Routes>
           <Route path='/*' element={<Landingpage />} />
-          <Route path='/home/*' element={<Homepage />} />
-          <Route path='/reader' element={<Reader book={book} chapter={chapter} toc={toc} pages={pages}/>} />
+          <Route path='/home/*' element={<Homepage/>} />
+          <Route path='/reader' element={<Reader state={
+            {
+              book: book,
+              chapter: chapter, 
+              toc: toc, 
+              pages: pages
+            }
+          }
+          />} />
         </Routes>
       </div>
   );
