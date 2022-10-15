@@ -35,7 +35,7 @@ function App() {
         <Routes>
           <Route path='/*' element={<Landingpage />} />
           <Route path='/home/*' element={<Homepage />} />
-          <Route path='/reader/*' element={<Reader book={book} chapter={chapter} toc={toc} pages={pages}/>} />
+          <Route path='/reader' element={<Reader book={book} chapter={chapter} toc={toc} pages={pages}/>} />
         </Routes>
       </div>
   );
