@@ -27,14 +27,14 @@ function Sidebar(props) {
         <div className={sidebar ? 'scrollable-sidebar-active' : 'scrollable-sidebar'}>
             {/* Navbar */}
             <div className='navbar'>
-                <Link to="#" className="menu-bars"> 
+                <div className="menu-bars"> 
                     <div className={sidebar ? 'zoom-vertical' : 'zoom-horizontal'}>
                         <FaIcons.FaBars onClick={showSidebar}/>
                         <AiIcons.AiOutlineZoomIn />
                         <AiIcons.AiOutlineZoomOut />
                     </div>
                     {/* top left bar icon, a clickable react component */}
-                </Link>
+                </div>
             </div>
             
 
