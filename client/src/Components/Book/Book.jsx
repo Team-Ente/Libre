@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import './Book.css';
 
 function getBook(book) { 
@@ -27,7 +28,7 @@ function Book(props) {
                 <h1 id='title'>{props.title}</h1>
                 <p>{props.author}</p>
                 <p>{props.year}</p>
-                <button className='button' onClick={readBook}>Read Now</button>
+                <Link to='/reader' className='button' onClick={readBook}>Read Now</Link>
             </div>
         </div>
     </div>
