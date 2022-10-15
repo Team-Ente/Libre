@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {getBook} from '../../../Components/Book/Book';
 import './Home.css';
 import Animation from '../Animation';
-function Home() {
+function Home(props) {
 
     const [readingList, setReadingList] = useState([]);
     const [trendingList, setTrendingList] = useState([]);

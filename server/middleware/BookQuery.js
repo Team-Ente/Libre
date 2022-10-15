@@ -23,9 +23,11 @@ import  {
 async function getBookData(book) {
 
   let file = editJsonFile("files/bookInfo.json");
-  const bookInfo = file.get(book.title);
-  if(bookInfo) return bookInfo;
-
+  let bookInfo = file.get(book.title);
+  if(bookInfo) {
+    bookInfo.id = book.title;
+    return bookInfo;
+  }
   // const epub = await EPub.createAsync("files/" + book.title + ".epub")  // Expensive (>500ms / book)
   
   // const [coverData, mimeType] = await epub.getFileAsync(epub.metadata.cover);

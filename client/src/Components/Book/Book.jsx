@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import './Book.css';
 
 function getBook(book) { 
@@ -8,6 +8,7 @@ function getBook(book) {
         img = {"data:" + book.mimeType + ";base64," + book.cover}
         title = {book.title}
         author = {book.creator}
+        id = {book.id}
         // year = {2001}
     />
   );
@@ -16,8 +17,31 @@ function getBook(book) {
 
 function Book(props) {
 
+  const navigate = useNavigate();
   const readBook = async () => {
-    console.log(props);
+    const book = props.id;
+    
+    fetch("http://localhost:3050/read?book="+props.id, {
+        mode: "cors",
+        credentials: "include"
+    }).then((result) => {
+        result.json().then((jsonResult) => {
+            const toc = jsonResult.contents;
+            const pages = jsonResult.pages;
+            
+            navigate('/reader', {
+              state: {
+                book: book,
+                // chapter: chapter, 
+                toc: toc, 
+                pages: pages
+              }
+            });
+
+        });   
+    }, (reason) => {
+        console.log(reason);
+    });
   }
 
   return (
@@ -28,7 +52,7 @@ function Book(props) {
                 <h1 id='title'>{props.title}</h1>
                 <p>{props.author}</p>
                 <p>{props.year}</p>
-                <Link to='/reader' className='button' onClick={readBook}>Read Now</Link>
+                <div className='button' onClick={readBook}>Read Now</div>
             </div>
         </div>
     </div>
