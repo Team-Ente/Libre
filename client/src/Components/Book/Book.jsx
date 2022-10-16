@@ -21,7 +21,6 @@ function Book(props) {
 
   const navigate = useNavigate();
   const readBook = async () => {
-    const book = props.id;
     
     fetch("http://localhost:3050/read?book="+props.id, {
         mode: "cors",
@@ -33,7 +32,8 @@ function Book(props) {
             
             navigate('/reader', {
               state: {
-                book: book,
+                id: props.id,
+                title: props.title,
                 // chapter: chapter, 
                 toc: toc, 
                 pages: pages

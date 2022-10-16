@@ -5,14 +5,13 @@ import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
 import { useLocation } from 'react-router-dom';
 
 function Reader() {
-
   const location = useLocation();
   const data = location.state;
-
-  const toc = data.toc;
+  const toc = location.state.toc;
   const pages = data.pages;
+  const id = data.id;
   const [content, setContent] = useState("");
-  const [book, setBook] = useState(data.book);
+  const [book, setBook] = useState(data.title);
   const [chapter, setChapter] = useState(pages[0].id);
 
   const iframeRef = useRef();
@@ -29,7 +28,10 @@ function Reader() {
   }
 
   const reloadIframe = () => {
-    iframeRef.current.contentWindow.location.reload();
+    // iframeRef.current.contentDocument.location.reload();
+    // iframeRef.current.style.height = iframeRef.current.contentWindow.document.body.scrollHeight + 50 + 'px';
+    // iframeRef.current.style.height = iframeRef.current.contentWindow.document.documentElement.scrollHeight + 5 + 'px';
+    // window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }
 
   const prevPage = () => {
@@ -55,7 +57,7 @@ function Reader() {
   useEffect(() => {
     // check logged in user
     const fetchData = async () => {
-        fetch("http://localhost:3050/read?book="+book+"&chapter="+chapter, {
+        fetch("http://localhost:3050/read?book="+id+"&chapter="+chapter, {
             mode: "cors",
             credentials: "include"
         }).then((result) => {
@@ -76,7 +78,7 @@ function Reader() {
       // iframeRef.current.contentWindow.document.body.style.fontSize = 3 + 'em';
     });
     fetchData();
-  }, [book, chapter]);
+  }, [id, chapter]);
 
 
   
