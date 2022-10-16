@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import * as IcoIcons from 'react-icons/im'; 
+import * as AiIcons from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import "./Signup.css";
 import Animation from '../Animation';
@@ -142,6 +143,7 @@ function Signup() {
               <input type="password" name='password' onChange={checkPass} autoComplete='off' id='passInput' required />
               <span></span>
               <label>Password</label>
+            <div className='showpass' onClick={showPassFunc}><AiIcons.AiFillEyeInvisible /></div> 
             </div>
             <p className='email-error'>{pvalid}</p>
 
@@ -149,8 +151,9 @@ function Signup() {
                 <input type="password" onChange={checkConfirmPass} autoComplete='off' required />
                 <span></span>
                 <label>Confirm Password</label>
+                <div className='showpass' onClick={showPassFunc}><AiIcons.AiFillEyeInvisible /></div> 
+
             </div>
-            <div className='showpass'><input type="checkbox" onClick={showPassFunc}/>Show Password</div>
             <p className='email-error'>{confirmmsg}</p>
               <input type="submit" name='submit_btn' value="Sign up" />
               <div className="signup_link">

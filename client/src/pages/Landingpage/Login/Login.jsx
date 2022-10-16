@@ -1,5 +1,6 @@
 import React from 'react';
 import * as IcoIcons from 'react-icons/im'; 
+import * as AiIcons from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import "./Login.css";
 import Animation from '../Animation';
@@ -68,12 +69,12 @@ function Login() {
               <span></span>
               <label>Username or Email</label>
             </div>
-            <div className="txt_field">
-              <input type="password" name='password' id='passInput' required />
-              <span></span>
-              <label>Password</label>
-            </div>
-              <div className='showpass'><input type="checkbox" onClick={showPassFunc}/>Show Password</div>
+              <div className="txt_field">
+                <input type="password" name='password' id='passInput' required />
+                <span></span>
+                <label>Password</label>
+                <div className='showpass' onClick={showPassFunc}><AiIcons.AiFillEyeInvisible /></div> 
+              </div>
               <div className="pass">Forgot Password?</div>
               <input type="submit" name='login_btn' value="Login" />
               <div className="signup_link">Not a member? <Link to="/signup">Signup</Link>

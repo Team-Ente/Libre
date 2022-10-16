@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import './Book.css';
 
@@ -11,6 +12,7 @@ function getBook(book) {
         id = {book.id}
         // year = {2001}
     />
+    
   );
 };
 
@@ -46,7 +48,7 @@ function Book(props) {
 
   return (
     <div className='wrapper'>
-        <div className='card'>
+        <Link to='/details' className='card'>
             <img src={props.img} alt={props.title}/>
             <div className='info'>
                 <h1 id='title'>{props.title}</h1>
@@ -54,7 +56,7 @@ function Book(props) {
                 <p>{props.year}</p>
                 <div className='button' onClick={readBook}>Read Now</div>
             </div>
-        </div>
+        </Link>
     </div>
   );
 }

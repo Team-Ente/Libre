@@ -53,7 +53,7 @@ form .txt_field{
 .txt_field span::before{
   content: '';
   position: absolute;
-  top: 40px;
+  top: 60px;
   left: 0;
   width: 0%;
   height: 2px;
