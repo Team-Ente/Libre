@@ -10,12 +10,12 @@
     text-align: center;
     font-size: 72px;
 }
-.Img404{
+.ErrorImg{
     width: 600px;
     height: 400px;
-    background-image: url(404.gif);
     background-position: center;
     margin: auto;
+    display: block;
 }
 .ErrorMsg {
     font-size: 32px;

@@ -3,14 +3,14 @@ import './ErrorPage.css';
 
 function ErrorPage() {
 
-    var code = '404';    //fetch this from props
-    var msg69 = '69 is the only solution to your mental illness'
+    var code = '401';    //fetch this from props
+    var msg401 = 'Stop in the name of law! You are not authorized to access this page'
     var msg404 = 'Look like you\'re lost. The page you are looking for not avaible!'
   return (
     <div className='ErrorPage'>
         <h1 className='ErrorCode'>{code}!</h1>
-        <div className="Img404"></div>
-        <p className='ErrorMsg'>{code==='404' ? msg404:msg69}</p>
+        <img className='ErrorImg' src={code === '404' ? require('./404.gif') : require('./401.jpg') } />
+        <p className='ErrorMsg'>{code==='404' ? msg404:msg401}</p>
     </div>
   )
 }
