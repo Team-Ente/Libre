@@ -21,7 +21,7 @@ function Loggeduser() {
 
         return (
         <div className="dropdown">
-                <div className="dropdown-btn" onClick={(e) => setIsActive(!isActive)}>Welcome, {user.handle}</div>
+                <div className="dropdown-btn" onClick={(e) => setIsActive(!isActive)}>Welcome, {user?user.handle:""}</div>
                 {isActive && 
                 <div className="dropdown-content">
                         <a href="/settings" className="dropdown-item">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Discover from './Discover/Discover';
 import Wishlist from './Wishlist/Wishlist';
@@ -12,11 +12,22 @@ import Header from '../../Components/Header/Header';
 import Sidenav from '../../Components/Sidenav/Sidenav';
 
 import { AnimatePresence } from 'framer-motion';
-import {Routes, Route, useLocation} from 'react-router-dom';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 
 import './Homepage.css';
 
 function Homepage() {
+
+  const navigate = useNavigate();
+  
+  useEffect(()=>{
+    // check logged in user
+    if(!localStorage.getItem("logged-in-user")) {
+        navigate("/error401");
+    }
+
+  });
+
   return (
     <div className='Homepage'>
       <div className='container'>

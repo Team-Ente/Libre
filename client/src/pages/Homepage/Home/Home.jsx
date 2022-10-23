@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import {getBook} from '../../../Components/Book/Book';
 import './Home.css';
 import Animation from '../Animation';
@@ -9,10 +10,10 @@ function Home(props) {
     const [recentList, setRecentList] = useState([]);
     const [editorsPickList, setEditorsPickList] = useState([]);
 
+    const navigate = useNavigate();
 
     useEffect(() => {
 
-        // check logged in user
         const fetchData = async () => {
             fetch("http://localhost:3050/books/reading?count=4", {
                 mode: "cors",
@@ -56,7 +57,7 @@ function Home(props) {
             });
         };
         fetchData();
-    }, []);
+    });
 
     return (
     <Animation>
