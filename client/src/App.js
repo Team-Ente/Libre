@@ -17,7 +17,7 @@ function App() {
           <Route path='/reader' element={<Reader/>} />
           <Route path='/error404' element={<Error404 />} />
           <Route path='/error401' element={<Error401 />} />
-          <Route path='/bookdetails' element={<BooksDetails />} />
+          <Route path='/book' element={<BooksDetails />} />
         </Routes>
       </div>
   );
