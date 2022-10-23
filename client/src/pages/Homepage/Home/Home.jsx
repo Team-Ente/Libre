@@ -10,8 +10,6 @@ function Home(props) {
     const [recentList, setRecentList] = useState([]);
     const [editorsPickList, setEditorsPickList] = useState([]);
 
-    const navigate = useNavigate();
-
     useEffect(() => {
 
         const fetchData = async () => {
@@ -57,7 +55,7 @@ function Home(props) {
             });
         };
         fetchData();
-    });
+    }, []);
 
     return (
     <Animation>

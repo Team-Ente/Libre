@@ -31,9 +31,6 @@ function Reader() {
 
   const reloadIframe = () => {
     iframeRef.current.contentDocument.location.reload();
-    // iframeRef.current.style.height = iframeRef.current.contentWindow.document.body.scrollHeight + 50 + 'px';
-    // iframeRef.current.style.height = iframeRef.current.contentWindow.document.documentElement.scrollHeight + 5 + 'px';
-    // window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }
 
   const increaseFontSize = () => {
@@ -42,7 +39,7 @@ function Reader() {
   }
 
   const decreaseFontSize = () => {
-    setFontSize(Math.max(1, fontSize - .1));
+    setFontSize(Math.max(.5, fontSize - .1));
     reloadIframe();
   }
 
