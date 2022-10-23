@@ -98,8 +98,6 @@ function Reader() {
       
         <aside className='sidebar'>
           <Sidebar toc={toc} navigateToChapter={navigateToChapter} reloadIframe={reloadIframe}/>
-          <div className='zoom'><AiIcons.AiOutlineZoomIn /></div>
-          <div className='zoom'><AiIcons.AiOutlineZoomOut /></div>
         </aside>
       
         <main className='content'>
