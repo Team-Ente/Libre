@@ -3,6 +3,9 @@
     align-content: center;
     margin: 5% 20% 0% 20%;
 }
+.bookimg img {
+    border-radius: 20px;
+}
 .book-card-grid {
     
     display: grid;
@@ -37,4 +40,17 @@
     font-weight: 700;
     cursor: pointer;
     outline: none;
+}
+.additional-info {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+    "language publisher topic"
+    "format year ISBN"
+    ;
+    column-gap: 35px;
+    row-gap: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;    
 }
