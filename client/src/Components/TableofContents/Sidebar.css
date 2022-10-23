@@ -11,11 +11,17 @@
     font-size: 2rem;
     background: none;
 }
+
+.menu-bars div:hover {
+    cursor:pointer;
+}
+
 .zoom-vertical {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
+
 .zoom-horizontal {
     display: flex;
     flex-direction: column;

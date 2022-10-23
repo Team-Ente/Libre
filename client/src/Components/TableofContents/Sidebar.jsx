@@ -12,15 +12,15 @@ import './Sidebar.css'
 function Sidebar(props) {
     
     const [sidebar, setSidebar] = useState(
-        JSON.parse(localStorage.getItem('sidebar-is-open')) || false); // sidebar state initially set to false
+        JSON.parse(sessionStorage.getItem('sidebar-is-open')) || false); // sidebar state initially set to false
     const showSidebar = () => {
         setSidebar(!sidebar); // function to toggle the state of the sidebar
-        props.reloadIframe();
+        // props.reloadIframe();
     }
     const data = props.toc ? props.toc : sidebarData;
 
     useEffect(() => {
-        localStorage.setItem('is-open', JSON.stringify(sidebar));
+        sessionStorage.setItem('is-open', JSON.stringify(sidebar));
     }, [sidebar]);
 
     return (
@@ -30,8 +30,8 @@ function Sidebar(props) {
                 <div className="menu-bars"> 
                     <div className={sidebar ? 'zoom-vertical' : 'zoom-horizontal'}>
                         <FaIcons.FaBars onClick={showSidebar}/>
-                        <AiIcons.AiOutlineZoomIn />
-                        <AiIcons.AiOutlineZoomOut />
+                        <AiIcons.AiOutlineZoomIn onClick={props.increaseFontSize}/>
+                        <AiIcons.AiOutlineZoomOut onClick={props.decreaseFontSize}/>
                     </div>
                     {/* top left bar icon, a clickable react component */}
                 </div>
