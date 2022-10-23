@@ -10,6 +10,7 @@ function Error401() {
         <h1 className='ErrorCode'>{code}!</h1>
         <img className='ErrorImg' src={require('./401.jpg') } />
         <p className='ErrorMsg'>{msg401}</p>
+        <a className='homefromerror' href='/'>Go back home</a>
     </div>
   )
 }

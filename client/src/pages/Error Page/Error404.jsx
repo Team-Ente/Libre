@@ -10,6 +10,8 @@ function Error404() {
         <h1 className='ErrorCode'>{code}!</h1>
         <img className='ErrorImg' src={require('./404.gif')} />
         <p className='ErrorMsg'>{msg404}</p>
+        <a className='homefromerror' href='/'>Go back home</a>
+
     </div>
   )
 }
