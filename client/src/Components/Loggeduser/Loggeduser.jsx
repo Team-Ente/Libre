@@ -6,6 +6,7 @@ import './Loggeduser.css';;
 function Loggeduser() {
 
         const [isActive, setIsActive] = useState(false);
+        const user = JSON.parse(localStorage.getItem('logged-in-user'));
 
         const logout = async () => {
                 fetch('http://localhost:3050/logout', {
@@ -20,7 +21,7 @@ function Loggeduser() {
 
         return (
         <div className="dropdown">
-                <div className="dropdown-btn" onClick={(e) => setIsActive(!isActive)}>Welcome, Saikat</div>
+                <div className="dropdown-btn" onClick={(e) => setIsActive(!isActive)}>Welcome, {user.handle}</div>
                 {isActive && 
                 <div className="dropdown-content">
                         <a href="/settings" className="dropdown-item">
