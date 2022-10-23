@@ -14,6 +14,8 @@ function Reader() {
   const [book, setBook] = useState(data.title);
   const [chapter, setChapter] = useState(pages[0].id);
 
+  const [fontSize, setFontSize] = useState(1);
+
   const iframeRef = useRef();
   const [scrollPercentage, setScrollPercentage] = useState("");
   const handleScroll = () => {
@@ -28,10 +30,20 @@ function Reader() {
   }
 
   const reloadIframe = () => {
-    // iframeRef.current.contentDocument.location.reload();
+    iframeRef.current.contentDocument.location.reload();
     // iframeRef.current.style.height = iframeRef.current.contentWindow.document.body.scrollHeight + 50 + 'px';
     // iframeRef.current.style.height = iframeRef.current.contentWindow.document.documentElement.scrollHeight + 5 + 'px';
     // window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }
+
+  const increaseFontSize = () => {
+    setFontSize(Math.min(5, fontSize + .1));
+    reloadIframe();
+  }
+
+  const decreaseFontSize = () => {
+    setFontSize(Math.max(1, fontSize - .1));
+    reloadIframe();
   }
 
   const prevPage = () => {
@@ -71,14 +83,16 @@ function Reader() {
 
     iframeRef.current.addEventListener('load', () => {
       // e.target.contentWindow.document.addEventListener('scroll', handleScroll);
+
+      iframeRef.current.contentWindow.document.body.style.fontSize = fontSize + "em";
+
       iframeRef.current.style.height = iframeRef.current.contentWindow.document.body.scrollHeight + 50 + 'px';
       iframeRef.current.style.height = iframeRef.current.contentWindow.document.documentElement.scrollHeight + 5 + 'px';
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-
-      // iframeRef.current.contentWindow.document.body.style.fontSize = 3 + 'em';
+      
     });
     fetchData();
-  }, [id, chapter]);
+  }, [id, chapter, fontSize]);
 
 
   
@@ -97,7 +111,13 @@ function Reader() {
       <div className='main-container'>
       
         <aside className='sidebar'>
-          <Sidebar toc={toc} navigateToChapter={navigateToChapter} reloadIframe={reloadIframe}/>
+          <Sidebar 
+            toc={toc} 
+            navigateToChapter={navigateToChapter} 
+            reloadIframe={reloadIframe}
+            increaseFontSize={increaseFontSize}
+            decreaseFontSize={decreaseFontSize}
+          />
         </aside>
       
         <main className='content'>
@@ -109,7 +129,6 @@ function Reader() {
               // sandbox="allow-scripts" 
               title="content" 
               srcDoc={content} 
-              
               // onScroll={handleScroll}
             ></iframe>
 
