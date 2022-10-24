@@ -6,13 +6,14 @@ import Completed from './Completed/Completed';
 import Reading from './Reading/Reading';
 import Home from './Home/Home';
 import AdvancedSearch from '../AdvancedSearch/AdvancedSearch';
+import Error404 from '../Error Page/Error404';
 import Reader from '../Reader/Reader';
 import Logo from '../../Components/Logo/Logo';
 import Header from '../../Components/Header/Header';
 import Sidenav from '../../Components/Sidenav/Sidenav';
 
 import { AnimatePresence } from 'framer-motion';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 
 import './Homepage.css';
 
@@ -23,7 +24,7 @@ function Homepage() {
   useEffect(()=>{
     // check logged in user
     if(!localStorage.getItem("logged-in-user")) {
-        navigate("/error401");
+        navigate("/unauthorized");
     }
 
   });
@@ -42,6 +43,7 @@ function Homepage() {
               <Route path='/wishlist' element={<Wishlist />} />
               <Route path='/completed' element={<Completed />} />
               <Route path='/search' element={<AdvancedSearch />} />
+              <Route path='/*' element={<Navigate to="/home" />} />
             </Routes>
           </AnimatePresence>
         </div>

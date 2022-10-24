@@ -9,8 +9,7 @@ function Landingpage() {
   return (
     <Routes>
       <Route path = '/' element={<Initial />} />
-      <Route path = '/login' element={<Login />} />
-      <Route path = '/signup' element={<Signup />} />
+      
       <Route path = '/home' element={<Home />} />
     </Routes>
   )
