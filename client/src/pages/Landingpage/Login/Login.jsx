@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as IcoIcons from 'react-icons/im'; 
 import * as AiIcons from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,6 +17,13 @@ function showPassFunc() {
 function Login() {
   
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    // check logged in user
+    if(localStorage.getItem("logged-in-user")) {
+      navigate("/home");
+    }
+  });
 
   const Auth = async (e) => {
     e.preventDefault();
