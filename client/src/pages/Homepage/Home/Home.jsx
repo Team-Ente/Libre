@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
 import {getBook} from '../../../Components/Book/Book';
 import './Home.css';
 import Animation from '../Animation';

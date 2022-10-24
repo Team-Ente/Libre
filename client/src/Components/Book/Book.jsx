@@ -48,7 +48,7 @@ function Book(props) {
 
   return (
     <div className='wrapper'>
-        <Link to='/book' className='card'>
+        <Link to='/book' className='card' state={{title: props.title, id: props.id, img: props.img, author: props.author}}>
             <img src={props.img} alt={props.title}/>
             <div className='info'>
                 <h1 id='title'>{props.title}</h1>
