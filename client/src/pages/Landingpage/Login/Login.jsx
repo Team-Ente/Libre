@@ -58,6 +58,7 @@ function Login() {
         } else {
           // invalid login
           console.log(jsonResponse.error);
+          alert('Invalid User or Password');
         }
       });  
       
