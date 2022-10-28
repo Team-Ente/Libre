@@ -2,17 +2,18 @@ import React, {useState, useEffect, useRef} from 'react';
 import * as AiIcons from 'react-icons/ai'; //for aiICons icons
 import './Reader.css';
 import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Reader() {
   const location = useLocation();
-  const data = location.state;
-  const toc = location.state.toc;
-  const pages = data.pages;
-  const id = data.id;
+  const navigate = useNavigate();
+
+  const toc = location.state ? location.state.toc : null;
+  const pages = location.state ? location.state.pages : null;
+  const id = location.state? location.state.id : null;
   const [content, setContent] = useState("");
-  const [book, setBook] = useState(data.title);
-  const [chapter, setChapter] = useState(pages[0].id);
+  const [book, setBook] = useState(location.state ? location.state.title : null);
+  const [chapter, setChapter] = useState(pages ? pages[0].id : null);
 
   const [fontSize, setFontSize] = useState(1);
 
@@ -65,6 +66,14 @@ function Reader() {
 
   useEffect(() => {
     // check logged in user
+    if(!localStorage.getItem("logged-in-user")) {
+      navigate("/unauthorized");
+    }
+
+    if(!location.state) {
+      navigate("error");
+    }
+
     const fetchData = async () => {
         fetch("http://localhost:3050/read?book="+id+"&chapter="+chapter, {
             mode: "cors",
@@ -89,7 +98,7 @@ function Reader() {
       
     });
     fetchData();
-  }, [id, chapter, fontSize]);
+  }, [id, chapter, fontSize, navigate, location.state]);
 
 
   
@@ -119,23 +128,7 @@ function Reader() {
       
         <main className='content'>
           <div className='book'>
-            
-            <iframe 
-              className='iframe'
-              ref={iframeRef}
-              // sandbox="allow-scripts" 
-              title="content" 
-              srcDoc={content} 
-              // onScroll={handleScroll}
-            ></iframe>
-
-
-
-            {/* <iframe sandbox="allow-top-navigation" title="content" src='http://localhost:3050/read?book=LN_test_1&chapter=toc' width="100%" height="100%"></iframe> */}
-            {/* <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/2' element={<Discover />} />
-            </Routes> */}
+            <iframe className='iframe' ref={iframeRef} title="content" srcDoc={content} ></iframe>
           </div>
           <div className='page-control'>
             <button onClick={prevPage}>Prev</button>
