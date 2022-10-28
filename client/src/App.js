@@ -8,6 +8,7 @@ import Error401 from './pages/Error Page/Error401';
 import Error404 from './pages/Error Page/Error404';
 import BooksDetails from './pages/BookDetails/BooksDetails';
 import { Route, Routes } from 'react-router-dom';
+import DiscoverPage from './pages/DiscoverPage/DiscoverPage'
 function App() {
 
 
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Landingpage />} />
           <Route path ='/login' element={<Login />} />
+          <Route path ='/discover' element={<DiscoverPage />} />
           <Route path ='/signup' element={<Signup />} />
           <Route path='/home/*' element={<Homepage/>} />
           <Route path='/reader' element={<Reader/>} />
