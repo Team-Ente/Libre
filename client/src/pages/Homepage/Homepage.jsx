@@ -40,7 +40,6 @@ function Homepage() {
               <Route path='/reading' element={<Reading />} />
               <Route path='/wishlist' element={<Wishlist />} />
               <Route path='/completed' element={<Completed />} />
-              <Route path='/search' element={<AdvancedSearch />} />
               <Route path='/*' element={<Navigate to="/home" />} />
             </Routes>
           </AnimatePresence>

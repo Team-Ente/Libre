@@ -2,4 +2,10 @@
         display: flex;
         flex-direction: row;
         gap: 30px;
+        /* display: block;
+        width: 220px; */
+}
+.filter i {
+        /* position: relative;
+        float: left; */
 }
