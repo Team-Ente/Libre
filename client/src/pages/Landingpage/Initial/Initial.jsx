@@ -18,12 +18,12 @@ function Topbar() {
         </div>
         <div className="col-links">
           <ul className='toplist'>
-            <li>Discover</li>
+            <li className='activelanding'>Home</li>
+            <li><Link to={"/discover"}>Discover</Link></li>
             <li>Pricing</li>
             <li>Contact</li>
             <li><Link to={Cookies.get('access_token')?'/home':'/login'}>Login</Link></li>
           </ul>
-          <p>Menu</p>
         </div>
       </div>
       
