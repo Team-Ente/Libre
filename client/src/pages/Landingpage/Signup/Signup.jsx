@@ -14,6 +14,14 @@ function showPassFunc() {
     x.type = "password";
   }
 }
+function showConfirmPassFunc() {
+  var x = document.getElementById("confirmpassInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
 
 
 function Signup() {
@@ -148,10 +156,10 @@ function Signup() {
             <p className='email-error'>{pvalid}</p>
 
             <div className="txt_field">
-                <input type="password" onChange={checkConfirmPass} autoComplete='off' required />
+                <input type="password" name='confirmpass' onChange={checkConfirmPass} autoComplete='off' id='confirmpassInput' required />
                 <span></span>
                 <label>Confirm Password</label>
-                <div className='showpass' onClick={showPassFunc}><AiIcons.AiFillEyeInvisible /></div> 
+                <div className='showpass' onClick={showConfirmPassFunc}><AiIcons.AiFillEyeInvisible /></div> 
 
             </div>
             <p className='email-error'>{confirmmsg}</p>
