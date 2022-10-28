@@ -40,11 +40,11 @@ function AdvancedSearch() {
   return (
     <div>
         <div className="filter">
-          <DropdownSearch dat={language} plc="Language" mul={false}/>
-          <DropdownSearch dat={author} plc="Author" mul={true}/>
-          <DropdownSearch dat={topic} plc="Topic" mul={true}/>
-          <DropdownSearch dat={publisher} plc="Publisher" mul={false}/>
-          <DropdownSearch dat={publication_date} plc="Publication Date" mul={false}/>
+          <i><DropdownSearch dat={language} plc="Language" mul={false}/></i>
+          <i><DropdownSearch dat={author} plc="Author" mul={true}/></i>
+          <i><DropdownSearch dat={topic} plc="Topic" mul={true}/></i>
+          <i><DropdownSearch dat={publisher} plc="Publisher" mul={false}/></i>
+          <i><DropdownSearch dat={publication_date} plc="Publication Date" mul={false}/></i>
         </div>
     </div>
   )
