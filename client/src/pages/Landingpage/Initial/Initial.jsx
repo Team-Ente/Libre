@@ -51,14 +51,6 @@ function Topbar() {
           </div>  
         </div>
       </div>
-
-      <div className="discover">
-        <div className="dis-title">
-          <p>Go beyond your Reading list</p>
-          <p>View All topics</p>
-        </div>
-        <Discover />
-      </div>
     </div>
   </Animation>
     
