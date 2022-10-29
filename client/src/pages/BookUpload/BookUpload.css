@@ -47,18 +47,31 @@
     width: 110%;
     height: 35px;
     margin-top: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    /* border-radius: 5px; */
+    /* border: 1px solid #ccc; */
     padding-left: 10px;
     font-size: 16px;
-    border-bottom-width: 2px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    /* border-bottom-width: 2px; */
     transition: all 0.3s ease;
 }
+.input_box span::before{
+    content: '';
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #2691d9;
+    transition: .5s;
+}
+
 .input_boxz textarea {
     height: 35px;
     margin-top: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    border: none;
+    border-bottom: 1px solid #ccc;
     padding-left: 10px;
     font-size: 16px;
     border-bottom-width: 2px;
