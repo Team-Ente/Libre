@@ -1,31 +1,15 @@
 import React from 'react';
 import Discover from '../../Homepage/Discover/Discover';
-import Logo from '../../../Components/Logo/Logo';
 import * as IcoIcons from 'react-icons/im'; 
 import Animation from '../Animation';
 import './Initial.css';
-import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import TopBar from '../../../Components/TopBar/TopBar';
 function Topbar() {
   return (
     <Animation>
 
     <div>
-      <div className="top-row">
-        
-        <div className="col-logo">
-          <Logo />
-        </div>
-        <div className="col-links">
-          <ul className='toplist'>
-            <li className='activelanding'>Home</li>
-            <li><Link to={"/discover"}>Discover</Link></li>
-            <li>Pricing</li>
-            <li>Contact</li>
-            <li><Link to={Cookies.get('access_token')?'/home':'/login'}>Login</Link></li>
-          </ul>
-        </div>
-      </div>
+      <TopBar home={true}/>
       
       <div className="hero">
         <p className='hero-text'>Unlock Knowledge</p>
