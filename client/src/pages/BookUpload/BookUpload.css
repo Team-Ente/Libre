@@ -1,9 +1,10 @@
 .mainbody {
+    margin-top: 15px;
+    padding: 0;
     display: flex;
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background: red;
 }
 .container-main {
     background-color: #fff; 
@@ -12,7 +13,7 @@
 }
 .titleadd {
     font-size: 32px;
-    margin: 20px 0px;
+    margin: 10px 0px;
     position: relative;
     text-align: center;
 }
@@ -35,7 +36,7 @@
 .input_box {
     width: calc(100%/2 - 40px);
     position: relative;
-    margin: 6px 0;
+    margin: 3px 0;
 }
 .input_boxz {
     width: calc(100%);
@@ -68,103 +69,12 @@
     height: 150px;
 }
 
-.wrapper{
-  width: 430px;
-  background: #fff;
-  border-radius: 5px;
-  padding: 30px;
-  box-shadow: 7px 7px 12px rgba(0,0,0,0.05);
+.addfile {
+    margin-top: 20px;
+    width: 100%;
+    height: 70px;
 }
-.wrapper header{
-  color: #6990F2;
-  font-size: 27px;
-  font-weight: 600;
-  text-align: center;
-}
-.wrapper form{
-  height: 167px;
-  display: flex;
-  cursor: pointer;
-  margin: 30px 0;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border-radius: 5px;
-  border: 2px dashed #6990F2;
-}
-form :where(i, p){
-  color: #6990F2;
-}
-form i{
-  font-size: 50px;
-}
-form p{
-  margin-top: 15px;
-  font-size: 16px;
-}
-section .row{
-  margin-bottom: 10px;
-  background: #E9F0FF;
-  list-style: none;
-  padding: 15px 20px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-section .row i{
-  color: #6990F2;
-  font-size: 30px;
-}
-section .details span{
-  font-size: 14px;
-}
-.progress-area .row .content{
-  width: 100%;
-  margin-left: 15px;
-}
-.progress-area .details{
-  display: flex;
-  align-items: center;
-  margin-bottom: 7px;
-  justify-content: space-between;
-}
-.progress-area .content .progress-bar{
-  height: 6px;
-  width: 100%;
-  margin-bottom: 4px;
-  background: #fff;
-  border-radius: 30px;
-}
-.content .progress-bar .progress{
-  height: 100%;
-  width: 0%;
-  background: #6990F2;
-  border-radius: inherit;
-}
-.uploaded-area{
-  max-height: 232px;
-  overflow-y: scroll;
-}
-.uploaded-area.onprogress{
-  max-height: 150px;
-}
-.uploaded-area::-webkit-scrollbar{
-  width: 0px;
-}
-.uploaded-area .row .content{
-  display: flex;
-  align-items: center;
-}
-.uploaded-area .row .details{
-  display: flex;
-  margin-left: 15px;
-  flex-direction: column;
-}
-.uploaded-area .row .details .size{
-  color: #404040;
-  font-size: 11px;
-}
-.uploaded-area i.fa-check{
-  font-size: 16px;
+.submitform {
+    width: 200px !important;
+    margin-left: calc(42%);
 }
