@@ -3,7 +3,8 @@ import * as IcoIcons from 'react-icons/im';
 import * as AiIcons from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import "./Login.css";
-import Animation from '../Animation';
+import Animation from '../Landingpage/Animation';
+import TopBar from '../../Components/TopBar/TopBar';
 
 function showPassFunc() {
   var x = document.getElementById("passInput");
@@ -67,7 +68,7 @@ function Login() {
 
   return (
     <Animation>
-
+    <TopBar login={true} />
     <div className='Login'>
         <div className="center">
         <Link to='/'><h1 className='icon'><i className='libre-icon'><IcoIcons.ImBooks /></i>Login</h1></Link>
