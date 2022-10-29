@@ -1,84 +1,36 @@
-.parent {
+.header-search {
     display: flex;
-    flex-direction: row;
-    /* align-items:flex-start; */
+    justify-content: space-between;
 }
-
-.children1 {
-    flex: 20;
-    /* margin-left: 40px; */
-    /* background-color: blue; */
+.search-form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 10px;
 }
-.children2 {
-    flex:7;
-    /* background-color: red; */
+.search-box-part {
+    margin: 0 40px;
 }
-.children3 {
-    flex:4;
-    /* background-color: green; */
-    position: absolute;
-    right: 1%;
-    /* margin-left: 100px; */
+.searchbox {
+    border: 1px solid #ccc;
+    width: 800px;
+    height: 45px;
+    border-radius: 30px;
+    padding-left: 25px;
 }
-.advanced-search{
-    flex: 2;
-    width: 120px;
-    margin: 0 20px;
+.search-logo-icn {
+    margin-left: -40px;
+    font-size: 25px;
+    color:#ccc;
+}
+.filter-btn {
+    font-size: 18px;
+    border: 1px solid #ccc;
+    background-color: #fff;
     padding: 12px;
-    text-align: center;
-    /* border: 1px solid; */
-    box-shadow: 2px 2px 10px 2px rgba(0,0,0,0.06);
-  border-radius: 10px;
-
-    background: white;
-    font-size: 18px;
-    /* color: gray; */
-    font-weight: bolder;
-    cursor: pointer;
-    outline: none;
+    width: 100px;
+    border-radius: 25px;
 }
-.advanced-search > i {
-    font-size: 20px;
-}
-.advanced-search:hover{
-    /* border-color: #0d74F5; */
-    /* background-color: #0d74F5; */  
-    box-shadow: 2px 2px 10px 2px rgba(0,0,0,0.13);
-
-
-
-    /* color: #fff; */
-    transition: .5s;
-}
-
-.box-container2 {
-    height: 52px;
-    /* border: 1px solid gray; */
-    box-shadow: 2px 2px 10px 2px rgba(0,0,0,0.06);
-
-    padding: 0px 10px;
-    border-radius: 50px;    
-}
-.element-container {
-    width: 100%;
-    height: 100%;
-    vertical-align: middle;
-}
-.search {
-    border: none;
-    height: 100%;
-    width: 100%;
-    padding: 0px 5px;
-    border-radius: 50px;
-    font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 500;
-}
-.search:focus {
-    outline: none;
-}
-.search-logo {
-    font-size: 30px;
-    margin-left: -30px;
-    color: gray;
+.filter-btn:hover {
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.06);
 }
