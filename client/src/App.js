@@ -10,6 +10,8 @@ import BooksDetails from './pages/BookDetails/BooksDetails';
 import { Route, Routes } from 'react-router-dom';
 import DiscoverPage from './pages/DiscoverPage/DiscoverPage'
 import AdminLogin from './pages/AdminLogin/AdminLogin';
+import BookUpload from './pages/BookUpload/BookUpload';
+import './App.css'
 function App() {
 
 
@@ -19,6 +21,7 @@ function App() {
           <Route path='/' element={<Landingpage />} />
           <Route path ='/login' element={<Login />} />
           <Route path ='/adminlogin' element={<AdminLogin />} />
+          <Route path ='/bookupload' element={<BookUpload />} />
           <Route path ='/discover' element={<DiscoverPage />} />
           <Route path ='/signup' element={<Signup />} />
           <Route path='/home/*' element={<Homepage/>} />
