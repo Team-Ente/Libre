@@ -38,7 +38,7 @@ const publisher = [
 
 function AdvancedSearch() {
   return (
-    <div>
+    <div className='advancedSearchblock'>
         <div className="filter">
           <i><DropdownSearch dat={language} plc="Language" mul={false}/></i>
           <i><DropdownSearch dat={author} plc="Author" mul={true}/></i>

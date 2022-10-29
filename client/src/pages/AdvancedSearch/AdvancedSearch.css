@@ -1,11 +1,11 @@
+.advancedSearchblock {
+}
 .filter {
-        display: flex;
-        flex-direction: row;
-        gap: 30px;
-        /* display: block;
-        width: 220px; */
+        display: block;
 }
 .filter i {
-        /* position: relative;
-        float: left; */
+        display: inline-block;
+        padding: 20px;
+        align-items: center;
+        justify-content: center;
 }
