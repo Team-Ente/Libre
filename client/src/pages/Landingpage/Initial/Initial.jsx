@@ -4,6 +4,7 @@ import * as IcoIcons from 'react-icons/im';
 import Animation from '../Animation';
 import './Initial.css';
 import TopBar from '../../../Components/TopBar/TopBar';
+import BookUpload from '../../BookUpload/BookUpload';
 function Topbar() {
   return (
     <Animation>
