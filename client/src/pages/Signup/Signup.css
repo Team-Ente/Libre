@@ -117,7 +117,7 @@ input[type="submit"]:hover{
   transition: .5s;
 }
 
-i {
+.libre-icon {
   vertical-align:middle;
 }
 .signup_link{

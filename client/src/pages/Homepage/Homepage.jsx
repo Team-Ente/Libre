@@ -5,7 +5,6 @@ import Wishlist from './Wishlist/Wishlist';
 import Completed from './Completed/Completed';
 import Reading from './Reading/Reading';
 import Home from './Home/Home';
-import AdvancedSearch from '../AdvancedSearch/AdvancedSearch';
 import Logo from '../../Components/Logo/Logo';
 import Header from '../../Components/Header/Header';
 import Sidenav from '../../Components/Sidenav/Sidenav';
