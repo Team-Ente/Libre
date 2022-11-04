@@ -63,6 +63,8 @@
 
 .nav-links li:hover a {
     color: #fff;
+    background-color: #2691d9;
+    border-radius: 6px;
     transition: 0.3s;
 }
 
