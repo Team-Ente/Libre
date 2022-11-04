@@ -2,7 +2,28 @@ import React from 'react'
 import './BookUpload.css'
 import * as AiIcons from 'react-icons/ai'
 import TopBar from '../../Components/TopBar/TopBar'
+import Author from './author'
+import { useState } from 'react'
 function BookUpload() {
+  const [counter, setCounter] = useState(1);
+ 
+  //increase counter
+  const increase = () => {
+    if(counter<20)
+    setCounter(counter => counter + 1);
+    console.log(counter);
+  };
+  //decrease counter
+  const decrease = () => {
+    if(counter>1)
+    setCounter(counter => counter - 1);
+    console.log(counter);
+  };
+
+  const authors = [];
+  for (let i = 1; i <= counter; i++) {
+    authors.push(<Author id={i} key={i} />);
+  }
   return (
     <div>
     <TopBar />
@@ -17,12 +38,6 @@ function BookUpload() {
               <input type="text" name='Bookname' required />
             </div>
             
-            <div className="input_box">
-              <label className="Labeldetails" >Author</label>
-              <span></span>
-              <input type="text" name='Author' required />
-            </div>
-
             <div className="input_box">
               <label className="Labeldetails" >Langugae</label>
               <span></span>
@@ -60,6 +75,18 @@ function BookUpload() {
               <label className="Labeldetails" >ISBN</label>
               <span></span>
               <input type="text" name='ISBN' required />
+            </div>
+            <div className="input_box">
+              <label className="Labeldetails" ></label>
+              <span></span>
+              <input type="text" name='ISBN' hidden />
+            </div>
+            <div className='input-box'>
+              <label className="LabeldetailsA" >Author</label>
+              <span></span>
+              <AiIcons.AiFillPlusCircle onClick={increase} className="authorbtn" />
+              <AiIcons.AiFillMinusCircle onClick={decrease} className="authorbtn" />
+              {authors}
             </div>
 
             <div className="input_boxz">
