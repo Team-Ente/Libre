@@ -38,7 +38,7 @@ function BooksDetails() {
     <div className='bookdetails'>
       <div className='book-card-grid'>
         <div className='bookimg'>
-        <img src={book.metadata.img} alt={book.metadata.title} style={{height: 500}}/>
+        <img src={"data:" + book.metadata.mimeType + ";base64," + book.metadata.cover} alt={book.metadata.title} style={{height: 500}}/>
         <div className='controlbtns'>
           <button className='details-control-btn' onClick={readBook}>Read Now</button>
           <button className='details-control-btn'>Add to wishlist</button>
