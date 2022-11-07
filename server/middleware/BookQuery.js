@@ -29,7 +29,6 @@ async function getBookData(book) {
   // get book info from database
   book.genre = await getBookGenre(book.id);
   book.authors = await getBookAuthors(book.id);
-  console.log(book);
 
   // change to id later (after upload complete)
   let metadata = file.get(book.title);

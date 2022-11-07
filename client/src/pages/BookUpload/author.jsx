@@ -4,7 +4,7 @@ import './author.css'
 function Author() {
   return (
     <div>
-      <input className='inpt' type="text" name='Author' required />
+      <input className='inpt' type="text" name='author' required />
     </div>
   )
 }
