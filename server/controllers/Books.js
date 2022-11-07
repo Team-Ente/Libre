@@ -170,7 +170,7 @@ export const getBookInfo = async (id) => {
 export const getBookGenre = async (id) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            db.execute('SELECT name FROM `genre` INNER JOIN `book_genre` ON `genre`.id = `book_genre`.book_id WHERE book_id = ?', 
+            db.execute('SELECT name FROM `genre` INNER JOIN `book_genre` ON `genre`.id = `book_genre`.genre_id WHERE book_id = ?', 
             [id], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
@@ -186,7 +186,7 @@ export const getBookGenre = async (id) => {
 export const getBookAuthors = async (id) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            db.execute('SELECT name FROM `author` INNER JOIN `author_book` ON `author`.id = `author_book`.book_id WHERE book_id = ?', 
+            db.execute('SELECT name FROM `author` INNER JOIN `author_book` ON `author`.id = `author_book`.author_id WHERE book_id = ?', 
             [id], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
