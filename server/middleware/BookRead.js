@@ -11,22 +11,15 @@ import { parse } from "node-html-parser";
 export const getContents = async (req, res) => {
 
   // check for user authentication
-  // if(!req.user) {
-  //   console.log("Not Authorized");
-  //   return res.status(401).json({error: "User unauthenticated"});
-  // }
+  if(!req.user) {
+    console.log("Not Authorized");
+    return res.status(401).json({error: "User unauthenticated"});
+  }
 
   const book = req.query.book;
   if(! req.query.chapter){  // book contents
     try {
       const epub = await EPub.createAsync("files/" + book + ".epub");
-  
-      // doesn't work for some reason
-      // let retHTML = "";
-      // epub.flow.forEach((ch)=> retHTML += `<a href="/read/`+ bookName + "/" + ch.id + `">` + (ch.title ? ch.title : '-') + `</a><br>`);
-      // return res.send(retHTML);
-
-
       return res.status(200).json({
         'contents' : epub.toc,  // for sidebar navigation
         'pages': epub.flow  // for page navigation
@@ -83,8 +76,6 @@ export const getContents = async (req, res) => {
 
       return res.status(200).json({'chapter' : retHTML });
       
-      // return res.status(200).send(retHTML); // for debugging
-
     } catch (error) {
         return res.status(404).json({error: "Resource not found"});
     }

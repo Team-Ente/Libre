@@ -3,27 +3,48 @@ import './BookUpload.css'
 import * as AiIcons from 'react-icons/ai'
 import TopBar from '../../Components/TopBar/TopBar'
 import Author from './author'
+import Topic from './topic'
 import { useState } from 'react'
 function BookUpload() {
-  const [counter, setCounter] = useState(1);
+  const [authorCounter, setAuthorCounter] = useState(1);
+  const [topicCounter, setTopicCounter] = useState(1);
  
   //increase counter
-  const increase = () => {
-    if(counter<20)
-    setCounter(counter => counter + 1);
-    console.log(counter);
+  const authorIncrease = () => {
+    if(authorCounter<20)
+    setAuthorCounter(authorCounter => authorCounter + 1);
+    console.log(authorCounter);
   };
   //decrease counter
-  const decrease = () => {
-    if(counter>1)
-    setCounter(counter => counter - 1);
-    console.log(counter);
+  const authorDecrease = () => {
+    if(authorCounter>1)
+    setAuthorCounter(authorCounter => authorCounter - 1);
+    console.log(authorCounter);
+  };
+
+  //increase counter
+  const topicIncrease = () => {
+    if(topicCounter<20)
+    setTopicCounter(topicCounter => topicCounter + 1);
+    console.log(topicCounter);
+  };
+  //decrease counter
+  const topicDecrease = () => {
+    if(topicCounter>1)
+    setTopicCounter(topicCounter => topicCounter - 1);
+    console.log(topicCounter);
   };
 
   const authors = [];
-  for (let i = 1; i <= counter; i++) {
+  for (let i = 1; i <= authorCounter; i++) {
     authors.push(<Author id={i} key={i} />);
   }
+
+  const topics = [];
+  for (let i = 1; i <= topicCounter; i++) {
+    authors.push(<Topic id={i} key={i} />);
+  }
+
   return (
     <div>
     <TopBar />
@@ -35,58 +56,65 @@ function BookUpload() {
             <div className="input_box">
               <label className="Labeldetails" >Book Name</label>
               <span></span>
-              <input type="text" name='Bookname' required />
+              <input type="text" name='bookName' required />
             </div>
             
             <div className="input_box">
               <label className="Labeldetails" >Langugae</label>
               <span></span>
-              <input type="text" name='Language' required />
+              <input type="text" name='language' required />
             </div>
 
             <div className="input_box">
               <label className="Labeldetails" >Publisher</label>
               <span></span>
-              <input type="text" name='Publisher' required />
+              <input type="text" name='publisher' required />
             </div>
             
 
-            <div className="input_box">
+            {/* <div className="input_box">
               <label className="Labeldetails" >Topic</label>
               <span></span>
-              <input type="text" name='Topic' required />
-            </div>
+              <input type="text" name='topic' required />
+            </div> */}
 
 
             <div className="input_box">
               <label className="Labeldetails" >Format</label>
               <span></span>
-              <input type="text" name='Format' required />
+              <input type="text" name='format' required />
             </div>
 
 
             <div className="input_box">
               <label className="Labeldetails" >Publishing Year</label>
               <span></span>
-              <input type="text" name='PublishingYear' required />
+              <input type="text" name='publishingYear' required />
             </div>
 
             <div className="input_box">
               <label className="Labeldetails" >ISBN</label>
               <span></span>
-              <input type="text" name='ISBN' required />
+              <input type="text" name='isbn' required />
             </div>
-            <div className="input_box">
+            {/* <div className="input_box">
               <label className="Labeldetails" ></label>
               <span></span>
-              <input type="text" name='ISBN' hidden />
-            </div>
+              <input type="text" hidden />
+            </div> */}
             <div className='input-box'>
               <label className="LabeldetailsA" >Author</label>
               <span></span>
-              <AiIcons.AiFillPlusCircle onClick={increase} className="authorbtn" />
-              <AiIcons.AiFillMinusCircle onClick={decrease} className="authorbtn" />
+              <AiIcons.AiFillPlusCircle onClick={authorIncrease} className="authorbtn" />
+              <AiIcons.AiFillMinusCircle onClick={authorDecrease} className="authorbtn" />
               {authors}
+            </div>
+            <div className='input-box'>
+              <label className="LabeldetailsA" >Topic</label>
+              <span></span>
+              <AiIcons.AiFillPlusCircle onClick={topicIncrease} className="authorbtn" />
+              <AiIcons.AiFillMinusCircle onClick={topicDecrease} className="authorbtn" />
+              {topics}
             </div>
 
             <div className="input_boxz">

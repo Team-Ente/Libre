@@ -10,6 +10,7 @@ function getBook(book) {
         title = {book.metadata.title}
         author = {book.metadata.creator}
         id = {book.id}
+        info = {book}
         // year = {2001}
     />
     
@@ -48,7 +49,7 @@ function Book(props) {
 
   return (
     <div className='wrapper'>
-        <Link to='/book' className='card' state={{title: props.title, id: props.id, img: props.img, author: props.author}}>
+        <Link to='/book' className='card' state={props.info}>
             <img src={props.img} alt={props.title}/>
             <div className='info'>
                 <h1 id='title'>{props.title}</h1>
