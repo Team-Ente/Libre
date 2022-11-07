@@ -151,11 +151,43 @@ export const addNewBook = async (book) => {
     }
 }
 
-export const getBookInfo = async (title) => {
+export const getBookInfo = async (id) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            db.execute('SELECT * FROM  `book` WHERE `title` = ?', 
-            ['%'+title+'%'], (err, results) => {
+            db.execute('SELECT * FROM  `book` WHERE `id` = ?', 
+            [id], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getBookGenre = async (id) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT name FROM `genre` INNER JOIN `book_genre` ON `genre`.id = `book_genre`.book_id WHERE book_id = ?', 
+            [id], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getBookAuthors = async (id) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT name FROM `author` INNER JOIN `author_book` ON `author`.id = `author_book`.book_id WHERE book_id = ?', 
+            [id], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
             })

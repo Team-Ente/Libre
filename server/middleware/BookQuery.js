@@ -10,7 +10,9 @@ import  {
     getEditorsPickBooks, 
     getLikeBooks, 
     getCompletedBooks, 
-    getBucketBooks
+    getBucketBooks,
+    getBookGenre,
+    getBookAuthors
 } from "../controllers/Books.js";
 
 /**
@@ -23,10 +25,17 @@ import  {
 async function getBookData(book) {
 
   let file = editJsonFile("files/bookInfo.json");
-  let bookInfo = file.get(book.title);
-  if(bookInfo) {
-    bookInfo.id = book.title;
-    return bookInfo;
+
+  // get book info from database
+  book.genre = await getBookGenre(book.id);
+  book.authors = await getBookAuthors(book.id);
+  console.log(book);
+
+  // change to id later (after upload complete)
+  let metadata = file.get(book.title);
+  if(metadata) {
+    book.metadata = metadata;
+    return book;
   }
   // const epub = await EPub.createAsync("files/" + book.title + ".epub")  // Expensive (>500ms / book)
   

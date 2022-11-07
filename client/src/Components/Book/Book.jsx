@@ -6,9 +6,9 @@ import './Book.css';
 function getBook(book) { 
   return (
     <Book 
-        img = {"data:" + book.mimeType + ";base64," + book.cover}
-        title = {book.title}
-        author = {book.creator}
+        img = {"data:" + book.metadata.mimeType + ";base64," + book.metadata.cover}
+        title = {book.metadata.title}
+        author = {book.metadata.creator}
         id = {book.id}
         // year = {2001}
     />
