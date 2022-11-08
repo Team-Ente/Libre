@@ -12,20 +12,15 @@ function Reader() {
 
   // const toc = location.state ? location.state.toc : null;
   const pages = location.state ? location.state.pages : null;
-  // const id = location.state? location.state.title : null;
 
-  // const [book, setBook] = useState(location.state ? location.state.title : null);
   const book = location.state ? location.state.title : null;
 
   const [currentPageIndex, setCurrentPageIndex] = useState(location.state ? location.state.index : 0);
 
-  // const [chapter, setChapter] = useState(pages ? pages[currentPageIndex].id : null);
-
   const [fontSize, setFontSize] = useState(1);
 
   const [contents, setContents] = useState([""]);
-  // const [contents, setContents] = Array(countPages).fill(useState(""));
-  // var iframeRef = Array(countPages).fill(useRef());
+
   const iframeRefs = useRef();
   iframeRefs.current = [];
 
@@ -69,8 +64,6 @@ function Reader() {
       return;
     }
     setCurrentPageIndex(currentPageIndex - 1);
-    // const prevPage = pages[currentPageIndex];
-    // setChapter(prevPage.id);
   }
 
   const nextPage = () => {
@@ -79,8 +72,6 @@ function Reader() {
       return;
     }
     setCurrentPageIndex(currentPageIndex + 1);
-    // const nextPage = pages[currentPageIndex]
-    // setChapter(nextPage.id);
   }
 
 
@@ -90,14 +81,6 @@ function Reader() {
           credentials: "include"
       }).then((result) => {
           result.json().then((jsonResult) => {
-              // const newContents = contents.map((oldContent, i) => {
-              //   if(i === idx) {
-              //     return jsonResult.chapter;
-              //   } else {
-              //     return oldContent;
-              //   }
-              // });
-            console.log(idx + ' ' + countPages);
             if(idx < countPages) {
               setContents((contents) => contents.map((oldContent, i) => {
                 if(i === idx) {
@@ -107,16 +90,13 @@ function Reader() {
                 }
               }));
             } else {
-              setContents((contents) => [...contents, jsonResult.chapter])
+              setContents((contents) => {
+                if(contents.includes(jsonResult.chapter)) return contents;
+                setCountPages(countPages + 1);
+                return [...contents, jsonResult.chapter]
+              })
             }
-            
-            return true;
-              // setContents((contents) => {
-              //   if(contents.length>0) return [...contents, jsonResult.chapter];
-              //   else return [jsonResult.chapter];
-              // });
 
-              // setContents[idx](jsonResult.chapter);
           });   
       }, (reason) => {
           console.log(reason);
@@ -126,9 +106,8 @@ function Reader() {
 
     const handleScroll = useCallback(async (e) => {  
       if(window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight) {
-        console.log("at the bottom of the page");
-        var val = await fetchData(countPages);
-        setCountPages((countPages)=>countPages+1);
+        console.log("loading chapter "+countPages);
+        fetchData(countPages);
       }
   
     }, [countPages, fetchData])
@@ -143,25 +122,14 @@ function Reader() {
       navigate("error");
     }
 
-    
-
-    console.log(iframeRefs);
-    // console.log(countPages);
-    // console.log(contents.length);
-    // for (let j=0; j<countPages; j++) {
-    //   fetchData(j);
-    // }
+    console.log("loading chapter 0");
     fetchData(0);
 
     // scrolling
     window.addEventListener("scroll", handleScroll);
 
-  }, [currentPageIndex, fontSize, countPages, fetchData, handleScroll, location.state, navigate]);
-  // }, [book, pages, currentPageIndex, fontSize, navigate, location.state, iframeRefs, countPages]);
+  }, [fetchData, handleScroll, location.state, navigate]);
 
-
-  
-  
 
   return (
     <div className='body'>
@@ -187,8 +155,8 @@ function Reader() {
       
         <main className='content'>
           <div className='book'>
-            {contents.map((content) => {
-              return (<iframe className='iframe' ref={addToRefs} title="content" srcDoc={content} ></iframe>);
+            {contents.map((content, index) => {
+              return (<iframe key={index} className='iframe' ref={addToRefs} title="content" srcDoc={content} ></iframe>);
             })}
           </div>
           <div className='page-control'>
