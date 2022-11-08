@@ -17,7 +17,7 @@ function Sidebar(props) {
         setSidebar(!sidebar); // function to toggle the state of the sidebar
         // props.reloadIframe();
     }
-    const data = props.toc ? props.toc : sidebarData;
+    const data = props.pages ? props.pages : sidebarData;
 
     useEffect(() => {
         sessionStorage.setItem('is-open', JSON.stringify(sidebar));
@@ -46,9 +46,9 @@ function Sidebar(props) {
                     {data.map((item, index) => {
                         return (
                             <li key={index} className="nav-text" onClick={() => {
-                                props.navigateToChapter(item.id)
+                                props.navigateToChapter(index)
                             }}>
-                                <span>{item.title}</span>
+                                <span>{item.title || "-"}</span>
                                 
                             </li>
                         )

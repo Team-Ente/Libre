@@ -30,6 +30,7 @@ header {
 }
 .book {
     display: flex;
+    flex-direction: column;
     /* background-color: brown; */
     /* overflow-y:hidden; */
     /* width: max-content; */

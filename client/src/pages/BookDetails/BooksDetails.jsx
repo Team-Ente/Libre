@@ -10,7 +10,7 @@ function BooksDetails() {
   const navigate = useNavigate();
   const readBook = async () => {
     
-    fetch("http://localhost:3050/read?book="+book.id, {
+    fetch("http://localhost:3050/read?book="+book.title, {
         mode: "cors",
         credentials: "include"
     }).then((result) => {
@@ -24,7 +24,8 @@ function BooksDetails() {
                 title: book.title,
                 // chapter: chapter, 
                 toc: toc, 
-                pages: pages
+                pages: pages,
+                index: 0
               }
             });
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import * as AiIcons from 'react-icons/ai'; //for aiICons icons
 import './Reader.css';
 import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
@@ -8,30 +8,49 @@ function Reader() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const toc = location.state ? location.state.toc : null;
+  const [countPages, setCountPages] = useState(1);
+
+  // const toc = location.state ? location.state.toc : null;
   const pages = location.state ? location.state.pages : null;
-  const id = location.state? location.state.id : null;
-  const [content, setContent] = useState("");
-  const [book, setBook] = useState(location.state ? location.state.title : null);
-  const [chapter, setChapter] = useState(pages ? pages[0].id : null);
+  // const id = location.state? location.state.title : null;
+
+  // const [book, setBook] = useState(location.state ? location.state.title : null);
+  const book = location.state ? location.state.title : null;
+
+  const [currentPageIndex, setCurrentPageIndex] = useState(location.state ? location.state.index : 0);
+
+  // const [chapter, setChapter] = useState(pages ? pages[currentPageIndex].id : null);
 
   const [fontSize, setFontSize] = useState(1);
 
-  const iframeRef = useRef();
-  const [scrollPercentage, setScrollPercentage] = useState("");
-  const handleScroll = () => {
-    const iframe = iframeRef.current.contentWindow;
-    const scrollY = iframe.window.scrollY;
-    const height = iframe.document.body.scrollHeight - iframe.window.innerHeight;
-    setScrollPercentage(Math.floor(100 * scrollY / height));
+  const [contents, setContents] = useState([""]);
+  // const [contents, setContents] = Array(countPages).fill(useState(""));
+  // var iframeRef = Array(countPages).fill(useRef());
+  const iframeRefs = useRef();
+  iframeRefs.current = [];
+
+  const addToRefs = (el) => {
+    if(el && !iframeRefs.current.includes(el)) {
+      el.addEventListener('load', () => {
+        el.contentWindow.document.body.style.fontSize = fontSize + "em";
+        el.style.height = el.contentWindow.document.body.scrollHeight + 50 + 'px';
+        el.style.height = el.contentWindow.document.documentElement.scrollHeight + 5 + 'px';
+      })
+      iframeRefs.current.push(el);
+    }
   }
+
+  // const [scrollPercentage, setScrollPercentage] = useState("");
   
-  const navigateToChapter = (chapterID) => {
-    setChapter(chapterID);
+  
+  const navigateToChapter = (chapterIndex) => {
+    setCurrentPageIndex(chapterIndex);
   }
 
   const reloadIframe = () => {
-    iframeRef.current.contentDocument.location.reload();
+    for (let i=0; i<countPages; i++){
+      iframeRefs.current[i].contentDocument.location.reload();
+    }
   }
 
   const increaseFontSize = () => {
@@ -45,24 +64,74 @@ function Reader() {
   }
 
   const prevPage = () => {
-    const currentPageIndex = pages.findIndex((pg) => pg.id === chapter);
     if(currentPageIndex === 0) {
       // give feedback to user (Tariq)
       return;
     }
-    const prevPage = pages[currentPageIndex - 1]
-    setChapter(prevPage.id);
+    setCurrentPageIndex(currentPageIndex - 1);
+    // const prevPage = pages[currentPageIndex];
+    // setChapter(prevPage.id);
   }
 
   const nextPage = () => {
-    const currentPageIndex = pages.findIndex((pg) => pg.id === chapter);
     if(currentPageIndex === pages.length - 1) {
       // give feedback to user (Tariq)
       return;
     }
-    const nextPage = pages[currentPageIndex + 1]
-    setChapter(nextPage.id);
+    setCurrentPageIndex(currentPageIndex + 1);
+    // const nextPage = pages[currentPageIndex]
+    // setChapter(nextPage.id);
   }
+
+
+  const fetchData = useCallback(async (idx) => {
+      fetch("http://localhost:3050/read?book="+book+"&chapter="+pages[currentPageIndex+idx].id, {
+          mode: "cors",
+          credentials: "include"
+      }).then((result) => {
+          result.json().then((jsonResult) => {
+              // const newContents = contents.map((oldContent, i) => {
+              //   if(i === idx) {
+              //     return jsonResult.chapter;
+              //   } else {
+              //     return oldContent;
+              //   }
+              // });
+            console.log(idx + ' ' + countPages);
+            if(idx < countPages) {
+              setContents((contents) => contents.map((oldContent, i) => {
+                if(i === idx) {
+                  return jsonResult.chapter;
+                } else {
+                  return oldContent;
+                }
+              }));
+            } else {
+              setContents((contents) => [...contents, jsonResult.chapter])
+            }
+            
+            return true;
+              // setContents((contents) => {
+              //   if(contents.length>0) return [...contents, jsonResult.chapter];
+              //   else return [jsonResult.chapter];
+              // });
+
+              // setContents[idx](jsonResult.chapter);
+          });   
+      }, (reason) => {
+          console.log(reason);
+      });
+    }, [book, countPages, currentPageIndex, pages]);
+  
+
+    const handleScroll = useCallback(async (e) => {  
+      if(window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight) {
+        console.log("at the bottom of the page");
+        var val = await fetchData(countPages);
+        setCountPages((countPages)=>countPages+1);
+      }
+  
+    }, [countPages, fetchData])
 
   useEffect(() => {
     // check logged in user
@@ -74,31 +143,21 @@ function Reader() {
       navigate("error");
     }
 
-    const fetchData = async () => {
-        fetch("http://localhost:3050/read?book="+id+"&chapter="+chapter, {
-            mode: "cors",
-            credentials: "include"
-        }).then((result) => {
-            result.json().then((jsonResult) => {
-                setContent(jsonResult.chapter);
-            });   
-        }, (reason) => {
-            console.log(reason);
-        });
-    };
+    
 
-    iframeRef.current.addEventListener('load', () => {
-      // e.target.contentWindow.document.addEventListener('scroll', handleScroll);
+    console.log(iframeRefs);
+    // console.log(countPages);
+    // console.log(contents.length);
+    // for (let j=0; j<countPages; j++) {
+    //   fetchData(j);
+    // }
+    fetchData(0);
 
-      iframeRef.current.contentWindow.document.body.style.fontSize = fontSize + "em";
+    // scrolling
+    window.addEventListener("scroll", handleScroll);
 
-      iframeRef.current.style.height = iframeRef.current.contentWindow.document.body.scrollHeight + 50 + 'px';
-      iframeRef.current.style.height = iframeRef.current.contentWindow.document.documentElement.scrollHeight + 5 + 'px';
-      window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-      
-    });
-    fetchData();
-  }, [id, chapter, fontSize, navigate, location.state]);
+  }, [currentPageIndex, fontSize, countPages, fetchData, handleScroll, location.state, navigate]);
+  // }, [book, pages, currentPageIndex, fontSize, navigate, location.state, iframeRefs, countPages]);
 
 
   
@@ -118,7 +177,7 @@ function Reader() {
       
         <aside className='sidebar'>
           <Sidebar 
-            toc={toc} 
+            pages={pages} 
             navigateToChapter={navigateToChapter} 
             reloadIframe={reloadIframe}
             increaseFontSize={increaseFontSize}
@@ -128,7 +187,9 @@ function Reader() {
       
         <main className='content'>
           <div className='book'>
-            <iframe className='iframe' ref={iframeRef} title="content" srcDoc={content} ></iframe>
+            {contents.map((content) => {
+              return (<iframe className='iframe' ref={addToRefs} title="content" srcDoc={content} ></iframe>);
+            })}
           </div>
           <div className='page-control'>
             <button onClick={prevPage}>Prev</button>
