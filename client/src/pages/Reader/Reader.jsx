@@ -9,20 +9,17 @@ function Reader() {
   const navigate = useNavigate();
 
   const [countPages, setCountPages] = useState(1);
-
-  // const toc = location.state ? location.state.toc : null;
   const pages = location.state ? location.state.pages : null;
-
   const book = location.state ? location.state.title : null;
-
   const [currentPageIndex, setCurrentPageIndex] = useState(location.state ? location.state.index : 0);
-
   const [fontSize, setFontSize] = useState(1);
-
   const [contents, setContents] = useState([""]);
-
   const iframeRefs = useRef();
   iframeRefs.current = [];
+
+  // loading information
+  const [loading, setLoading] = useState(true);
+  const [hasMore, sethasMore] = useState(false);  
 
   const addToRefs = (el) => {
     if(el && !iframeRefs.current.includes(el)) {
@@ -33,10 +30,7 @@ function Reader() {
       })
       iframeRefs.current.push(el);
     }
-  }
-
-  // const [scrollPercentage, setScrollPercentage] = useState("");
-  
+  }  
   
   const navigateToChapter = (chapterIndex) => {
     setCurrentPageIndex(chapterIndex);
@@ -84,18 +78,23 @@ function Reader() {
             if(idx < countPages) {
               setContents((contents) => contents.map((oldContent, i) => {
                 if(i === idx) {
+                  setLoading(false);
                   return jsonResult.chapter;
                 } else {
                   return oldContent;
                 }
               }));
+              
             } else {
               setContents((contents) => {
                 if(contents.includes(jsonResult.chapter)) return contents;
                 setCountPages(countPages + 1);
+                setLoading(false);
                 return [...contents, jsonResult.chapter]
               })
             }
+            
+            sethasMore(pages.length > countPages);
 
           });   
       }, (reason) => {
@@ -104,13 +103,17 @@ function Reader() {
     }, [book, countPages, currentPageIndex, pages]);
   
 
-    const handleScroll = useCallback(async (e) => {  
-      if(window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight) {
-        console.log("loading chapter "+countPages);
-        fetchData(countPages);
-      }
-  
-    }, [countPages, fetchData])
+  const handleScroll = useCallback(async (e) => {  
+    if(loading) return;
+    if(window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight
+      && hasMore) {
+
+      console.log("loading chapter "+countPages);
+      setLoading(true);
+      fetchData(countPages);
+    }
+
+  }, [loading, hasMore, countPages, fetchData])
 
   useEffect(() => {
     // check logged in user
@@ -162,6 +165,9 @@ function Reader() {
           <div className='page-control'>
             <button onClick={prevPage}>Prev</button>
             <button onClick={nextPage}>Next</button>
+          </div>
+          <div>
+            {loading && (<h5>Loading</h5>)}
           </div>
         </main>
       
