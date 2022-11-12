@@ -1,0 +1,36 @@
+.toprow {
+    display: grid;
+    grid-template-columns: 2fr 5fr 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+.searchbox {
+    width: 96%;
+    height: 40px;
+    border-radius: 20px;
+    padding: 0px 20px;
+    border: 1px solid #ccc;
+    outline-color: #ccc;
+    font-size: 20px;
+}
+
+.filter-btn {
+    font-size: 18px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 12px;
+    height: 40px;
+    width: 100px;
+    border-radius: 25px;
+}
+.filter-btn:hover {
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.06);
+}
+.filters {
+    display: grid;
+    grid-template-columns: 2fr 5fr 1fr 1fr;
+    gap: 40px;
+}
+.hidden-filters {
+    margin: -10px 0px 0px -20px;
+}

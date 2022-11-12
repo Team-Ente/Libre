@@ -33,7 +33,7 @@ function Wishlist() {
     return (
         <Animation>
         <div className='group'>
-            <h2>Your Bucket List</h2>
+            <h2 className='titleofcount'>Your Bucket List</h2>
             <div className='books'>
                 {bucketList.map(getBook)}  
             </div>

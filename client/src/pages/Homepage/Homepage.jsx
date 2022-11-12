@@ -6,7 +6,6 @@ import Completed from './Completed/Completed';
 import Reading from './Reading/Reading';
 import Home from './Home/Home';
 import Logo from '../../Components/Logo/Logo';
-import Header from '../../Components/Header/Header';
 import Sidenav from '../../Components/Sidenav/Sidenav';
 
 import { AnimatePresence } from 'framer-motion';
@@ -14,6 +13,7 @@ import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 
 import './Homepage.css';
 import SearchResult from './SearchResult/Searchresult';
+import SearchTopBar from '../../Components/SearchTopBar/SearchTopBar';
 
 function Homepage() {
 
@@ -29,9 +29,9 @@ function Homepage() {
 
   return (
     <div className='Homepage'>
-      <div className='container'>
-        <div className='logo'><Logo /><Sidenav /></div>
-        <div className='header'><Header /></div>
+    <div className='header'><SearchTopBar /></div>
+      <div className='containerhome'>
+        <Sidenav />
         <div className='sidenav-content'>
           <AnimatePresence exitBeforeEnter>    
             <Routes>

@@ -9,7 +9,7 @@ import './Sidenav.css';
 
 function Sidenav() {
   return (
-    <div className='header'>
+    <div className='headernav'>
     <div className='side-nav'>
         <ul className='nav-links'>
             <li><Link to='/home'><i><AiIcons.AiFillHome /></i><p>Home</p></Link></li>
