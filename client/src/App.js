@@ -26,7 +26,7 @@ function App() {
           <Route path ='/bookupload' element={<BookUpload />} />
           <Route path ='/discover' element={<DiscoverPage />} />
           <Route path ='/signup' element={<Signup />} />
-          <Route path='/query' element={<SearchResult />} />
+          <Route exact path='/query' element={<SearchResult />} />
           <Route path='/home/*' element={<Homepage/>} />
           <Route path='/reader' element={<Reader/>} />
           <Route path='/unauthorized' element={<Error401 />} />
