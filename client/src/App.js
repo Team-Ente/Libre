@@ -12,6 +12,7 @@ import DiscoverPage from './pages/DiscoverPage/DiscoverPage'
 import AdminLogin from './pages/AdminLogin/AdminLogin';
 import BookUpload from './pages/BookUpload/BookUpload';
 import './App.css'
+import UserProfile from './pages/UserProfile/UserProfile';
 function App() {
 
 
@@ -29,6 +30,7 @@ function App() {
           <Route path='/unauthorized' element={<Error401 />} />
           <Route path='/book' element={<BooksDetails />} />
           <Route path='*' element={<Error404 />} />
+          <Route path="/user" element={<UserProfile />} />
         </Routes>
       </div>
   );
