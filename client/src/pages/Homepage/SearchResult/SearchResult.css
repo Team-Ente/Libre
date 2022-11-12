@@ -10,3 +10,11 @@
     margin-bottom: 20px;
     font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
+.searchbookgrid {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+.searchcounter {
+    margin-left: 45px;
+    margin-top: 60px;
+}
