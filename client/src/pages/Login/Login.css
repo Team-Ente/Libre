@@ -91,7 +91,7 @@ form .txt_field{
   right: 5%;
   align-items: center;
 }
-input[type="submit"]{
+.submitlogin{
   width: 100%;
   height: 50px;
   border: 1px solid;
@@ -103,7 +103,7 @@ input[type="submit"]{
   cursor: pointer;
   outline: none;
 }
-input[type="submit"]:hover{
+.submitlogin:hover{
   border-color: #2691d9;
   transition: .5s;
 }

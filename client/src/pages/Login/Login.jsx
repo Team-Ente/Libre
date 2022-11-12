@@ -85,7 +85,7 @@ function Login() {
                 <div className='showpass' onClick={showPassFunc}><AiIcons.AiFillEyeInvisible /></div> 
               </div>
               <div className="pass">Forgot Password?</div>
-              <input type="submit" name='login_btn' value="Login" />
+              <input className='submitlogin' type="submit" name='login_btn' value="Login" />
               <div className="signup_link">Not a member? <Link to="/signup">Signup</Link>
             </div>
         </form>

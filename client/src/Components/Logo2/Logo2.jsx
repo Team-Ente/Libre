@@ -2,13 +2,13 @@ import React from 'react';
 import * as IcoIcons from 'react-icons/im'; 
 import './Logo2.css';
 
-function Logo() {
+function Logo2() {
   return (
-    <div className='parent-logo'>
-      <div class="child1">
-        <i className='libre-icon'><IcoIcons.ImBooks /></i>
+    <div className='parent-logo2'>
+      <div class="child12">
+        <i className='libre-icon2'><IcoIcons.ImBooks /></i>
       </div>
-      <div class="child2">
+      <div class="child22">
         Libre
       </div>
     </div>
@@ -16,4 +16,4 @@ function Logo() {
   )
 }
 
-export default Logo
+export default Logo2
