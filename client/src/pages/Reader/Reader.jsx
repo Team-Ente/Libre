@@ -3,7 +3,7 @@ import * as AiIcons from 'react-icons/ai'; //for aiICons icons
 import './Reader.css';
 import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import Loader from './loader';
 function Reader() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -162,12 +162,8 @@ function Reader() {
               return (<iframe key={index} className='iframe' ref={addToRefs} title="content" srcDoc={content} ></iframe>);
             })}
           </div>
-          <div className='page-control'>
-            <button onClick={prevPage}>Prev</button>
-            <button onClick={nextPage}>Next</button>
-          </div>
           <div>
-            {loading && (<h5>Loading</h5>)}
+            {loading && (<Loader />)}
           </div>
         </main>
       
