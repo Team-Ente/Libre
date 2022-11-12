@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+.userprofile {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+.usertopbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 40px;
+}
+.userprofiletitle {
+    text-align: center;
+    margin: 50px 0px 100px 0px;
+}
+.profilegrid {
+    margin: auto;
+    width: 50%;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+.dp {
+    height: 300px;
+    width: 300px;
+    /* background-color: red; */
+    margin-right: 50px;
+}
+.infotitle {
+    margin-bottom: 20px;
+}
+.accountinfo {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 20px;
+    margin-bottom: 80px;
+}
+.userinfoinput {
+    border: none;
+    border-bottom: 1px solid #ccc;   
+}
+.userinfoinput:hover, .userinfoinput:active {
+    border: none;
+    border-bottom: 1px solid #2691d9;   
+}

@@ -87,9 +87,9 @@ function BookUpload() {
 
 
             <div className="input_box">
-              <label className="Labeldetails" >Publishing Year</label>
+              <label className="Labeldetails" >Edition</label>
               <span></span>
-              <input type="text" name='publishingYear' required />
+              <input type="text" name='edition' required />
             </div>
 
             <div className="input_box">
