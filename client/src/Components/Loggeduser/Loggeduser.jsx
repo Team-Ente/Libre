@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Loggeduser.css';;
-
 
 function Loggeduser() {
 
@@ -24,9 +24,9 @@ function Loggeduser() {
                 <div className="dropdown-btn" onClick={(e) => setIsActive(!isActive)}>Welcome, {user?user.handle:""}</div>
                 {isActive && 
                 <div className="dropdown-content">
-                        <a href="/settings" className="dropdown-item">
+                        <Link to="/user" className="dropdown-item">
                                 Settings
-                        </a>
+                        </Link>
                         <a href='/' onClick={logout} className="dropdown-item">
                                 Log out
                         </a>
