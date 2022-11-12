@@ -12,7 +12,8 @@ function UserProfile() {
             <Loggeduser />
         </div>
         <h1 className='userprofiletitle'>Customize Your Profile</h1>
-        
+        <form>
+
         <div className='profilegrid'>
             {/* <div className='dp'> */}
             <img src={user} className='dp' />
@@ -48,9 +49,12 @@ function UserProfile() {
                     <input className='userinfoinput' type="text" name='phone' placeholder='Query from database' required />
                 </div>
             </div>
+            <input className='savebutton' type={"submit"} value="submit" />  
 
             </div>
         </div>
+        </form>
+    
     </div>
 
   )
