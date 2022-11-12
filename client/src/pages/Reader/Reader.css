@@ -1,5 +1,11 @@
+.bookheaderbar {
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    z-index: 4;
+}
 .body {
-    margin: -40px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
     min-height: 100vh;
     overflow-y: hidden;
     /* background-color: blue; */
@@ -19,6 +25,12 @@ header {
 .sidebar {
     /* min-width: 320px; */
     width: fit-content;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 100px 0px;
+    background-color: white;
+    min-height: 1000px;
     /* background-color: lightgray; */
     /* display: flex; */
 }
@@ -31,6 +43,8 @@ header {
 .book {
     display: flex;
     flex-direction: column;
+    width: 90%;
+    margin: auto;
     /* background-color: brown; */
     /* overflow-y:hidden; */
     /* width: max-content; */
@@ -38,11 +52,13 @@ header {
 }
 .iframe {
     /* min-height: 2000px; */
-    width: 100%;
+    /* width: 90%; */
     /* height: 100%;  */
     overflow-y: visible;
     /* scrolling: none; */
-    padding: 0 40px;
+    outline: none;
+    border-width: 0px;
+    padding: 0 100px;
 }
 
 .book-name {
@@ -53,7 +69,8 @@ header {
     font-size: 24px;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
+    margin: auto;
+    margin-top: -40px;
 }
 .zoom {
     margin-top: 10px;

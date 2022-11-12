@@ -1,3 +1,6 @@
+.stickytableofcontents {
+    /* position: fixed; */
+}
 .navbar {
     background-color: #fff;
     height: fit-content;
@@ -95,6 +98,7 @@
 }
 .scrollable-sidebar {
     height:fit-content;
+    transition: all 1s ease-in;
 }
 .scrollable-sidebar-active {
     height: fit-content;

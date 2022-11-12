@@ -24,8 +24,7 @@ function Sidebar(props) {
     }, [sidebar]);
 
     return (
-        <div className={sidebar ? 'scrollable-sidebar-active' : 'scrollable-sidebar'}>
-            {/* Navbar */}
+        <div className='stickytableofcontents'> 
             <div className='navbar'>
                 <div className="menu-bars"> 
                     <div className={sidebar ? 'zoom-vertical' : 'zoom-horizontal'}>
@@ -36,6 +35,8 @@ function Sidebar(props) {
                     {/* top left bar icon, a clickable react component */}
                 </div>
             </div>
+        <div className={sidebar ? 'scrollable-sidebar-active' : 'scrollable-sidebar'}>
+            {/* Navbar */}
             
 
             {/* Nav Menu */}
@@ -56,6 +57,7 @@ function Sidebar(props) {
                 </ul>
             
             </nav>
+    </div>
     </div>
   )
 }
