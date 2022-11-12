@@ -20,6 +20,7 @@ function Header() {
             <input type={'text'} className='searchbox' placeholder="Search by title, author, ISBN & topic" />
             <i className='search-logo-icn'><IcoIcons.ImSearch /></i>
           </div>
+          <input type='submit' name='q' value='query' hidden/>
           <button className='filter-btn' onClick={advancedToggle}>Filter</button>
         </form>
         

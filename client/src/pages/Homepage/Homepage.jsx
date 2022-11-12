@@ -13,6 +13,7 @@ import { AnimatePresence } from 'framer-motion';
 import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 
 import './Homepage.css';
+import SearchResult from './SearchResult/Searchresult';
 
 function Homepage() {
 
@@ -39,6 +40,7 @@ function Homepage() {
               <Route path='/reading' element={<Reading />} />
               <Route path='/wishlist' element={<Wishlist />} />
               <Route path='/completed' element={<Completed />} />
+              <Route path='/query' element={<SearchResult />} />
               <Route path='/*' element={<Navigate to="/home" />} />
             </Routes>
           </AnimatePresence>

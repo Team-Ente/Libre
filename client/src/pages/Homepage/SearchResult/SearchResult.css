@@ -1,0 +1,20 @@
+
+.books {
+    display: flex;
+    gap: 50px;
+    /* flex-wrap: wrap; */
+    /* align-items: flex-start; */
+    margin-bottom: 60px;
+}
+.group {
+    margin-bottom: 20px;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
+.searchbookgrid {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+.searchcounter {
+    margin-left: 60px;
+    margin-top: 60px;
+}
