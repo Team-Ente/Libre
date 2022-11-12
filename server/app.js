@@ -11,10 +11,7 @@ import { bypassCORS } from "./middleware/Setup.js";
 import { uploadBook } from "./middleware/Admin.js";
 
 
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { addNewBook } from "./controllers/Books.js";
-const __dirname = dirname(fileURLToPath(import.meta.url));
+
 
 
 const app = Express();
@@ -37,26 +34,7 @@ app.post('/login', bypassCORS, verifyToken, login);
 app.post('/logout', bypassCORS, verifyToken, logout);
 
 // book upload
-app.post('/upload', async (req, res) => {
-    if(req.files === null) {
-        return res.status(400).json({ msg: "No file uploaded" });
-    }
-
-
-    // check for duplicate in database
-    // const response = await addNewBook(req.body);
-    // console.log(response);
-
-    const file = req.files.ebook;
-    file.mv(`${__dirname}/files/${file.name}`, err => {
-        if(err) {
-            console.log(error);
-            return res.status(500).send(error);
-        }
-
-        res.json("success");
-    })
-});
+app.post('/upload', bypassCORS, uploadBook);
 
 
 app.listen(process.env.PORT, process.env.HOST, () => {

@@ -1,70 +1,28 @@
-import multer from "multer";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { addNewBook } from "./controllers/Books.js";
 
-const UPLOADS_FOLDER = "./files/";
-
-
-
-const addBook = async (bookInfo, book) => {
-
-  console.log(bookInfo);
-
-  console.log(book);
-  // const epub = await EPub.createAsync("files/" + book.originalname + ".epub")  // Expensive (>500ms / book)
-  
-  // const [coverData, mimeType] = await epub.getFileAsync(epub.metadata.cover);
-
-  // const img = await Jimp.read(coverData);  // Expensive (>200ms / book)
-  // const compressedCoverData = await img.resize(250,360).quality(80).getBufferAsync(mimeType); // Expensive (>500ms / book)
-
-  // var json = epub.metadata;
-  // json["cover"] = compressedCoverData.toString('base64');
-  // json["mimeType"] = mimeType;
-
-  // // append to bookInfo object
-  // file.set(book.title,json);
-
-  // file.save();
-
-  return "0";
-}
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, UPLOADS_FOLDER)
-  },
-  filename: async function (req, file, cb) {
-    // add to database and set filename, pass filename through req
-    const id = await addBook(req.body, file);
-    cb(null, id)
-  }
-});
-
-const upload = multer({
-  dest: UPLOADS_FOLDER,
-  limits: {
-    fileSize: 209715200 // 200 MB
-  },
-  storage: storage,
-  fileFilter: (req, file, cb) => {
-    if(file.mimetype === 'application/epub+zip') {
-      cb(null, true);
-    } else {
-      cb(new Error("Invalid File Format. Only Epub is accepted"), true);
-    }
-  }
-}).single('ebook');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const UPLOADS_FOLDER = `${__dirname}/files`;
 
 export const uploadBook = async (req, res) => {
-  upload(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      // A Multer error occurred when uploading.
-      res.status(400).send(err.message);
-    } else if (err) {
-      // An unknown error occurred when uploading.
-      res.status(400).send(err.message)
+    if(req.files === null) {
+        return res.status(400).json({ msg: "No file uploaded" });
     }
-    console.log("file upload successful");
-    // update bookInfo.json file async
-    res.send("Upload Successful");
-  })
+
+
+    // check for duplicate in database
+    // const response = await addNewBook(req.body);
+    // console.log(response);
+
+    const file = req.files.ebook;
+    file.mv(`${UPLOADS_FOLDER}/${file.name}`, err => {
+        if(err) {
+            console.log(err);
+            return res.status(500).send(err);
+        }
+
+        res.json("success");
+    })
+}
 }
