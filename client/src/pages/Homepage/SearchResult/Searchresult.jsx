@@ -3,6 +3,7 @@ import Logo2 from '../../../Components/Logo2/Logo2'
 import AdvancedSearch from '../../../Components/SearchTopBar/AdvancedSearch/AdvancedSearch'
 import { useState } from 'react';
 import './SearchResult.css'
+import Card from './Card';
 function Searchresult() {
   const [advancedSearch, setAdvancedSearch] = useState(false);
   const advancedToggle = (e) => {
@@ -28,8 +29,25 @@ function Searchresult() {
       <div>
         <div className='hidden-filters-main'>{ advancedSearch ? <AdvancedSearch />: <p></p>}</div>
         <h2 className='titleofcount'>Showing {total} results</h2>
-        {/* <div className='books'>{readingList.map(getBook)}</div>  */} 
-        {/*Find the query yourself */}
+        <div className='result-of-search'>
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        <Card img='./35356.jpg' title='Shei book' author='Tariq' year='2022' />
+        </div>
       </div>
       <div></div>
     </div>
