@@ -7,7 +7,7 @@ function DefaultTopbar() {
   return (
     <div>
         <div className='usertopbar'>
-            <Link to='/home'><Logo2 /></Link>
+            <Logo2 />
             <Loggeduser />
         </div>
     </div>
