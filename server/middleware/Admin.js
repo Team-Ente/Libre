@@ -1,9 +1,9 @@
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { addNewBook } from "./controllers/Books.js";
+import { addNewBook } from "../controllers/Books.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const UPLOADS_FOLDER = `${__dirname}/files`;
+const UPLOADS_FOLDER = `${__dirname}/../files`;
 
 export const uploadBook = async (req, res) => {
     if(req.files === null) {
@@ -24,5 +24,4 @@ export const uploadBook = async (req, res) => {
 
         res.json("success");
     })
-}
 }
