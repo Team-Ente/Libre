@@ -36,7 +36,7 @@ function Book(props) {
                 id: props.id,
                 title: props.info.title,
                 // chapter: chapter, 
-                toc: toc, 
+                // toc: toc, 
                 pages: pages,
                 index: 0
               }
