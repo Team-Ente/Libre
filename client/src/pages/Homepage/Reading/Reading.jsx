@@ -32,7 +32,7 @@ function Reading() {
   return (
     <Animation>
     <div className='group'>
-        <h2>Resume From Where you left</h2>
+        <h2 className='titleofcount'>Resume From Where you left</h2>
         <div className='books'>
             {readingList.map(getBook)}
             </div>

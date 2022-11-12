@@ -1,8 +1,9 @@
 .advancedSearchblock {
-        margin-left: 35px;
+        position: absolute;
 }
 .filter {
         display: block;
+        
 }
 .filter i {
         display: inline-block;

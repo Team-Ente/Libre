@@ -14,7 +14,7 @@ function Discover() {
   return (
     <Animation>
     <div>
-      <h2>Explore</h2>
+      <h2 className='titleofcount'>Explore</h2>
       <div className='items'>
         <div className='item'>
             <i className='itemIcon'><BsIcons.BsBuilding /></i>

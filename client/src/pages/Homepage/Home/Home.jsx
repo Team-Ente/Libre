@@ -59,24 +59,24 @@ function Home(props) {
     return (
     <Animation>
         <div>
-            <h2 >Now Reading {readingList.length} books</h2>
+            <h2 className='titleofcount'>Now Reading {readingList.length} books</h2>
             <div className='books'>
 
                 {readingList.map(getBook)}
 
             </div>
 
-            <h2>Trending</h2>
+            <h2 className='titleofcount'>Trending</h2>
             <div className='books'>
                 {trendingList.map(getBook)}
             </div>
 
-            <h2>Recently Added</h2>
+            <h2 className='titleofcount'>Recently Added</h2>
             <div className='books'>
                 {recentList.map(getBook)}
             </div>
 
-            <h2>Editors Pick</h2>
+            <h2 className='titleofcount'>Editors Pick</h2>
             <div className='books'>
                 {editorsPickList.map(getBook)}
             </div>

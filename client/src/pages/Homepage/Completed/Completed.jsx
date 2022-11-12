@@ -33,7 +33,7 @@ function Completed() {
     return (
         <Animation>
             <div className='group'>
-            <h2>The Books You've Read</h2>
+            <h2 className='titleofcount'>The Books You've Read</h2>
             <div className='books'>
                     {completedList.map(getBook)}
                 </div>
