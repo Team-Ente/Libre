@@ -49,7 +49,7 @@ function UserProfile() {
                     <input className='userinfoinput' type="text" name='phone' placeholder='Query from database' required />
                 </div>
             </div>
-            <input className='savebutton' type={"submit"} value="submit" />  
+            <input className='savebutton' type={"submit"} value="Submit" />  
 
             </div>
         </div>

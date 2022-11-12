@@ -164,7 +164,7 @@ function Signup() {
 
             </div>
             <p className='email-error'>{confirmmsg}</p>
-              <input type="submit" name='submit_btn' value="Sign up" />
+              <input className='submitsignup' type="submit" name='submit_btn' value="Sign up" />
               <div className="signup_link">
               Have an account? <Link to="/login">Login</Link>
             </div>
