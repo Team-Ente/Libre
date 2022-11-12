@@ -1,20 +1,28 @@
-
-.books {
-    display: flex;
-    gap: 50px;
-    /* flex-wrap: wrap; */
-    /* align-items: flex-start; */
-    margin-bottom: 60px;
-}
-.group {
-    margin-bottom: 20px;
-    font-family: "Montserrat", Arial, Helvetica, sans-serif;
-}
-.searchbookgrid {
+.toprowsearch {
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 3fr 7fr 2fr;
+    padding: 0px 30px;
+    align-items: center;
+    gap: 40px;
+    margin-top: 20px;
 }
-.searchcounter {
-    margin-left: 60px;
-    margin-top: 60px;
+.searchbox-main {
+    width: 96%;
+    height: 40px;
+    border-radius: 20px;
+    padding: 0px 20px;
+    border: 1px solid #ccc;
+    outline-color: #ccc;
+    font-size: 20px;
+}
+
+.filters-main {
+    display: grid;
+    grid-template-columns: 3fr 7fr 2fr;
+    gap: 40px;
+    padding: 0px 30px;
+    
+}
+.hidden-filters-main {
+    margin: -10px 0px 0px -20px;
 }
