@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import * as FaIcons from 'react-icons/fa'; //for fontawesome icons
 import * as AiIcons from 'react-icons/ai'; //for aiICons icons
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // Anchor tags will reload the page and re-render all the components. While <Link> and <NavLink> 
 // will only re-render updated components matched with the URL path of the Route without reloading. 
 // It helps the Single-Page Applications to work faster while routing.
@@ -15,9 +15,27 @@ function Sidebar(props) {
         JSON.parse(sessionStorage.getItem('sidebar-is-open')) || false); // sidebar state initially set to false
     const showSidebar = () => {
         setSidebar(!sidebar); // function to toggle the state of the sidebar
-        // props.reloadIframe();
     }
     const data = props.pages ? props.pages : sidebarData;
+
+    const navigate = useNavigate();
+
+    const navigateToChapter = (index) => {
+        
+        console.log(index);
+        navigate('../reader', {
+            replace: true,
+            state: {
+            id: props.id,
+            title: props.book,
+            // chapter: chapter, 
+            // toc: toc, 
+            pages: data,
+            index: index
+            }
+        });
+        navigate(0);
+    }
 
     useEffect(() => {
         sessionStorage.setItem('is-open', JSON.stringify(sidebar));
@@ -47,7 +65,7 @@ function Sidebar(props) {
                     {data.map((item, index) => {
                         return (
                             <li key={index} className="nav-text" onClick={() => {
-                                props.navigateToChapter(index)
+                                navigateToChapter(index)
                             }}>
                                 <span>{item.title || "-"}</span>
                                 

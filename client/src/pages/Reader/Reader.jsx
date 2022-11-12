@@ -33,9 +33,21 @@ function Reader() {
     }
   }  
   
-  const navigateToChapter = (chapterIndex) => {
-    setCurrentPageIndex(chapterIndex);
-  }
+//   useEffect( () => {
+//   const navigateToChapter = async (chapterIndex) => {
+//     console.log(chapterIndex);
+//     navigate('/reader', {
+//       state: {
+//         id: location.state.id,
+//         title: book,
+//         // chapter: chapter, 
+//         // toc: toc, 
+//         pages: pages,
+//         index: chapterIndex
+//       }
+//     });
+//   }
+// }, []);
 
   const reloadIframe = () => {
     for (let i=0; i<countPages; i++){
@@ -53,63 +65,48 @@ function Reader() {
     reloadIframe();
   }
 
-  const prevPage = () => {
-    if(currentPageIndex === 0) {
-      // give feedback to user (Tariq)
-      return;
-    }
-    setCurrentPageIndex(currentPageIndex - 1);
-  }
-
-  const nextPage = () => {
-    if(currentPageIndex === pages.length - 1) {
-      // give feedback to user (Tariq)
-      return;
-    }
-    setCurrentPageIndex(currentPageIndex + 1);
-  }
-
-
   const fetchData = useCallback(async (idx) => {
-      fetch("http://localhost:3050/read?book="+book+"&chapter="+pages[currentPageIndex+idx].id, {
-          mode: "cors",
-          credentials: "include"
-      }).then((result) => {
-          result.json().then((jsonResult) => {
-            if(idx < countPages) {
-              setContents((contents) => contents.map((oldContent, i) => {
-                if(i === idx) {
-                  setLoading(false);
-                  return jsonResult.chapter;
-                } else {
-                  return oldContent;
-                }
-              }));
-              
-            } else {
-              setContents((contents) => {
-                if(contents.includes(jsonResult.chapter)) return contents;
-                setCountPages(countPages + 1);
+    console.log("loading chapter "+(currentPageIndex+idx));
+    console.log(currentPageIndex);
+    console.log(countPages);
+    fetch("http://localhost:3050/read?book="+book+"&chapter="+pages[currentPageIndex+idx].id, {
+        mode: "cors",
+        credentials: "include"
+    }).then((result) => {
+        result.json().then((jsonResult) => {
+          if(idx < countPages) {
+            setContents((contents) => contents.map((oldContent, i) => {
+              if(i === idx) {
                 setLoading(false);
-                return [...contents, jsonResult.chapter]
-              })
-            }
+                return jsonResult.chapter;
+              } else {
+                return oldContent;
+              }
+            }));
             
-            sethasMore(pages.length > countPages);
+          } else {
+            setContents((contents) => {
+              if(contents.includes(jsonResult.chapter)) return contents;
+              setCountPages(countPages + 1);
+              setLoading(false);
+              return [...contents, jsonResult.chapter]
+            })
+          }
+          
+          sethasMore(pages.length > countPages);
 
-          });   
-      }, (reason) => {
-          console.log(reason);
-      });
-    }, [book, countPages, currentPageIndex, pages]);
+        });   
+    }, (reason) => {
+        console.log(reason);
+    });
+  }, [book, countPages, currentPageIndex, pages]);
   
 
   const handleScroll = useCallback(async (e) => {  
     if(loading) return;
-    if(window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight
+    if(window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight
       && hasMore) {
 
-      console.log("loading chapter "+countPages);
       setLoading(true);
       fetchData(countPages);
     }
@@ -126,13 +123,14 @@ function Reader() {
       navigate("error");
     }
 
-    console.log("loading chapter 0");
     fetchData(0);
 
     // scrolling
     window.addEventListener("scroll", handleScroll);
 
-  }, [fetchData, handleScroll, location.state, navigate]);
+    handleScroll();
+
+  }, [fetchData, handleScroll, location.state, navigate, currentPageIndex]);
 
 
   return (
@@ -149,7 +147,8 @@ function Reader() {
         <aside className='sidebar'>
           <Sidebar 
             pages={pages} 
-            navigateToChapter={navigateToChapter} 
+            id={location.state.id}
+            book={book} 
             reloadIframe={reloadIframe}
             increaseFontSize={increaseFontSize}
             decreaseFontSize={decreaseFontSize}
