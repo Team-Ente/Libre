@@ -1,16 +1,11 @@
 import React from 'react'
-import Logo2 from '../../Components/Logo2/Logo2'
-import Loggeduser from '../../Components/Loggeduser/Loggeduser'
 import './UserProfile.css'
 import user from './sami.jpg'
-
+import DefaultTopbar from '../../Components/DefaultTopbar/DefaultTopbar'
 function UserProfile() {
   return (
     <div className='userprofile'>
-        <div className='usertopbar'>
-            <Logo2 />
-            <Loggeduser />
-        </div>
+        <DefaultTopbar />
         <h1 className='userprofiletitle'>Customize Your Profile</h1>
         <form>
 

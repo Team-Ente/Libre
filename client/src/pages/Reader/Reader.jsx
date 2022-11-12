@@ -4,6 +4,7 @@ import './Reader.css';
 import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loader from './loader';
+import DefaultTopbar from '../../Components/DefaultTopbar/DefaultTopbar';
 function Reader() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -135,6 +136,8 @@ function Reader() {
 
 
   return (
+    <div>
+      <DefaultTopbar />
     <div className='body'>
       
       <header className='book-name'>
@@ -169,6 +172,7 @@ function Reader() {
       
       </div>
 
+    </div>
     </div>
   )
 }
