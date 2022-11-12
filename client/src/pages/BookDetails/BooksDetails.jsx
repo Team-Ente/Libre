@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import DefaultTopbar from '../../Components/DefaultTopbar/DefaultTopbar';
 import './BookDetails.css';
 
 function BooksDetails() {
@@ -36,6 +37,9 @@ function BooksDetails() {
 
   };
   return (
+    <div>
+      <DefaultTopbar />
+
     <div className='bookdetails'>
       <div className='book-card-grid'>
         <div className='bookimg'>
@@ -62,6 +66,7 @@ function BooksDetails() {
         <p className='year'>Publishing Year: {book.publishing_year}</p>
         <p className='ISBN'>ISBN: {book.isbn}</p>
       </div>
+    </div>
     </div>
   )
 }
