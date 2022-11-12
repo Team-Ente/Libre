@@ -137,16 +137,13 @@ function Reader() {
 
   return (
     <div>
-      <DefaultTopbar />
-    <div className='body'>
-      
-      <header className='book-name'>
-        <span>{book}</span>
-
-
-        
-      </header>
-
+      <div className='bookheaderbar'>
+        <DefaultTopbar />
+        <header className='book-name'>
+          <span>{book}</span>  
+        </header>
+      </div>
+      <div className='body'>
       <div className='main-container'>
       
         <aside className='sidebar'>

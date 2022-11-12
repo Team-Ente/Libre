@@ -33,11 +33,14 @@
 }
 .userinfoinput {
     border: none;
-    border-bottom: 1px solid #ccc;   
+    border-bottom: 1px solid #ccc; 
+    outline: none;
 }
 .userinfoinput:hover, .userinfoinput:active {
     border: none;
-    border-bottom: 1px solid #2691d9;   
+    border-bottom: 1px solid #2691d9; 
+    outline: none; 
+    transition: 0.5s ease-in; 
 }
 .savebutton {
     width: 150px;
