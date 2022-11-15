@@ -14,6 +14,7 @@ import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 import './Homepage.css';
 import SearchResult from './SearchResult/Searchresult';
 import SearchTopBar from '../../Components/SearchTopBar/SearchTopBar';
+import Footer from '../../Components/Footer/Footer';
 
 function Homepage() {
 
@@ -45,7 +46,6 @@ function Homepage() {
             </Routes>
           </AnimatePresence>
         </div>
-        {/* <div className='footer'>footer</div> */}
       </div>
     </div>
   )
