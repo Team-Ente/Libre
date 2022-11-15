@@ -5,6 +5,7 @@ import Animation from '../Animation';
 import './Initial.css';
 import TopBar from '../../../Components/TopBar/TopBar';
 import BookUpload from '../../BookUpload/BookUpload';
+import Footer from '../../../Components/Footer/Footer';
 function Topbar() {
   return (
     <Animation>
@@ -50,8 +51,14 @@ function Topbar() {
             <img src="https://cdn-icons-png.flaticon.com/512/896/896317.png" alt="books" />
             <p>Read anytime, anywhere, on any device</p>
           </div>  
+
         </div>
+
       </div>
+    </div>
+
+    <div className='footerinitial'>
+        <Footer />
     </div>
   </Animation>
     

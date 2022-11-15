@@ -4,7 +4,7 @@ import './Reader.css';
 import Sidebar from '../../Components/TableofContents/Sidebar.jsx';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loader from './loader';
-import DefaultTopbar from '../../Components/DefaultTopbar/DefaultTopbar';
+import ReaderTopbar from '../../Components/ReaderTopbar/ReaderTopbar';
 function Reader() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -136,7 +136,7 @@ function Reader() {
   return (
     <div>
       <div className='bookheaderbar'>
-        <DefaultTopbar />
+        <ReaderTopbar />
         <header className='book-name'>
           <span>{book}</span>  
         </header>
