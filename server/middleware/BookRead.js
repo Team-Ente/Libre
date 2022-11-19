@@ -29,7 +29,9 @@ export const getContents = async (req, res) => {
       return res.status(404).json({error: error});
     }
   } else { // chapter contents
+    // update users book progress
     
+
     const chapter = req.query.chapter;
     try {
       const epub = await EPub.createAsync("files/" + book + ".epub");
