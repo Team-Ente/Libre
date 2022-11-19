@@ -7,44 +7,56 @@ const language = [
   { label: 'English', value: 'English' },
 ];
 
-const edition = [
-  { label: '1', value: '1' },
-  { label: '2', value: '2' },
-  { label: '3', value: '3' },
-  { label: '4', value: '4' },
-];
+// const edition = [
+//   { label: '1', value: '1' },
+//   { label: '2', value: '2' },
+//   { label: '3', value: '3' },
+//   { label: '4', value: '4' },
+// ];
 
 
-const author = [
-  { label: 'A', value: 'A' },
-  { label: 'B', value: 'B' },
-  { label: 'C', value: 'C' },
-  { label: 'D', value: 'D' },
+// const author = [
+//   { label: 'A', value: 'A' },
+//   { label: 'B', value: 'B' },
+//   { label: 'C', value: 'C' },
+//   { label: 'D', value: 'D' },
+// ];
+
+const genre = [
+  { label: 'Art', value: 'Art' },
+  { label: 'Biology', value: 'Biology' },
+  { label: 'Business', value: 'Business' },
+  { label: 'Computer', value: 'Computer' },
+  { label: 'Design', value: 'Design' },
+  { label: 'Economy', value: 'Economy' },
+  { label: 'Histoy', value: 'Histoy' },
+  { label: 'Law', value: 'Law' },
+  { label: 'Literature', value: 'Literature' },
+  { label: 'Math', value: 'Math' },
+  { label: 'Medicine', value: 'Medicine' },
+  { label: 'Sociology', value: 'Sociology' },
+  { label: 'Philosophy', value: 'Philosophy' },
+  { label: 'Politics', value: 'Politics' },
+  { label: 'Technology', value: 'Technology' },
 ];
 
-const topic = [
-  { label: 'A', value: 'A' },
-  { label: 'B', value: 'B' },
-  { label: 'C', value: 'C' },
-  { label: 'D', value: 'D' },
-];
-
-const publisher = [
-  { label: 'A', value: 'A' },
-  { label: 'B', value: 'B' },
-  { label: 'C', value: 'C' },
-  { label: 'D', value: 'D' },
-];
+// const publisher = [
+//   { label: 'A', value: 'A' },
+//   { label: 'B', value: 'B' },
+//   { label: 'C', value: 'C' },
+//   { label: 'D', value: 'D' },
+// ];
 
 function AdvancedSearch() {
   return (
     <div className='advancedSearchblock'>
         <div className="filter">
           <i><DropdownSearch dat={language} plc="Language" mul={false}/></i>
-          <i><DropdownSearch dat={author} plc="Author" mul={true}/></i>
-          <i><DropdownSearch dat={topic} plc="Topic" mul={true}/></i>
-          <i><DropdownSearch dat={publisher} plc="Publisher" mul={false}/></i>
-          <i><DropdownSearch dat={edition} plc="Edition" mul={false}/></i>
+          <i><input placeholder='Author' className='filtertext' type='text'/></i>
+          {/* <i><DropdownSearch dat={author} plc="Author" mul={true}/></i> */}
+          <i><DropdownSearch dat={genre} plc="Book Genre" mul={true}/></i>
+          {/* <i><DropdownSearch dat={publisher} plc="Publisher" mul={false}/></i> */}
+          <i><input placeholder='Edition' className='filternumber' type='number' min="1" max="99"/></i>
         </div>
     </div>
   )

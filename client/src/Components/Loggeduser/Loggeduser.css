@@ -5,6 +5,7 @@
   user-select: none;
   position: relative;
   font-size: 18px;
+  cursor: pointer;
 }
 .dropdown .dropdown-btn {
   font-size: 18px;

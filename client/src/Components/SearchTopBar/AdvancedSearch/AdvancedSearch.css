@@ -11,3 +11,25 @@
         align-items: center;
         justify-content: center;
 }
+.filtertext {
+        outline: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 8px;
+        font-size: 15px;
+        font-style: italic;
+        width: 156px;
+        height: 20px;
+        color: rgb(89, 88, 88);
+}
+.filternumber {
+        outline: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 8px;
+        font-size: 15px;
+        font-style: italic;
+        width: 70px;
+        height: 20px;
+        color: rgb(89, 88, 88);
+}

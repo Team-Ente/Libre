@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-
+import './DropdownSearch.css';
 
 function DropdownSearch(props) {
         return (
