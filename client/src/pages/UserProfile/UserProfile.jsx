@@ -6,7 +6,7 @@ function UserProfile() {
     const [userEdit, setuserEdit] = useState(false);
     function toggleedit() {
         setuserEdit(!userEdit);
-        console.log(userEdit);
+        // console.log(userEdit);
     }
   return (
     <div className='userprofile'>
@@ -22,13 +22,19 @@ function UserProfile() {
 
             <div className='emailusername'>
                 <h3 className='infotitle'>Account Information</h3>
-                <div className='accountinfo'>
+                <div className={userEdit? 'accountinfo':'accountinfonogap'}>
                     <label className="emailofaccount" >Email:</label>
                     <input className='userinfoinput' type="text" name='email' placeholder='Query from database' disabled={true}/>
                     <label className="usernameofaccount" >Username:</label>
-                    <div>
+                    <div className='usernametoggle'>
+                        <button onClick={toggleedit} className={userEdit ? 'editbuttonsettings' : 'editbuttonsettingsclicked'}>Edit</button>
                         <input className='userinfoinput' type="text" name='username' placeholder='Query from database' required disabled={userEdit} />
-                        <button onClick={toggleedit}>Edit</button>
+                    </div>
+                    <label className="usernameofaccount" ></label>
+                    <div className='saveaccountinfo' hidden={userEdit ? true:false}>
+                        <button className='save'>Save</button>
+                        <span />
+                        <button className='cancel'>Cancel</button>
                     </div>
                 </div>
             </div>

@@ -25,11 +25,39 @@
 .infotitle {
     margin-bottom: 20px;
 }
+.accountinfonogap {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 20px;
+}
+.saveaccountinfo {
+    text-align: center;
+}
+.saveaccountinfo > button {
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin: auto;
+    outline: none;
+    margin-bottom: 20px;
+}
+.saveaccountinfo > .save {
+    background-color: #2691d9;
+    color: #e9f4fb;
+}
+.saveaccountinfo > .cancel {
+    background-color: #ccc;
+    color: rgb(75, 73, 73);
+}
 .accountinfo {
     display: grid;
     grid-template-columns: 1fr 3fr;
     gap: 20px;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
 }
 .userinfoinput {
     padding: 10px 0px;
@@ -51,6 +79,42 @@
     border-radius: 25px;
     font-size: 18px;
     color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    outline: none;
+}
+.usernametoggle {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 30px;
+    margin-top: -10px;
+    justify-content: space-between;
+}
+.usernametoggle > .userinfoinput {
+    width: 90%;
+}
+.editbuttonsettings {
+    width: 50px;
+    height: 30px;
+    font-size: 15px;
+    border: none;
+    background-color: transparent;
+    color: #2691d9;
+    font-weight: 700;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    outline: none;
+}
+.editbuttonsettingsclicked {
+    color:#ccc;
+    width: 50px;
+    height: 30px;
+    font-size: 15px;
+    border: none;
+    background-color: transparent;
     font-weight: 700;
     cursor: pointer;
     display: block;
