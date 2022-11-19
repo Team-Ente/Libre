@@ -158,29 +158,34 @@ export const search = async (req, res) => {
 
     try {
       let books = [];
+      let ids = [];
       if (req.query.author) {
         let authorMatched = await getBooksBasedOnAuthor(req.query.author);
-        for (const b of authorMatched) {
-          if (!books.includes(b)) books.push(b);
-        }
+        books = [...books, ...authorMatched];
+        // for (const b of authorMatched) {
+        //   if (!books.includes(b)) books.push(b);
+        // }
       }
       if (req.query.title) {
         let titleMatched = await getBooksBasedOnTitle(req.query.title);
-        for (const b of titleMatched) {
-          if (!books.includes(b)) books.push(b);
-        }
+        books = [...books, ...titleMatched];
+        // for (const b of titleMatched) {
+        //   if (!books.includes(b)) books.push(b);
+        // }
       }
       if (req.query.isbn) {
         let isbnMatched = await getBooksBasedOnISBN(req.query.isbn);
-        for (const b of isbnMatched) {
-          if (!books.includes(b)) books.push(b);
-        }
+        books = [...books, ...isbnMatched];
+        // for (const b of isbnMatched) {
+        //   if (!books.includes(b)) books.push(b);
+        // }
       }
       if (req.query.genre) {
         let genreMatched = await getBooksBasedOnTopic(req.query.genre);
-        for (const b of genreMatched) {
-          if (!books.includes(b)) books.push(b);
-        }
+        books = [...books, ...genreMatched];
+        // for (const b of genreMatched) {
+        //   if (!books.includes(b)) books.push(b);
+        // }
       }
 
       if (books.length === 0) {
@@ -188,8 +193,23 @@ export const search = async (req, res) => {
       }
 
       for (const book of books) {
-        const json = await getBookData(book);
-        retJson["books"].push(json);
+        if (!ids.includes(book.id)) {
+          ids.push(book.id);
+        }
+      }
+
+      console.log(ids);
+
+      for (const book of books) {
+        if (ids.includes(book.id)) {
+          const json = await getBookData(book);
+          retJson["books"].push(json);
+          ids.splice(ids.indexOf(book.id), 1);
+          console.log(ids);
+        }
+
+        // const json = await getBookData(book);
+        // retJson["books"].push(json);
       }
 
       return res.status(200).send(retJson);
