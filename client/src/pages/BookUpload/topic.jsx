@@ -4,7 +4,7 @@ import './topic.css'
 function Topic() {
   return (
     <div>
-      <input className='inpt' type="text" name='topic' required />
+      <input className='inpt' type="text" name='genre' required />
     </div>
   )
 }
