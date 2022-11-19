@@ -20,7 +20,10 @@ function Topbar() {
           <table className='element-container'>
             <tr>
               <td>
-                <input type={'text'} placeholder="Search by title, author, ISBN & topic" className='search'></input>
+                <form>
+                  <input type={'text'} placeholder="Search by title, author, ISBN & topic" className='search'></input>
+                  <input type={'submit'} hidden/>
+                </form>
               </td>
               <td>
                 <a href='#' className='search-logo'>

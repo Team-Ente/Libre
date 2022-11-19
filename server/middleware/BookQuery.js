@@ -117,20 +117,20 @@ export const query = async (req, res) => {
       let titleMatched = await getBooksBasedOnTitle(keyword);
       let isbnMatched = await getBooksBasedOnISBN(keyword);
       let topicMatched = await getBooksBasedOnTopic(keyword);
-
-      var books = [...new Set([...authorMatched, ...titleMatched, ...isbnMatched, ...topicMatched])];
       
-      // use map to store book id and index
-
-      // var isChecked = new map(); // not working in nodejs
-
-      // for(const book of books) {
-      //   if(!isChecked.has(book.id)) {
-      //     const json = await getBookData(book);
-      //     retJson["books"].push(json);
-      //     isChecked.set(book.id, true);
-      //   }
-      // }
+      let books = [];
+      for (const b of authorMatched) {
+        if(!books.includes(b)) books.push(b);
+      }
+      for (const b of titleMatched) {
+        if(!books.includes(b)) books.push(b);
+      }
+      for (const b of isbnMatched) {
+        if(!books.includes(b)) books.push(b);
+      }
+      for (const b of topicMatched) {
+        if(!books.includes(b)) books.push(b);
+      }
 
       if(books.length === 0) {
         console.log("No books found");
