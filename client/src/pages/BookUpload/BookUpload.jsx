@@ -45,13 +45,46 @@ function BookUpload() {
     topics.push(<Topic id={i} key={i} />);
   }
 
+  const [file, setFile] = useState('');
+
+  const onChange = (e) => {
+    setFile(e.target.files[0]);
+  }
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    
+    formData.append('ebook', file)
+    
+    fetch('http://localhost:3050/upload', {
+      method: 'POST',
+      body: formData,
+      credentials: 'include' 
+    }).then((response) => {
+      response.json().then((jsonResponse) => {
+        if (! jsonResponse.error) {
+          console.log(jsonResponse);
+          
+        } else {
+          // invalid login
+          console.log(jsonResponse.error);
+          alert('jsonResponse.error');
+        }
+      });  
+      
+    }); 
+
+  };
+
   return (
     <div>
     <TopBar />
     <div className='mainbody'>
     <div className='container-main'>
     <div className='titleadd'>Add New Book</div>
-        <form>
+        <form onSubmit={onSubmit}>
         <div className='bookdetails'>
             <div className="input_box">
               <label className="Labeldetails" >Book Name</label>
@@ -137,8 +170,8 @@ function BookUpload() {
                 <textarea required />
             </div>
 
-            <input className='addfile' type={"file"} />
-            <input className='submitform' type={"submit"} value="submit" />  
+            <input className='addfile' type="file" onChange={onChange} />
+            <input className='submitform' type="submit" value="submit" />  
           </div>
         </form>
     </div>
