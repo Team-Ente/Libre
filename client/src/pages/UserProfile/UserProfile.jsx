@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './UserProfile.css'
 import user from './sami.jpg'
 import DefaultTopbar from '../../Components/DefaultTopbar/DefaultTopbar'
 function UserProfile() {
+    const [userEdit, setuserEdit] = useState(false);
+    function toggleedit() {
+        setuserEdit(!userEdit);
+        console.log(userEdit);
+    }
   return (
     <div className='userprofile'>
         <DefaultTopbar />
@@ -19,9 +24,12 @@ function UserProfile() {
                 <h3 className='infotitle'>Account Information</h3>
                 <div className='accountinfo'>
                     <label className="emailofaccount" >Email:</label>
-                    <input className='userinfoinput' type="text" name='email' placeholder='Query from database' disabled/>
+                    <input className='userinfoinput' type="text" name='email' placeholder='Query from database' disabled={true}/>
                     <label className="usernameofaccount" >Username:</label>
-                    <input className='userinfoinput' type="text" name='username' placeholder='Query from database' required />
+                    <div>
+                        <input className='userinfoinput' type="text" name='username' placeholder='Query from database' required disabled={userEdit} />
+                        <button onClick={toggleedit}>Edit</button>
+                    </div>
                 </div>
             </div>
 
