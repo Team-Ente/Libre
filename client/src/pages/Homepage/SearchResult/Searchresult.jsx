@@ -45,7 +45,8 @@ function Searchresult() {
 }, [query, title, author, genre, edition, language]);
 
 const navigate = useNavigate();
- const onSubmit = async (e) => {
+ const onSubmit = (e) => {
+    e.preventDefault();
     const genre = e.target.genre.value?`genre=${e.target.genre.value}`:'';
     const title = e.target.title.value?`title=${e.target.title.value}`:'';
     const author = e.target.author.value?`author=${e.target.author.value}`:'';

@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Book.css";
 
 function getBook(book) {
-  console.log(book.metadata);
   return (
     <Book
       img={"data:" + book.metadata.mimeType + ";base64," + book.metadata.cover}
