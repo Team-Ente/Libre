@@ -1,19 +1,29 @@
-
-import editJsonFile from 'edit-json-file';
+import editJsonFile from "edit-json-file";
 import {
-  getAllBooks, getBookAuthors, getBookGenre, getBooksBasedOnAuthor, getBooksBasedOnISBN, getBooksBasedOnTitle, getBooksBasedOnTopic, getBucketBooks, getCompletedBooks, getEditorsPickBooks,
-  getLikeBooks, getReadingBooks, getRecentBooks, getTrendingBooks
+  getAllBooks,
+  getBookAuthors,
+  getBookGenre,
+  getBooksBasedOnAuthor,
+  getBooksBasedOnISBN,
+  getBooksBasedOnTitle,
+  getBooksBasedOnTopic,
+  getBucketBooks,
+  getCompletedBooks,
+  getEditorsPickBooks,
+  getLikeBooks,
+  getReadingBooks,
+  getRecentBooks,
+  getTrendingBooks,
 } from "../controllers/Books.js";
 
 /**
- * 
- * @param {book_table_entry} book 
+ *
+ * @param {book_table_entry} book
  * @returns book metadata and cover
  * Gets entry from database table and opens the file to get metadata.
  * Opens Book Cover file, compresses and sends as base64 encoded string
  */
 async function getBookData(book) {
-
   let file = editJsonFile("files/bookInfo.json");
 
   // get book info from database
@@ -21,183 +31,179 @@ async function getBookData(book) {
   book.authors = await getBookAuthors(book.id);
 
   book.metadata = file.get(book.title);
-  if(!book.metadata) console.log(book.title);
+  if (!book.metadata) console.log(book.title);
   return book;
 }
 
 /**
-* 
-* @param {query_type} qType 
-* @param {query_argument} qArg 
-* @returns list of books matching criteria
-* Get a list of books following query_type. If searching by string query_argument is a string
-*/
+ *
+ * @param {query_type} qType
+ * @param {query_argument} qArg
+ * @returns list of books matching criteria
+ * Get a list of books following query_type. If searching by string query_argument is a string
+ */
 async function getBookList(handle, qType, count, genre) {
   const books = await new Promise((resolve, reject) => {
-    if (qType === "all") 
-      resolve(getAllBooks(count, genre));
-    else if (qType === "reading") 
-      resolve(getReadingBooks(handle, count));
-    else if (qType === "completed") 
-      resolve(getCompletedBooks(handle, count));
-    else if (qType === "bucket") 
-      resolve(getBucketBooks(handle, count));
-    else if (qType === "recent") 
-      resolve(getRecentBooks(count));
-    else if (qType === "trending") 
-      resolve(getTrendingBooks(count));
-    else if (qType === "editor") 
-      resolve(getEditorsPickBooks(count));
-    else if (qType === "search") 
-      resolve(getLikeBooks(count, genre));
-    else 
-      reject(new Error("invalid request"));
+    if (qType === "all") resolve(getAllBooks(count, genre));
+    else if (qType === "reading") resolve(getReadingBooks(handle, count));
+    else if (qType === "completed") resolve(getCompletedBooks(handle, count));
+    else if (qType === "bucket") resolve(getBucketBooks(handle, count));
+    else if (qType === "recent") resolve(getRecentBooks(count));
+    else if (qType === "trending") resolve(getTrendingBooks(count));
+    else if (qType === "editor") resolve(getEditorsPickBooks(count));
+    else if (qType === "search") resolve(getLikeBooks(count, genre));
+    else reject(new Error("invalid request"));
   });
   return books;
 }
 
-
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  * @returns json containing book list
  */
 export const query = async (req, res) => {
-
-  if(!req.user) {
+  if (!req.user) {
     console.log("Not Authorized");
-    return res.status(401).json({error: "User unauthenticated"});
+    return res.status(401).json({ error: "User unauthenticated" });
   }
 
   const handle = req.user.handle;
-  const qType = req.params.qType;  // The type of query (list criteria)
-  const count = req.query.count ? req.query.count : '10';  // The number of results returned
-  const genre = req.query.genre ? req.query.genre.split(',') : []; // advanced search by filtering genre
+  const qType = req.params.qType; // The type of query (list criteria)
+  const count = req.query.count ? req.query.count : "10"; // The number of results returned
+  const genre = req.query.genre ? req.query.genre.split(",") : []; // advanced search by filtering genre
 
   // Initialize empty return JSON
   let retJson = {
-      "books": []
+    books: [],
   };
 
   try {
-
-      let books = await getBookList(handle, qType, count, genre); 
-      for (const book of books) {
-          const json = await getBookData(book);
-          retJson["books"].push(json);
-      }
-      return res.status(200).send(retJson);    
-      
-  } catch (error) {
-    console.log(error);
-    return res.status(404).json({error: error});
-  }
-  
-};
-
-/**
- * 
- * @param {*} req 
- * @param {*} res 
- * @returns json containing book list
- */
- export const search = async (req, res) => {
-  console.log(req.query);
-
-  if (req.query.query) {
-    const keyword = req.query.query;  // The type of query (list criteria)
-  
-    // Initialize empty return JSON
-    let retJson = {
-        "books": []
-    };
-
-    try {
-
-        let authorMatched = await getBooksBasedOnAuthor(keyword);
-        let titleMatched = await getBooksBasedOnTitle(keyword);
-        let isbnMatched = await getBooksBasedOnISBN(keyword);
-        let topicMatched = await getBooksBasedOnTopic(keyword);
-        
-        let books = [];
-        for (const b of authorMatched) {
-          if(!books.includes(b)) books.push(b);
-        }
-        for (const b of titleMatched) {
-          if(!books.includes(b)) books.push(b);
-        }
-        for (const b of isbnMatched) {
-          if(!books.includes(b)) books.push(b);
-        }
-        for (const b of topicMatched) {
-          if(!books.includes(b)) books.push(b);
-        }
-
-        if(books.length === 0) {
-          console.log("No books found");
-        }
-
-        for (const book of books) {
-
-          const json = await getBookData(book);
-          retJson["books"].push(json);
-        }
-
-        return res.status(200).send(retJson);    
-        
-    } catch (error) {
-      console.log(error);
-      return res.status(404).json({error: error});
-    }
-  } else {
-    // Initialize empty return JSON
-  let retJson = {
-    "books": []
-  };
-
-  try {
-    let books = [];
-    if (req.query.author) {
-      let authorMatched = await getBooksBasedOnAuthor(req.query.author);
-      for (const b of authorMatched) {
-        if(!books.includes(b)) books.push(b);
-      }
-    }
-    if (req.query.title) {
-      let titleMatched = await getBooksBasedOnTitle(req.query.title);
-      for (const b of titleMatched) {
-        if(!books.includes(b)) books.push(b);
-      }
-    }
-    if (req.query.isbn) {
-      let isbnMatched = await getBooksBasedOnISBN(req.query.isbn);
-      for (const b of isbnMatched) {
-        if(!books.includes(b)) books.push(b);
-      }
-    }
-    if (req.query.genre) {
-      let genreMatched = await getBooksBasedOnTopic(req.query.genre);
-      for (const b of genreMatched) {
-        if(!books.includes(b)) books.push(b);
-      }
-    }
-      
-    if(books.length === 0) {
-      console.log("No books found");
-    }
-      
+    let books = await getBookList(handle, qType, count, genre);
     for (const book of books) {
-
       const json = await getBookData(book);
       retJson["books"].push(json);
     }
-
-    return res.status(200).send(retJson);    
-      
+    return res.status(200).send(retJson);
   } catch (error) {
     console.log(error);
-    return res.status(404).json({error: error});
+    return res.status(404).json({ error: error });
   }
+};
+
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns json containing book list
+ */
+export const search = async (req, res) => {
+  console.log(req.query);
+
+  if (req.query.query) {
+    const keyword = req.query.query; // The type of query (list criteria)
+
+    // Initialize empty return JSON
+    let retJson = {
+      books: [],
+    };
+
+    try {
+      let authorMatched = await getBooksBasedOnAuthor(keyword);
+      let titleMatched = await getBooksBasedOnTitle(keyword);
+      let isbnMatched = await getBooksBasedOnISBN(keyword);
+      let topicMatched = await getBooksBasedOnTopic(keyword);
+
+      let tempBooks = [
+        ...authorMatched,
+        ...titleMatched,
+        ...isbnMatched,
+        ...topicMatched,
+      ];
+
+      let books = [];
+
+      for (const book of tempBooks) {
+        if (!books.includes(book)) {
+          books.push(book);
+        }
+      }
+
+      let ids = [];
+
+      for (const book of books) {
+        if (!ids.includes(book.id)) {
+          ids.push(book.id);
+        }
+      }
+
+      console.log(ids);
+
+      if (books.length === 0) {
+        console.log("No books found");
+      }
+
+      for (const book of books) {
+        if (ids.includes(book.id)) {
+          const json = await getBookData(book);
+          retJson["books"].push(json);
+          ids.splice(ids.indexOf(book.id), 1);
+          console.log(ids);
+        }
+      }
+
+      return res.status(200).send(retJson);
+    } catch (error) {
+      console.log(error);
+      return res.status(404).json({ error: error });
+    }
+  } else {
+    // Initialize empty return JSON
+    let retJson = {
+      books: [],
+    };
+
+    try {
+      let books = [];
+      if (req.query.author) {
+        let authorMatched = await getBooksBasedOnAuthor(req.query.author);
+        for (const b of authorMatched) {
+          if (!books.includes(b)) books.push(b);
+        }
+      }
+      if (req.query.title) {
+        let titleMatched = await getBooksBasedOnTitle(req.query.title);
+        for (const b of titleMatched) {
+          if (!books.includes(b)) books.push(b);
+        }
+      }
+      if (req.query.isbn) {
+        let isbnMatched = await getBooksBasedOnISBN(req.query.isbn);
+        for (const b of isbnMatched) {
+          if (!books.includes(b)) books.push(b);
+        }
+      }
+      if (req.query.genre) {
+        let genreMatched = await getBooksBasedOnTopic(req.query.genre);
+        for (const b of genreMatched) {
+          if (!books.includes(b)) books.push(b);
+        }
+      }
+
+      if (books.length === 0) {
+        console.log("No books found");
+      }
+
+      for (const book of books) {
+        const json = await getBookData(book);
+        retJson["books"].push(json);
+      }
+
+      return res.status(200).send(retJson);
+    } catch (error) {
+      console.log(error);
+      return res.status(404).json({ error: error });
+    }
   }
 };
