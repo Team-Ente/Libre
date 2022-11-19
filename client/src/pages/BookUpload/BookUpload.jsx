@@ -5,7 +5,7 @@ import TopBar from '../../Components/TopBar/TopBar'
 import Author from './author'
 import Topic from './topic'
 import { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 function BookUpload() {
   const [authorCounter, setAuthorCounter] = useState(1);
   const [topicCounter, setTopicCounter] = useState(1);
@@ -68,7 +68,7 @@ function BookUpload() {
       response.json().then((jsonResponse) => {
         if (! jsonResponse.error) {
           console.log(jsonResponse);
-          Navigate(0);
+          navigate(0);
         } else {
           // invalid login
           console.log(jsonResponse.error);
