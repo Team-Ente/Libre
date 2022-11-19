@@ -176,6 +176,8 @@ export const search = async (req, res) => {
         books = [...books, ...genreMatched];
       }
 
+      // Language & edition
+
       // if (req.query.language) {
       //   let languageMatched = await getBooksBasedOnLanguage(req.query.language);
       //   books = [...books, ...languageMatched];
@@ -186,7 +188,7 @@ export const search = async (req, res) => {
       //   books = [...books, ...editionMatched];
       // }
 
-      
+
 
 
       if (books.length === 0) {
