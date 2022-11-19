@@ -34,40 +34,41 @@ export const uploadBook = async (req, res) => {
         return res.status(400).json({error : "Book Already Exists"});
     }
     // check for duplicate author in database
-    if(book.author.length) {
-        for(let author of book.author) {
-            let author_id;
-            const response = await checkExistingAuthor(author);
-            if(response.length == 0) {
-                const response = await addNewAuthor(author);
-                author_id = response.insertId;
-            } else {
-                author_id = response[0].id;
-            }
-
-            // entry in author_book junction table
-            const response2 = await addBookAuthor(author_id, book.id);
-            console.log(response2);
-        }
+    if(typeof book.author === 'string') {
+        book.author = [book.author];
     }   
+    for(let author of book.author) {
+        let author_id;
+        const response = await checkExistingAuthor(author);
+        if(response.length == 0) {
+            const response = await addNewAuthor(author);
+            author_id = response.insertId;
+        } else {
+            author_id = response[0].id;
+        }
+
+        // entry in author_book junction table
+        const response2 = await addBookAuthor(author_id, book.id);
+        console.log(response2);
+    }
     // check for duplicate genre in database
-    if(book.genre.length) {
-        for(let genre of book.genre) {
-            let genre_id;
-            const response = await checkExistingGenre(genre);
-            if(response.length == 0) {
-                const response = await addNewGenre(genre);
-                genre_id = response.insertId;
-            } else {
-                genre_id = response[0].id;
-            }
-
-            // entry in author_book junction table
-            const response2 = await addBookGenre(book.id, genre_id);
-            console.log(response2);
-        }
+    if(typeof book.genre === 'string') {
+        book.genre = [book.genre];
     }   
-    
+    for(let genre of book.genre) {
+        let genre_id;
+        const response = await checkExistingGenre(genre);
+        if(response.length == 0) {
+            const response = await addNewGenre(genre);
+            genre_id = response.insertId;
+        } else {
+            genre_id = response[0].id;
+        }
+
+        // entry in author_book junction table
+        const response2 = await addBookGenre(book.id, genre_id);
+        console.log(response2);
+    }
     console.log(book);
 
     const ebookFile = req.files.ebook;

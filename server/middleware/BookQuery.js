@@ -104,7 +104,6 @@ export const query = async (req, res) => {
  */
  export const search = async (req, res) => {
 
-  console.log(req.query);
   const keyword = req.query.query;  // The type of query (list criteria)
  
   // Initialize empty return JSON

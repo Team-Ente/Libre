@@ -138,7 +138,7 @@ export const getLikeBooks = async (title, genre) => {
 export const getBooksBasedOnTitle = async (title) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            db.execute('SELECT * FROM `libredbbeta`.`book` WHERE `book`.title LIKE ?', 
+            db.execute('SELECT * FROM `book` WHERE `book`.title LIKE ?', 
             ['%'+title+'%'], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
@@ -155,7 +155,7 @@ export const getBooksBasedOnAuthor = async (authorName) => {
     try {
         console.log(authorName);
         const response = await new Promise((resolve, reject) => {
-            db.execute('SELECT * FROM `libredbbeta`.`book` WHERE `book`.id IN (SELECT book_id FROM  `libredbbeta`.`author_book` WHERE `libredbbeta`.`author_book`.author_id IN (SELECT id FROM  `libredbbeta`.`author` WHERE `libredbbeta`.`author`.name LIKE ?))', 
+            db.execute('SELECT * FROM `book` WHERE `book`.id IN (SELECT book_id FROM  `author_book` WHERE `author_book`.author_id IN (SELECT id FROM  `author` WHERE `author`.name LIKE ?))', 
             ['%'+authorName+'%'], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
@@ -171,7 +171,7 @@ export const getBooksBasedOnAuthor = async (authorName) => {
 export const getBooksBasedOnISBN = async (isbn) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            db.execute('SELECT * FROM `libredbbeta`.`book` WHERE `book`.isbn LIKE ?', 
+            db.execute('SELECT * FROM `book` WHERE `book`.isbn LIKE ?', 
             ['%'+isbn+'%'], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
@@ -188,7 +188,7 @@ export const getBooksBasedOnTopic = async (topicName) => {
     try {
         topicName = topicName.toLowerCase();
         const response = await new Promise((resolve, reject) => {
-            db.execute('SELECT * FROM `libredbbeta`.`book` WHERE `book`.id IN (SELECT book_id FROM  `libredbbeta`.`book_genre` WHERE `libredbbeta`.`book_genre`.genre_id IN (SELECT id FROM  `libredbbeta`.`genre` WHERE `libredbbeta`.`genre`.name LIKE ?))', 
+            db.execute('SELECT * FROM `book` WHERE `book`.id IN (SELECT book_id FROM  `book_genre` WHERE `book_genre`.genre_id IN (SELECT id FROM  `genre` WHERE `genre`.name LIKE ?))', 
             ['%'+topicName+'%'], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
