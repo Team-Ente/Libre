@@ -1,7 +1,3 @@
-import { EPub } from 'epub2';
-import Jimp from 'jimp';
-import editJsonFile from 'edit-json-file';
-
 import  {
     getAllBooks, 
     getRecentBooks, 
@@ -32,27 +28,8 @@ async function getBookData(book) {
 
   // change to id later (after upload complete)
   let metadata = file.get(book.title);
-  if(metadata) {
-    book.metadata = metadata;
-    return book;
-  }
-  // const epub = await EPub.createAsync("files/" + book.title + ".epub")  // Expensive (>500ms / book)
-  
-  // const [coverData, mimeType] = await epub.getFileAsync(epub.metadata.cover);
-
-  // const img = await Jimp.read(coverData);  // Expensive (>200ms / book)
-  // const compressedCoverData = await img.resize(250,360).quality(50).getBufferAsync(mimeType); // Expensive (>500ms / book)
-
-  // var json = epub.metadata;
-  // json["cover"] = compressedCoverData.toString('base64');
-  // json["mimeType"] = mimeType;
-
-  // // append to bookInfo object
-  // file.set(book.title,json);
-
-  // file.save();
-
-  // return json;
+  book.metadata = metadata;
+  return book;
 }
 
 /**
