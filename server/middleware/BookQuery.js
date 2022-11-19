@@ -115,20 +115,12 @@ export const search = async (req, res) => {
       let isbnMatched = await getBooksBasedOnISBN(keyword);
       let topicMatched = await getBooksBasedOnTopic(keyword);
 
-      let tempBooks = [
+      let books = [
         ...authorMatched,
         ...titleMatched,
         ...isbnMatched,
         ...topicMatched,
       ];
-
-      let books = [];
-
-      for (const book of tempBooks) {
-        if (!books.includes(book)) {
-          books.push(book);
-        }
-      }
 
       let ids = [];
 
