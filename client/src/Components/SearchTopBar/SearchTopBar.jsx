@@ -15,25 +15,27 @@ function SearchTopBar() {
 
   return (
     <div>
-    <div className='toprow'>
-      <Logo2 />
-      <div className='header-search'>
-        <form className='search-form'>
-            <input type={'text'} className='searchbox' placeholder="Search by title, author, ISBN & topic" />
-            <input type='submit' name='q' value='query' hidden/>
-        </form> 
+    <form>
+      <div className='toprow'>
+        <Logo2 />
+        <div className='header-search'>
+          <div className='search-form'>
+              <input type={'text'} className='searchbox' placeholder="Search by title, author, ISBN & topic" />
+              <input type='submit' name='q' value='query' hidden/>
+          </div> 
+        </div>
+        <button className='filter-btn' onClick={advancedToggle}>Filter</button>
+        <Loggeduser />
       </div>
-      <button className='filter-btn' onClick={advancedToggle}>Filter</button>
-      <Loggeduser />
-    </div>
-    <div className='filters'>
-      <div></div>
-      <div className='hidden-filters'>
-        { advancedSearch ? <AdvancedSearch />: <p></p>}
+      <div className='filters'>
+        <div></div>
+        <div className='hidden-filters'>
+          { advancedSearch ? <AdvancedSearch />: <p></p>}
+        </div>
+        <div></div>
+        <div></div>
       </div>
-      <div></div>
-      <div></div>
-    </div>
+    </form>
     </div>
 )
 }
