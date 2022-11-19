@@ -134,12 +134,123 @@ export const getLikeBooks = async (title, genre) => {
     }
 }
 
+export const checkExistingBook = async (book) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT * FROM `book` WHERE `title`=? AND `isbn`=? AND `edition`=? AND `publisher`=? AND `publishing_year`=?', 
+            [book.title, book.isbn, book.edition, book.publisher, book.publishing_year], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export const addNewBook = async (book) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            db.execute('INSERT INTO  `book` (`title`, `added_on`, `rating`, `language`, `publisher`, `isbn`, `publishing_year`, `edition`) VALUES (?, ?, ?, ? , ? , ? , ?, ?)', 
-            ['%'+title+'%'], (err, results) => {
+            db.execute('INSERT INTO  `book` (`title`, `added_on`, `rating`, `language`, `publisher`, `isbn`, `publishing_year`, `edition`) VALUES (?, now(), ?, ? , ? , ? , ?, ?)', 
+            [book.title, null, book.language, book.publisher, book.isbn, book.publishing_year, book.edition], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const checkExistingAuthor = async (author) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT * FROM `author` WHERE `name`=?', 
+            [author], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const addNewAuthor = async (author) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('INSERT INTO `author` (`name`) VALUES (?)', 
+            [author], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const addBookAuthor = async (author_id, book_id) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('INSERT INTO `author_book` VALUES (?, ?)', 
+            [author_id, book_id], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const checkExistingGenre = async (genre) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT * FROM `genre` WHERE `name`=?', 
+            [genre], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const addNewGenre = async (genre) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('INSERT INTO `genre` (`name`) VALUES (?)', 
+            [genre], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const addBookGenre = async (book_id, genre_id) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('INSERT INTO `book_genre` VALUES (?, ?)', 
+            [book_id, genre_id], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
             })
