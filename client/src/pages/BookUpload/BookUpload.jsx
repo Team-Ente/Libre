@@ -42,7 +42,7 @@ function BookUpload() {
 
   const topics = [];
   for (let i = 1; i <= topicCounter; i++) {
-    authors.push(<Topic id={i} key={i} />);
+    topics.push(<Topic id={i} key={i} />);
   }
 
   return (
@@ -56,7 +56,7 @@ function BookUpload() {
             <div className="input_box">
               <label className="Labeldetails" >Book Name</label>
               <span></span>
-              <input type="text" name='bookName' required />
+              <input type="text" name='title' required />
             </div>
             
             <div className="input_box">
@@ -85,6 +85,12 @@ function BookUpload() {
               <input type="text" name='format' required />
             </div>
 
+            <div className="input_box">
+              <label className="Labeldetails" >Publishing Year</label>
+              <span></span>
+              <input type="text" name='publishing_year' required />
+            </div>
+
 
             <div className="input_box">
               <label className="Labeldetails" >Edition</label>
@@ -97,19 +103,27 @@ function BookUpload() {
               <span></span>
               <input type="text" name='isbn' required />
             </div>
-            {/* <div className="input_box">
+            <div className="input_box">
               <label className="Labeldetails" ></label>
               <span></span>
               <input type="text" hidden />
-            </div> */}
-            <div className='input-box'>
+            </div>
+            
+            <div className='input_box'>
               <label className="LabeldetailsA" >Author</label>
               <span></span>
               <AiIcons.AiFillPlusCircle onClick={authorIncrease} className="authorbtn" />
               <AiIcons.AiFillMinusCircle onClick={authorDecrease} className="authorbtn" />
               {authors}
             </div>
-            <div className='input-box'>
+
+            <div className="input_box">
+              <label className="Labeldetails" ></label>
+              <span></span>
+              <input type="text" hidden />
+            </div>
+            
+            <div className='input_box'>
               <label className="LabeldetailsA" >Topic</label>
               <span></span>
               <AiIcons.AiFillPlusCircle onClick={topicIncrease} className="authorbtn" />
