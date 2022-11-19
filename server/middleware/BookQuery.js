@@ -176,6 +176,19 @@ export const search = async (req, res) => {
         books = [...books, ...genreMatched];
       }
 
+      // if (req.query.language) {
+      //   let languageMatched = await getBooksBasedOnLanguage(req.query.language);
+      //   books = [...books, ...languageMatched];
+      // }
+
+      // if (req.query.edition) {
+      //   let editionMatched = await getBooksBasedOnEdition(req.query.genre);
+      //   books = [...books, ...editionMatched];
+      // }
+
+      
+
+
       if (books.length === 0) {
         console.log("No books found");
       }
