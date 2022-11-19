@@ -134,6 +134,75 @@ export const getLikeBooks = async (title, genre) => {
     }
 }
 
+// search is done on the basis of title, author, isbn, topic
+export const getBooksBasedOnTitle = async (title) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT * FROM `libredbbeta`.`book` WHERE `book`.title LIKE ?', 
+            ['%'+title+'%'], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getBooksBasedOnAuthor = async (authorName) => {
+    try {
+        console.log(authorName);
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT * FROM `libredbbeta`.`book` WHERE `book`.id IN (SELECT book_id FROM  `libredbbeta`.`author_book` WHERE `libredbbeta`.`author_book`.author_id IN (SELECT id FROM  `libredbbeta`.`author` WHERE `libredbbeta`.`author`.name LIKE ?))', 
+            ['%'+authorName+'%'], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getBooksBasedOnISBN = async (isbn) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT * FROM `libredbbeta`.`book` WHERE `book`.isbn LIKE ?', 
+            ['%'+isbn+'%'], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getBooksBasedOnTopic = async (topicName) => {
+    try {
+        topicName = topicName.toLowerCase();
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT * FROM `libredbbeta`.`book` WHERE `book`.id IN (SELECT book_id FROM  `libredbbeta`.`book_genre` WHERE `libredbbeta`.`book_genre`.genre_id IN (SELECT id FROM  `libredbbeta`.`genre` WHERE `libredbbeta`.`genre`.name LIKE ?))', 
+            ['%'+topicName+'%'], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// search is done on the basis of title, author, isbn, topic
+
 export const checkExistingBook = async (book) => {
     try {
         const response = await new Promise((resolve, reject) => {

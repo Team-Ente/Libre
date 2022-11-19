@@ -1,14 +1,8 @@
-import  {
-    getAllBooks, 
-    getRecentBooks, 
-    getReadingBooks, 
-    getTrendingBooks, 
-    getEditorsPickBooks, 
-    getLikeBooks, 
-    getCompletedBooks, 
-    getBucketBooks,
-    getBookGenre,
-    getBookAuthors
+
+import editJsonFile from 'edit-json-file';
+import {
+  getAllBooks, getBookAuthors, getBookGenre, getBooksBasedOnAuthor, getBooksBasedOnISBN, getBooksBasedOnTitle, getBooksBasedOnTopic, getBucketBooks, getCompletedBooks, getEditorsPickBooks,
+  getLikeBooks, getReadingBooks, getRecentBooks, getTrendingBooks
 } from "../controllers/Books.js";
 
 /**
@@ -26,9 +20,8 @@ async function getBookData(book) {
   book.genre = await getBookGenre(book.id);
   book.authors = await getBookAuthors(book.id);
 
-  // change to id later (after upload complete)
-  let metadata = file.get(book.title);
-  book.metadata = metadata;
+  book.metadata = file.get(book.title);
+  if(!book.metadata) console.log(book.title);
   return book;
 }
 
@@ -103,3 +96,87 @@ export const query = async (req, res) => {
   
 };
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns json containing book list
+ */
+ export const search = async (req, res) => {
+
+  console.log(req.query);
+  const keyword = req.query.query;  // The type of query (list criteria)
+ 
+  // Initialize empty return JSON
+  let retJson = {
+      "books": []
+  };
+
+  try {
+
+      let authorMatched = await getBooksBasedOnAuthor(keyword);
+      let titleMatched = await getBooksBasedOnTitle(keyword);
+      let isbnMatched = await getBooksBasedOnISBN(keyword);
+      let topicMatched = await getBooksBasedOnTopic(keyword);
+
+      var books = [...new Set([...authorMatched, ...titleMatched, ...isbnMatched, ...topicMatched])];
+      
+      // use map to store book id and index
+
+      // var isChecked = new map(); // not working in nodejs
+
+      // for(const book of books) {
+      //   if(!isChecked.has(book.id)) {
+      //     const json = await getBookData(book);
+      //     retJson["books"].push(json);
+      //     isChecked.set(book.id, true);
+      //   }
+      // }
+
+      if(books.length === 0) {
+        console.log("No books found");
+      }
+      
+
+      for (const book of authorMatched) {
+        console.log("Author Matched");
+        console.log(book);
+        //const json = await getBookData(book);
+        //retJson["books"].push(json);
+      }
+
+      for (const book of titleMatched) {
+        console.log("Title Matched");
+        console.log(book);
+        //const json = await getBookData(book);
+        //retJson["books"].push(json);
+      }
+
+      for (const book of isbnMatched) {
+        console.log("ISBN Matched");
+        console.log(book);
+        //const json = await getBookData(book);
+        //retJson["books"].push(json);
+      }
+      
+      for (const book of topicMatched) {
+        console.log("Topic Matched");
+        console.log(book);
+        //const json = await getBookData(book);
+        //retJson["books"].push(json);
+      }
+
+      for (const book of books) {
+
+        const json = await getBookData(book);
+        retJson["books"].push(json);
+      }
+
+      return res.status(200).send(retJson);    
+      
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({error: error});
+  }
+  
+};
