@@ -11,7 +11,7 @@ function getBook(book) {
       author={book.metadata.creator}
       id={book.id}
       info={book}
-      // year = {2001}
+      year = {book.publishing_year}
     />
   );
 }
@@ -25,7 +25,6 @@ function Book(props) {
     }).then(
       (result) => {
         result.json().then((jsonResult) => {
-          const toc = jsonResult.contents;
           const pages = jsonResult.pages;
 
           navigate("/reader", {

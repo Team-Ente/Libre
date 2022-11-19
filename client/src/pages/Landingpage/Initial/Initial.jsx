@@ -6,7 +6,13 @@ import './Initial.css';
 import TopBar from '../../../Components/TopBar/TopBar';
 import BookUpload from '../../BookUpload/BookUpload';
 import Footer from '../../../Components/Footer/Footer';
+import { useNavigate } from 'react-router-dom';
 function Topbar() {
+  const navigate = useNavigate();
+  const search = async (e) => {
+    navigate(`/search?query=${e.target.query.value}`);
+  }
+
   return (
     <Animation>
 
@@ -20,15 +26,15 @@ function Topbar() {
           <table className='element-container'>
             <tr>
               <td>
-                <form>
-                  <input type={'text'} placeholder="Search by title, author, ISBN & topic" className='search'></input>
+                <form onSubmit={search}>
+                  <input type={'text'} name='query' placeholder="Search by title, author, ISBN & topic" className='search'></input>
                   <input type={'submit'} hidden/>
                 </form>
               </td>
               <td>
-                <a href='#' className='search-logo'>
+                <p className='search-logo'>
                   <i><IcoIcons.ImSearch /></i>
-                </a>
+                </p>
               </td>
             </tr>
           </table>

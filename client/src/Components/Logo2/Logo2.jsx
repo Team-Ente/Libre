@@ -5,7 +5,7 @@ import './Logo2.css';
 
 function Logo2() {
   return (
-    <Link to='/home'>
+    <Link to='/'>
     <div className='parent-logo2'>
       <div class="child12">
         <i className='libre-icon2'><IcoIcons.ImBooks /></i>

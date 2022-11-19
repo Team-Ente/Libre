@@ -103,79 +103,101 @@ export const query = async (req, res) => {
  * @returns json containing book list
  */
  export const search = async (req, res) => {
+  console.log(req.query);
 
-  const keyword = req.query.query;  // The type of query (list criteria)
- 
-  // Initialize empty return JSON
+  if (req.query.query) {
+    const keyword = req.query.query;  // The type of query (list criteria)
+  
+    // Initialize empty return JSON
+    let retJson = {
+        "books": []
+    };
+
+    try {
+
+        let authorMatched = await getBooksBasedOnAuthor(keyword);
+        let titleMatched = await getBooksBasedOnTitle(keyword);
+        let isbnMatched = await getBooksBasedOnISBN(keyword);
+        let topicMatched = await getBooksBasedOnTopic(keyword);
+        
+        let books = [];
+        for (const b of authorMatched) {
+          if(!books.includes(b)) books.push(b);
+        }
+        for (const b of titleMatched) {
+          if(!books.includes(b)) books.push(b);
+        }
+        for (const b of isbnMatched) {
+          if(!books.includes(b)) books.push(b);
+        }
+        for (const b of topicMatched) {
+          if(!books.includes(b)) books.push(b);
+        }
+
+        if(books.length === 0) {
+          console.log("No books found");
+        }
+
+        for (const book of books) {
+
+          const json = await getBookData(book);
+          retJson["books"].push(json);
+        }
+
+        return res.status(200).send(retJson);    
+        
+    } catch (error) {
+      console.log(error);
+      return res.status(404).json({error: error});
+    }
+  } else {
+    // Initialize empty return JSON
   let retJson = {
-      "books": []
+    "books": []
   };
 
   try {
-
-      let authorMatched = await getBooksBasedOnAuthor(keyword);
-      let titleMatched = await getBooksBasedOnTitle(keyword);
-      let isbnMatched = await getBooksBasedOnISBN(keyword);
-      let topicMatched = await getBooksBasedOnTopic(keyword);
-      
-      let books = [];
+    let books = [];
+    if (req.query.author) {
+      let authorMatched = await getBooksBasedOnAuthor(req.query.author);
       for (const b of authorMatched) {
         if(!books.includes(b)) books.push(b);
       }
+    }
+    if (req.query.title) {
+      let titleMatched = await getBooksBasedOnTitle(req.query.title);
       for (const b of titleMatched) {
         if(!books.includes(b)) books.push(b);
       }
+    }
+    if (req.query.isbn) {
+      let isbnMatched = await getBooksBasedOnISBN(req.query.isbn);
       for (const b of isbnMatched) {
         if(!books.includes(b)) books.push(b);
       }
-      for (const b of topicMatched) {
+    }
+    if (req.query.genre) {
+      let genreMatched = await getBooksBasedOnTopic(req.query.genre);
+      for (const b of genreMatched) {
         if(!books.includes(b)) books.push(b);
       }
-
-      if(books.length === 0) {
-        console.log("No books found");
-      }
+    }
       
-
-      for (const book of authorMatched) {
-        console.log("Author Matched");
-        console.log(book);
-        //const json = await getBookData(book);
-        //retJson["books"].push(json);
-      }
-
-      for (const book of titleMatched) {
-        console.log("Title Matched");
-        console.log(book);
-        //const json = await getBookData(book);
-        //retJson["books"].push(json);
-      }
-
-      for (const book of isbnMatched) {
-        console.log("ISBN Matched");
-        console.log(book);
-        //const json = await getBookData(book);
-        //retJson["books"].push(json);
-      }
+    if(books.length === 0) {
+      console.log("No books found");
+    }
       
-      for (const book of topicMatched) {
-        console.log("Topic Matched");
-        console.log(book);
-        //const json = await getBookData(book);
-        //retJson["books"].push(json);
-      }
+    for (const book of books) {
 
-      for (const book of books) {
+      const json = await getBookData(book);
+      retJson["books"].push(json);
+    }
 
-        const json = await getBookData(book);
-        retJson["books"].push(json);
-      }
-
-      return res.status(200).send(retJson);    
+    return res.status(200).send(retJson);    
       
   } catch (error) {
     console.log(error);
     return res.status(404).json({error: error});
   }
-  
+  }
 };
