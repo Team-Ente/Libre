@@ -12,6 +12,7 @@ import { Route, Routes } from 'react-router-dom';
 import DiscoverPage from './pages/DiscoverPage/DiscoverPage'
 import AdminLogin from './pages/AdminLogin/AdminLogin';
 import BookUpload from './pages/BookUpload/BookUpload';
+import Pricing from './pages/Pricing/Pricing';
 import './App.css'
 import UserProfile from './pages/UserProfile/UserProfile';
 function App() {
@@ -25,9 +26,10 @@ function App() {
           <Route path ='/adminlogin' element={<AdminLogin />} />
           <Route path ='/bookupload' element={<BookUpload />} />
           <Route path ='/discover' element={<DiscoverPage />} />
+          <Route path ='/pricing' element={<Pricing />} />
           <Route path ='/signup' element={<Signup />} />
-          <Route exact path='/search' element={<SearchResult />} />
-          <Route path='/home' element={<Homepage/>} />
+          <Route exact path='/query' element={<SearchResult />} />
+          <Route path='/home/*' element={<Homepage/>} />
           <Route path='/reader' element={<Reader/>} />
           <Route path='/unauthorized' element={<Error401 />} />
           <Route path='/book' element={<BooksDetails />} />

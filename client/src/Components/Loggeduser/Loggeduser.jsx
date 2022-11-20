@@ -21,7 +21,7 @@ function Loggeduser() {
 
         return (
         <div className="dropdown">
-                <div className="dropdown-btn" onClick={(e) => setIsActive(!isActive)}>Welcome, {user?user.handle:""}</div>
+                <div className="dropdown-btn" onClick={(e) => setIsActive(!isActive)}>Welcome, {user?user.handle:"User"}</div>
                 {isActive && 
                 <div className="dropdown-content">
                         <Link to="/user" className="dropdown-item">
@@ -30,7 +30,8 @@ function Loggeduser() {
                         <a href='/' onClick={logout} className="dropdown-item">
                                 Log out
                         </a>
-                </div>}
+                </div>
+                }
         </div>
         );
 }
