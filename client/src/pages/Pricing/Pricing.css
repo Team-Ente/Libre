@@ -142,3 +142,9 @@
 .pricing-button.is-featured:active {
     background-color: #269aff;
 }
+.pricing-footer {
+    display: block;
+    text-align: center;
+    justify-content: center;
+    margin-left: 50%;
+}
