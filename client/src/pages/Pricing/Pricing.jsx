@@ -1,11 +1,13 @@
 import React from 'react'
 import DefaultTopbar from '../../Components/DefaultTopbar/DefaultTopbar'
 import Footer from '../../Components/Footer/Footer'
+import TopBar from '../../Components/TopBar/TopBar';
 import './Pricing.css'
 function Pricing() {
     return (
         <div>
             <DefaultTopbar />
+            <TopBar pricing={true} />   
             <div class="background-pricing2">
                 <div class="container-pricing">
                     <div class="panel-pricing pricing-table">
