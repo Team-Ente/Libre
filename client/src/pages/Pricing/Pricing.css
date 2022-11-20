@@ -115,7 +115,9 @@
     color: #016FF9;
     display: block;
     font-size: 32px;
-    font-weight: 700;
+    /* font-size: 38px; */
+    font-weight: 900;
+    letter-spacing: 3px;
 }
 
 .pricing-button {
