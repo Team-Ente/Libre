@@ -9,6 +9,7 @@ import * as MdIcons from "react-icons/md";
 import * as SiIcons from "react-icons/si";
 import * as VsIcons from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
+import Footer from '../../../Components/Footer/Footer'
 import Animation from "../Animation";
 import "./Discover.css";
 function Discover() {
@@ -177,6 +178,7 @@ function Discover() {
             <p>Religion</p>
           </div>
         </div>
+        <div classname ="discover-footer" ><Footer /></div>
       </div>
     </Animation>
   );

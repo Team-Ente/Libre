@@ -18,7 +18,7 @@ function BooksDetails() {
         result.json().then((jsonResult) => {
             const toc = jsonResult.contents;
             const pages = jsonResult.pages;
-            
+            console.log(book);
             navigate('/reader', {
               state: {
                 id: book.id,
@@ -26,7 +26,7 @@ function BooksDetails() {
                 // chapter: chapter, 
                 toc: toc, 
                 pages: pages,
-                index: 0,
+                index: book.progress.current_index,
                 book: book.info
               }
             });
