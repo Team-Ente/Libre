@@ -51,10 +51,10 @@ function AdvancedSearch() {
   return (
     <div className='advancedSearchblock'>
         <div className="filter">
-          <i><DropdownSearch dat={language} plc="Language" mul={false} name="language" /></i>
-          <i><input placeholder='Author' className='filtertext' type='text' name='author'/></i>
-          <i><DropdownSearch dat={genre} plc="Book Genre" mul={true} name="genre"/></i>
-          <i><input placeholder='Edition' className='filternumber' type='number' min="1" max="99" name='edition'/></i>
+          <div className='fix'><DropdownSearch dat={language} plc="Language" mul={false} name="language" /></div>
+          <div className='fix'><input placeholder='Author' className='filtertext' type='text' name='author'/></div>
+          <div className='fix'><DropdownSearch dat={genre} plc="Book Genre" mul={true} name="genre"/></div>
+          <div className='fix'><input placeholder='Edition' className='filternumber' type='number' min="1" max="99" name='edition'/></div>
         </div>
     </div>
   )
