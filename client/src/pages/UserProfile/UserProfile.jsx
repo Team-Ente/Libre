@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './UserProfile.css'
-import user from './sami.jpg'
+import user from './sami.png'
 import DefaultTopbar from '../../Components/DefaultTopbar/DefaultTopbar'
 function UserProfile() {
     const [userEdit, setuserEdit] = useState(false);
