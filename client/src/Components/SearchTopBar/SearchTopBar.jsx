@@ -35,9 +35,11 @@ function SearchTopBar() {
         <Logo2 />
         <div className='header-search'>
           <form onSubmit={onSubmit} className='search-form-main'>
-              <input type='text' name='query' className='searchbox-main' placeholder="Search by title, author, ISBN & topic" />
+              <input type='text' name='query' className='searchbox-main' placeholder="Search by title, author, ISBN & topic" required/>
               <input type='submit' hidden/>
-              <div className='hidden-filters-main'>{ advancedSearch ? <AdvancedSearch />: <p></p>}</div>
+              <div className='hidden-filters-main'>
+                <div className={advancedSearch ?'hidefix':'show'}><AdvancedSearch /></div>
+              </div>
           </form>  
         </div>
         <button className='filter-btn' onClick={advancedToggle}>Filter</button>

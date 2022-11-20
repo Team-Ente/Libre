@@ -15,6 +15,7 @@ import BookUpload from './pages/BookUpload/BookUpload';
 import Pricing from './pages/Pricing/Pricing';
 import './App.css'
 import UserProfile from './pages/UserProfile/UserProfile';
+import Contact from './pages/Contact/Contact';
 function App() {
 
 
@@ -27,6 +28,7 @@ function App() {
           <Route path ='/bookupload' element={<BookUpload />} />
           <Route path ='/discover' element={<DiscoverPage />} />
           <Route path ='/pricing' element={<Pricing />} />
+          <Route path ='/contact' element={<Contact />} />
           <Route path ='/signup' element={<Signup />} />
           <Route exact path='/search' element={<SearchResult />} />
           <Route path='/home/*' element={<Homepage/>} />
