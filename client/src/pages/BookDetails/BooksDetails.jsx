@@ -55,7 +55,7 @@ function BooksDetails() {
           <div className='title'>{book.metadata.title}</div>        
           <div className='author'>{book.metadata.creator}</div>
           <div className='summary'>
-          George Orwell's nineteen Eighty-Four is one of the most definitive texts of modern literature. Set in Oceania, one of the three inter-continental superstate that divided the world among themselves after a global war, Orwell's masterful critique of the political structures of the time, works itself out through the story of Winston Smith, a man caught in the webs of a dystopian future, and his clandestine love affair with Julia, a young woman he meets during the course of his work for the government. As much as it is an entertaining read, nineteen Eighty-Four is also a brilliant, and more importantly, a timeless satirical attack on the social and political structures of the world.
+          {book.metadata.summary}
           </div>
         </div>
       </div>

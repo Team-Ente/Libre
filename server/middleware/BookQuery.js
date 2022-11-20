@@ -15,6 +15,7 @@ import {
   getRecentBooks,
   getTrendingBooks,
 } from "../controllers/Books.js";
+import { getUserProgress } from "../controllers/Users.js";
 
 /**
  *
@@ -23,12 +24,15 @@ import {
  * Gets entry from database table and opens the file to get metadata.
  * Opens Book Cover file, compresses and sends as base64 encoded string
  */
-async function getBookData(book) {
+async function getBookData(handle, book) {
   let file = editJsonFile("files/bookInfo.json");
 
   // get book info from database
   book.genre = await getBookGenre(book.id);
   book.authors = await getBookAuthors(book.id);
+
+  // get progress info form database
+  book.progress = (await getUserProgress(handle, book.id))[0];
 
   book.metadata = file.get(book.title);
   if (!book.metadata) console.log(book.title);
@@ -82,7 +86,7 @@ export const query = async (req, res) => {
   try {
     let books = await getBookList(handle, qType, count, genre);
     for (const book of books) {
-      const json = await getBookData(book);
+      const json = await getBookData(req.user.handle, book);
       retJson["books"].push(json);
     }
     return res.status(200).send(retJson);
@@ -138,7 +142,7 @@ export const search = async (req, res) => {
 
       for (const book of books) {
         if (ids.includes(book.id)) {
-          const json = await getBookData(book);
+          const json = await getBookData(req.user.handle, book);
           retJson["books"].push(json);
           ids.splice(ids.indexOf(book.id), 1);
           console.log(ids);
@@ -205,7 +209,7 @@ export const search = async (req, res) => {
 
       for (const book of books) {
         if (ids.includes(book.id)) {
-          const json = await getBookData(book);
+          const json = await getBookData(req.user.handle, book);
           retJson["books"].push(json);
           ids.splice(ids.indexOf(book.id), 1);
           console.log(ids);

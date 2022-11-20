@@ -1,5 +1,7 @@
 import { EPub } from 'epub2';
 import { parse } from "node-html-parser";
+import { getBookId } from '../controllers/Books.js';
+import { addUserProgress, getUserProgress, updateUserProgress } from '../controllers/Users.js';
 
 /**
  * @query {book_name} book
@@ -17,24 +19,48 @@ export const getContents = async (req, res) => {
   }
 
   const book = req.query.book;
+  const userHandle = req.user.handle;
+  const bookId = (await getBookId(book))[0].id;
+
+
   if(! req.query.chapter){  // book contents
     try {
+
+      const userProgress = await getUserProgress(userHandle, bookId);
+      if (userProgress.length === 0) {
+        const response = await addUserProgress(userHandle, bookId);
+        console.log(response);
+      }
+
       const epub = await EPub.createAsync("files/" + book + ".epub");
       return res.status(200).json({
         'contents' : epub.toc,  // for sidebar navigation
-        'pages': epub.flow  // for page navigation
+        'pages': epub.flow,  // for page navigation
+        'progress': userProgress
       });  
 
     } catch (error) {
       return res.status(404).json({error: error});
     }
   } else { // chapter contents
-    // update users book progress
-    
-
     const chapter = req.query.chapter;
     try {
       const epub = await EPub.createAsync("files/" + book + ".epub");
+
+
+      // update users book progress
+      let chapterIndex;
+      epub.flow.find((c,i) => {
+        if(c.id === chapter) {
+          chapterIndex = i;
+          return i;
+        }
+      });
+      const progress = (chapterIndex+1)/epub.flow.length;
+
+      const response = await updateUserProgress(userHandle, bookId, chapterIndex, progress);
+      console.log(response);
+
       // get style as string from all the css files in the epub
   
       let stylesheet = '';
