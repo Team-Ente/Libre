@@ -1,5 +1,6 @@
 import React from 'react'
 import DefaultTopbar from '../../Components/DefaultTopbar/DefaultTopbar'
+import Footer from '../../Components/Footer/Footer'
 import './Pricing.css'
 function Pricing() {
     return (
@@ -48,6 +49,7 @@ function Pricing() {
                     </div>
                 </div>
             </div>
+            <div classname ="pricing-footer" ><Footer /></div>
         </div>
     )
 }
