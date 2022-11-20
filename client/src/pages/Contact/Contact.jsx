@@ -1,22 +1,23 @@
 import React from 'react'
 import './Contact.css'
-import DefaultTopbar from '../../Components/DefaultTopbar/DefaultTopbar'
+import TopBar from '../../Components/TopBar/TopBar'
+import Footer from '../../Components/Footer/Footer'
 function Contact() {
   return (
-    <div>
-        <DefaultTopbar />
+    <div className='contactpage'>
+        <TopBar contact={true} />
         <div className='Hero-text'>
             <h1>Contact us</h1>
             <p>Libre is here to provide you with more information and answers to any questions that you might have and provide you the best experience</p>
         </div>
         <div className='subsection'>
             <h2>Reason for Inquiry</h2>
-            <p>Please select the purpose for your Inquiry</p>
+            {/* <p>Please select the purpose for your Inquiry</p> */}
         </div>
         <div className='query-category'>
             <div className='query-subsection'>
                 <h3>Request a demo</h3>
-                <p>You can ask us for any demonstration of using our product. We are more than happy to help you out</p>
+                <p>You can ask us for any demonstration of using our product. </p>
                 <button>Request Demo</button>
             </div>
             <div className='query-subsection'>
@@ -30,6 +31,7 @@ function Contact() {
                 <button>Customer Support</button>
             </div>
         </div>
+        <Footer />
     </div>
   )
 }
