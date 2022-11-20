@@ -22,7 +22,7 @@ app.use(fileupload());
 
 // book query
 app.get("/books/:qType", bypassCORS, verifyToken, query);
-app.get("/search", bypassCORS, search);
+app.get("/search", bypassCORS, verifyToken, search);
 
 // read book
 app.get("/read", bypassCORS, verifyToken, getContents);

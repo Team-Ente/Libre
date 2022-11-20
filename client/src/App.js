@@ -28,7 +28,7 @@ function App() {
           <Route path ='/discover' element={<DiscoverPage />} />
           <Route path ='/pricing' element={<Pricing />} />
           <Route path ='/signup' element={<Signup />} />
-          <Route exact path='/query' element={<SearchResult />} />
+          <Route exact path='/search' element={<SearchResult />} />
           <Route path='/home/*' element={<Homepage/>} />
           <Route path='/reader' element={<Reader/>} />
           <Route path='/unauthorized' element={<Error401 />} />
