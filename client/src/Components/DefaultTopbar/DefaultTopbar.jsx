@@ -8,7 +8,7 @@ function DefaultTopbar() {
     <div>
         <div className='usertopbar'>
             <Logo2 />
-            <Loggeduser />
+            {/* <Loggeduser /> */}
         </div>
     </div>
   )
