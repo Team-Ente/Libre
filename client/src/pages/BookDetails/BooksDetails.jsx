@@ -26,7 +26,8 @@ function BooksDetails() {
                 // chapter: chapter, 
                 toc: toc, 
                 pages: pages,
-                index: 0
+                index: 0,
+                book: book.info
               }
             });
 

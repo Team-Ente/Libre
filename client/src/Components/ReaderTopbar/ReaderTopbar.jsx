@@ -4,11 +4,12 @@ import Loggeduser from "../Loggeduser/Loggeduser"
 import './ReaderTopbar.css'
 import { Link } from 'react-router-dom'
 import { BiArrowBack } from "react-icons/bi";
-function ReaderTopbar() {
+function ReaderTopbar(props) {
+  console.log(props);
   return (
     <div>
         <div className='usertopbar'>
-            <Link to='/book'><i className='backicon'><BiArrowBack /></i></Link>
+            <Link to='/book' state={props.info}><i className='backicon'><BiArrowBack /></i></Link>
             <Loggeduser />
         </div>
     </div>

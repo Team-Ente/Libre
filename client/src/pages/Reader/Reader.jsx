@@ -9,9 +9,12 @@ function Reader() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  console.log(location.state);
+
   const [countPages, setCountPages] = useState(1);
   const pages = location.state ? location.state.pages : null;
   const book = location.state ? location.state.title : null;
+  const info = location.state ? location.state.book : null;
   const [currentPageIndex, setCurrentPageIndex] = useState(location.state ? location.state.index : 0);
   const [fontSize, setFontSize] = useState(1);
   const [contents, setContents] = useState([""]);
@@ -136,7 +139,7 @@ function Reader() {
   return (
     <div>
       <div className='bookheaderbar'>
-        <ReaderTopbar />
+        <ReaderTopbar info={info}/>
         <header className='book-name'>
           <span>{book}</span>  
         </header>

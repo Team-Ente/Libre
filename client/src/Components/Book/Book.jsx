@@ -34,6 +34,7 @@ function Book(props) {
               // toc: toc,
               pages: pages,
               index: 0,
+              book: props.info
             },
           });
         });

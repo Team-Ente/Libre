@@ -19,6 +19,7 @@ function Card(props) {
               title: props.info.title,
               pages: pages,
               index: 0,
+              book: props.info
             },
           });
         });
