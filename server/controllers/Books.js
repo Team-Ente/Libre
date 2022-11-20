@@ -201,6 +201,38 @@ export const getBooksBasedOnTopic = async (topicName) => {
     }
 }
 
+export const getBooksBasedOnLanguage = async (language) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT * FROM `book` WHERE `book`.language = ?', 
+            [language], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getBooksBasedOnEdition = async (edition) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            db.execute('SELECT * FROM `book` WHERE `book`.edition = ?', 
+            [edition], (err, results) => {
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // search is done on the basis of title, author, isbn, topic
 
 export const checkExistingBook = async (book) => {

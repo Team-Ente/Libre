@@ -162,31 +162,34 @@ export const search = async (req, res) => {
       if (req.query.author) {
         let authorMatched = await getBooksBasedOnAuthor(req.query.author);
         books = [...books, ...authorMatched];
-        // for (const b of authorMatched) {
-        //   if (!books.includes(b)) books.push(b);
-        // }
       }
       if (req.query.title) {
         let titleMatched = await getBooksBasedOnTitle(req.query.title);
         books = [...books, ...titleMatched];
-        // for (const b of titleMatched) {
-        //   if (!books.includes(b)) books.push(b);
-        // }
       }
       if (req.query.isbn) {
         let isbnMatched = await getBooksBasedOnISBN(req.query.isbn);
         books = [...books, ...isbnMatched];
-        // for (const b of isbnMatched) {
-        //   if (!books.includes(b)) books.push(b);
-        // }
       }
       if (req.query.genre) {
         let genreMatched = await getBooksBasedOnTopic(req.query.genre);
         books = [...books, ...genreMatched];
-        // for (const b of genreMatched) {
-        //   if (!books.includes(b)) books.push(b);
-        // }
       }
+
+      // Language & edition
+
+      // if (req.query.language) {
+      //   let languageMatched = await getBooksBasedOnLanguage(req.query.language);
+      //   books = [...books, ...languageMatched];
+      // }
+
+      // if (req.query.edition) {
+      //   let editionMatched = await getBooksBasedOnEdition(req.query.genre);
+      //   books = [...books, ...editionMatched];
+      // }
+
+
+
 
       if (books.length === 0) {
         console.log("No books found");
@@ -207,9 +210,6 @@ export const search = async (req, res) => {
           ids.splice(ids.indexOf(book.id), 1);
           console.log(ids);
         }
-
-        // const json = await getBookData(book);
-        // retJson["books"].push(json);
       }
 
       return res.status(200).send(retJson);
