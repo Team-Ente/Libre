@@ -92,7 +92,8 @@
 }
 
 .pricing-features {
-    color: #016FF9;
+    /* color: #016FF9; */
+    color:black;
     font-weight: 600;
     letter-spacing: 1px;
     margin: 50px 0 25px;
@@ -101,7 +102,7 @@
 
 .pricing-features-item {
     border-top: 1px solid #e1f1ff;
-    font-size: 12px;
+    font-size: 14.5px;
     line-height: 1.5;
     padding: 15px 0;
 }
