@@ -1,0 +1,15 @@
+.Hero-text {
+    text-align: center;
+    margin: 150px 0px;
+}
+.Hero-text > p {
+    font-size: 28px;
+    padding: 0px 300px;
+}
+.subsection {
+    text-align: center;
+}
+.query-category {
+    text-align: center;
+
+}
