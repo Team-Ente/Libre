@@ -21,7 +21,7 @@ function Loggeduser() {
 
         return (
         <div className="dropdown">
-                <div className="dropdown-btn" onClick={(e) => setIsActive(!isActive)}>Welcome, {user?user.handle:"User"}</div>
+                <div className="dropdown-btn" onClick={(e) => setIsActive(!isActive)}>{user?user.handle:"User"}</div>
                 {isActive && user ? <div className="dropdown-content">
                         <Link to="/user" className="dropdown-item">
                                 Settings
