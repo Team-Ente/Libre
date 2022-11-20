@@ -25,7 +25,6 @@ function Book(props) {
       (result) => {
         result.json().then((jsonResult) => {
           const pages = jsonResult.pages;
-
           navigate("/reader", {
             state: {
               id: props.id,
@@ -33,7 +32,7 @@ function Book(props) {
               // chapter: chapter,
               // toc: toc,
               pages: pages,
-              index: 0,
+              index: props.info.progress.current_index,
               book: props.info
             },
           });

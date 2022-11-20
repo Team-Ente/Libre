@@ -9,8 +9,6 @@ function Reader() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  console.log(location.state);
-
   const [countPages, setCountPages] = useState(1);
   const pages = location.state ? location.state.pages : null;
   const book = location.state ? location.state.title : null;
@@ -36,21 +34,6 @@ function Reader() {
     }
   }  
   
-//   useEffect( () => {
-//   const navigateToChapter = async (chapterIndex) => {
-//     console.log(chapterIndex);
-//     navigate('/reader', {
-//       state: {
-//         id: location.state.id,
-//         title: book,
-//         // chapter: chapter, 
-//         // toc: toc, 
-//         pages: pages,
-//         index: chapterIndex
-//       }
-//     });
-//   }
-// }, []);
 
   const reloadIframe = () => {
     for (let i=0; i<countPages; i++){
@@ -119,7 +102,7 @@ function Reader() {
   useEffect(() => {
     // check logged in user
     if(!localStorage.getItem("logged-in-user")) {
-      navigate("/unauthorized");
+      navigate("/login");
     }
 
     if(!location.state) {
