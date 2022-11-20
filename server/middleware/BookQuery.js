@@ -7,6 +7,8 @@ import {
   getBooksBasedOnISBN,
   getBooksBasedOnTitle,
   getBooksBasedOnTopic,
+  getBooksBasedOnLanguage,
+  getBooksBasedOnEdition,
   getBucketBooks,
   getCompletedBooks,
   getEditorsPickBooks,
@@ -197,18 +199,15 @@ export const search = async (req, res) => {
 
       //Language & edition
 
-      // if (req.query.language) {
-      //   let languageMatched = await getBooksBasedOnLanguage(req.query.language);
-      //   books = [...books, ...languageMatched];
-      // }
+      if (req.query.language) {
+        let languageMatched = await getBooksBasedOnLanguage(req.query.language);
+        books = [...books, ...languageMatched];
+      }
 
-      // if (req.query.edition) {
-      //   let editionMatched = await getBooksBasedOnEdition(req.query.genre);
-      //   books = [...books, ...editionMatched];
-      // }
-
-
-
+      if (req.query.edition) {
+        let editionMatched = await getBooksBasedOnEdition(req.query.edition);
+        books = [...books, ...editionMatched];
+      }
 
       if (books.length === 0) {
         console.log("No books found");
