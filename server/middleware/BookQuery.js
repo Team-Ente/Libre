@@ -13,7 +13,7 @@ import {
   getLikeBooks,
   getReadingBooks,
   getRecentBooks,
-  getTrendingBooks,
+  getTrendingBooks
 } from "../controllers/Books.js";
 import { getUserProgress } from "../controllers/Users.js";
 
@@ -33,6 +33,19 @@ async function getBookData(handle, book) {
 
   // get progress info form database
   book.progress = (await getUserProgress(handle, book.id))[0];
+
+  book.metadata = file.get(book.title);
+  if (!book.metadata) console.log(book.title);
+  return book;
+}
+
+
+async function getBookDataUnAuth(book) {
+  let file = editJsonFile("files/bookInfo.json");
+
+  // get book info from database
+  book.genre = await getBookGenre(book.id);
+  book.authors = await getBookAuthors(book.id);
 
   book.metadata = file.get(book.title);
   if (!book.metadata) console.log(book.title);
@@ -103,8 +116,7 @@ export const query = async (req, res) => {
  * @returns json containing book list
  */
 export const search = async (req, res) => {
-  console.log(req.query);
-
+  
   if (req.query.query) {
     const keyword = req.query.query; // The type of query (list criteria)
 
@@ -142,12 +154,15 @@ export const search = async (req, res) => {
 
       for (const book of books) {
         if (ids.includes(book.id)) {
-          const json = await getBookData(req.user.handle, book);
+          const json = await getBookDataUnAuth(book);
           retJson["books"].push(json);
           ids.splice(ids.indexOf(book.id), 1);
           console.log(ids);
         }
       }
+      
+
+      console.log(retJson);
 
       return res.status(200).send(retJson);
     } catch (error) {
@@ -180,7 +195,7 @@ export const search = async (req, res) => {
         books = [...books, ...genreMatched];
       }
 
-      // Language & edition
+      //Language & edition
 
       // if (req.query.language) {
       //   let languageMatched = await getBooksBasedOnLanguage(req.query.language);
@@ -209,7 +224,7 @@ export const search = async (req, res) => {
 
       for (const book of books) {
         if (ids.includes(book.id)) {
-          const json = await getBookData(req.user.handle, book);
+          const json = await getBookDataUnAuth(book);
           retJson["books"].push(json);
           ids.splice(ids.indexOf(book.id), 1);
           console.log(ids);
