@@ -13,8 +13,7 @@ function UserProfile() {
     console.log(userPhoneEdit);
   }
 
-  const user = JSON.parse(localStorage.getItem('logged-in-user'));
-
+  const user = JSON.parse(localStorage.getItem("logged-in-user"));
 
   return (
     <div className="userprofile">
@@ -121,7 +120,7 @@ function UserProfile() {
             </form>
           </div>
 
-          <div className="phonenumber">
+          {/* <div className="phonenumber">
             <h3 className="infotitle">Phone Number</h3>
             <form>
               <div className={userEdit ? "accountinfo" : "accountinfonogap"}>
@@ -162,7 +161,7 @@ function UserProfile() {
                 </div>
               </div>
             </form>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
