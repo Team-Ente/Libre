@@ -47,12 +47,13 @@ function Searchresult() {
 const navigate = useNavigate();
  const onSubmit = (e) => {
     e.preventDefault();
-    const genre = e.target.genre.value?`genre=${e.target.genre.value}`:'';
-    const title = e.target.title.value?`title=${e.target.title.value}`:'';
-    const author = e.target.author.value?`author=${e.target.author.value}`:'';
-    const edition = e.target.edition.value?`edition=${e.target.edition.value}`:'';
-    const language = e.target.language.value?`language=${e.target.language.value}`:'';
-    navigate(`/search?${title}&${author}&${genre}&${edition}&${language}`);
+    const query = e.target.query?`query=${e.target.query.value}`:'';
+    const genre = e.target.genre?`genre=${e.target.genre.value}`:'';
+    const title = e.target.title?`title=${e.target.title.value}`:'';
+    const author = e.target.author?`author=${e.target.author.value}`:'';
+    const edition = e.target.edition?`edition=${e.target.edition.value}`:'';
+    const language = e.target.language?`language=${e.target.language.value}`:'';
+    navigate(`/search?${query}&${title}&${author}&${genre}&${edition}&${language}`);
  }
   return (
     <div>
