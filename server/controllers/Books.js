@@ -19,8 +19,8 @@ export const getAllBooks = async (count, genre) => { // done
 export const getReadingBooks = async (handle, count) => { // done
     try {
         const response = await new Promise((resolve, reject) => {
-            db.execute('SELECT * FROM  `book` INNER JOIN (SELECT book_id FROM  `reading` WHERE ? = `reading`.handle) as V2 ON `book`.id = V2.book_id', 
-            [handle], (err, results) => {
+            db.execute('SELECT * FROM  `book` INNER JOIN (SELECT book_id FROM  `reading` WHERE ? = `reading`.handle) as V2 ON `book`.id = V2.book_id LIMIT ?', 
+            [handle, count], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
             })
@@ -35,7 +35,7 @@ export const getReadingBooks = async (handle, count) => { // done
 export const  getCompletedBooks = async (handle, count) => {
     try {
         const response = await new Promise((resolve, reject) => {
-            db.execute('SELECT * FROM `book` INNER JOIN (SELECT book_id FROM `reading` WHERE `reading`.progress > 98) AS V2 ON `book`.id = V2.book_id LIMIT 2', 
+            db.execute('SELECT * FROM `book` INNER JOIN (SELECT book_id FROM `reading` WHERE `reading`.progress > 98) AS V2 ON `book`.id = V2.book_id LIMIT ?', 
             [count], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
@@ -51,13 +51,13 @@ export const  getCompletedBooks = async (handle, count) => {
 export const getBucketBooks = async (handle, count) => { // done
     try {
         const response = await new Promise((resolve, reject) => {
-            db.execute('SELECT * FROM  `book` INNER JOIN (SELECT book_id FROM  `wishlist` WHERE ? = `wishlist`.handle) as V2 ON `book`.id = V2.book_id', 
+            db.execute('SELECT * FROM  `book` INNER JOIN (SELECT book_id FROM  `wishlist` WHERE ? = `wishlist`.handle) as V2 ON `book`.id = V2.book_id LIMIT ?', 
             [handle, count], (err, results) => {
                 if (err) reject(new Error(err.message));
                 resolve(results);
             })
         });
-        // console.log(response);
+        console.log(response);
         return response;
     } catch (error) {
         console.log(error);
