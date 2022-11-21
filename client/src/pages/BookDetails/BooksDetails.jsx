@@ -7,6 +7,7 @@ function BooksDetails() {
 
   const {state} = useLocation();
   const book = state;
+  console.log(book);
 
   const navigate = useNavigate();
   const readBook = async () => {

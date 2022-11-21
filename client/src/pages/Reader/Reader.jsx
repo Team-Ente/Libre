@@ -138,6 +138,7 @@ function Reader() {
             reloadIframe={reloadIframe}
             increaseFontSize={increaseFontSize}
             decreaseFontSize={decreaseFontSize}
+            info={info}
           />
         </aside>
       

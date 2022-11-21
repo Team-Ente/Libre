@@ -23,6 +23,7 @@ function Sidebar(props) {
     const navigateToChapter = (index) => {
         
         console.log(index);
+        props.info.progress.current_index = index;
         navigate('../reader', {
             replace: true,
             state: {
@@ -31,7 +32,8 @@ function Sidebar(props) {
             // chapter: chapter, 
             // toc: toc, 
             pages: data,
-            index: index
+            index: index,
+            book: props.info
             }
         });
         navigate(0);
