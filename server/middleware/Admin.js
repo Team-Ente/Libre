@@ -72,7 +72,7 @@ export const uploadBook = async (req, res) => {
     console.log(book);
 
     const ebookFile = req.files.ebook;
-    ebookFile.mv(`${UPLOADS_FOLDER}/${book.title}`, async (err) => {
+    ebookFile.mv(`${UPLOADS_FOLDER}/${book.title}.epub`, async (err) => {
         if(err) {
             console.log(err);
             return res.status(500).send(err);
@@ -81,7 +81,7 @@ export const uploadBook = async (req, res) => {
         // edit bookInfo.json file
         let file = editJsonFile("files/bookInfo.json");
 
-        const epub = await EPub.createAsync("files/" + book.title)  // Expensive (>500ms / book)
+        const epub = await EPub.createAsync("files/" + book.title +'.epub')  // Expensive (>500ms / book)
         const [coverData, mimeType] = await epub.getFileAsync(epub.metadata.cover);
         const img = await Jimp.read(coverData);  // Expensive (>200ms / book)
         const compressedCoverData = await img.resize(250,360).quality(50).getBufferAsync(mimeType); // Expensive (>500ms / book)
