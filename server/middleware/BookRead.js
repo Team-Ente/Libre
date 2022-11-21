@@ -1,7 +1,7 @@
 import { EPub } from 'epub2';
 import { parse } from "node-html-parser";
 import { getBookId } from '../controllers/Books.js';
-import { addUserProgress, getUserProgress, updateUserProgress } from '../controllers/Users.js';
+import { addUserProgress, addUserWishlist, getUserProgress, updateUserProgress } from '../controllers/Users.js';
 
 /**
  * @query {book_name} book
@@ -111,3 +111,28 @@ export const getContents = async (req, res) => {
   }
   
 };
+
+
+// localhost:3050/wishlist?book=abc
+export const wishlist = async (req, res, next) => {
+  // check for user authentication
+  if(!req.user) {
+    console.log("Not Authorized");
+    return res.status(401).json({error: "User unauthenticated"});
+  }
+
+  try {
+    const book = req.query.book;
+    const userHandle = req.user.handle;
+    const bookId = (await getBookId(book))[0].id;
+
+    const response = await addUserWishlist(userHandle, bookId);
+    console.log(response);
+
+    return res.status(200).json("success");
+
+  } catch (e) {
+    res.status(400).json({error: e})
+  }  
+
+}

@@ -7,7 +7,7 @@ dotenv.config();
 import { uploadBook } from "./middleware/Admin.js";
 import { login, logout, register, verifyToken } from "./middleware/Auth.js";
 import { query, search } from "./middleware/BookQuery.js";
-import { getContents } from "./middleware/BookRead.js";
+import { getContents, wishlist } from "./middleware/BookRead.js";
 import { bypassCORS } from "./middleware/Setup.js";
 
 
@@ -26,6 +26,9 @@ app.get("/search", bypassCORS, verifyToken, search);
 
 // read book
 app.get("/read", bypassCORS, verifyToken, getContents);
+
+// wishlist
+app.post("/wishlist", bypassCORS, verifyToken, wishlist)
 
 // user authentication
 app.post('/register', bypassCORS, register);

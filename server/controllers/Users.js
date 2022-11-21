@@ -109,3 +109,23 @@ export const updateUserProgress = async (handle, bookId, chapterIndex, progress)
     throw error;
   }
 }
+
+export const addUserWishlist = async (handle, bookId) => {
+  try {
+    const response = await new Promise((resolve, reject) => {
+      db.execute(
+        'INSERT INTO `wishlist` VALUES (?, ?)',
+        [handle, bookId],
+        (err, results) => {
+          if (err) {
+            reject(err.message);
+          }
+          resolve(results);
+        }
+      )
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}

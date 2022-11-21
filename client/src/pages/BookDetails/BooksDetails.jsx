@@ -27,16 +27,41 @@ function BooksDetails() {
                 toc: toc, 
                 pages: pages,
                 index: book.progress.current_index,
-                book: book.info
+                book: book
               }
             });
 
         });   
     }, (reason) => {
         console.log(reason);
+        navigate('/login');
     });
 
   };
+
+
+  const addToWishlist = async () => {
+    fetch("http://localhost:3050/wishlist?book="+book.title, {
+        method: "POST",
+        mode: "cors",
+        credentials: "include"
+    }).then((result) => {
+        result.json().then((jsonResult) => {
+            console.log(jsonResult);
+            if(!jsonResult.error) {
+              // show success message
+              alert('Added to Wishlist!');
+            } else {
+              // show error message
+              alert(jsonResult.error);
+            }
+        });   
+    }, (reason) => {
+        console.log(reason);
+        navigate('/login');
+    });
+  }
+
   return (
     <div>
       <DefaultTopbar />
@@ -47,7 +72,7 @@ function BooksDetails() {
         <img src={"data:" + book.metadata.mimeType + ";base64," + book.metadata.cover} alt={book.metadata.title} style={{height: 500}}/>
         <div className='controlbtns'>
           <button className='details-control-btn' onClick={readBook}>Read Now</button>
-          <button className='details-control-btn'>Add to wishlist</button>
+          <button className='details-control-btn' onClick={addToWishlist}>Add to wishlist</button>
         </div>
         </div>
         <div className='description'>
