@@ -75,6 +75,7 @@ function Reader() {
               if(contents.includes(jsonResult.chapter)) return contents;
               setCountPages(countPages + 1);
               setLoading(false);
+              info.progress.current_index = currentPageIndex + idx - 1;
               return [...contents, jsonResult.chapter]
             })
           }
@@ -138,6 +139,7 @@ function Reader() {
             reloadIframe={reloadIframe}
             increaseFontSize={increaseFontSize}
             decreaseFontSize={decreaseFontSize}
+            info={info}
           />
         </aside>
       
