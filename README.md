@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://github.com/Team-Ente/Libre/blob/main/client/src/Components/Logo/library.png" title="book icons"></a>
+    <img href="https://github.com/Team-Ente/Libre/blob/main/client/src/Components/Logo/library.png" title="book icons"/>
 </p>
 
 # Libre
