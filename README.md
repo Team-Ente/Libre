@@ -1,5 +1,5 @@
 <p align="center">
-    <a><img href="https://ibb.co/Ry6h5zS" title="book icons"></a>
+    <img href="client/src/Components/Logo/library.png" title="book icons"/>
 </p>
 
 # Libre
