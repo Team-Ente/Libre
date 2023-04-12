@@ -22,7 +22,7 @@ An Online E-book Reading Platform to browse, read, track and save your progress.
 - Bookmark
 
 # Screenshots
-<a href="https://ibb.co/JdrDsYH"><img src="https://i.ibb.co/JdrDsYH/g.jpg" alt="g" border="0"></a>
-<a href="https://ibb.co/ZT170V0"><img src="https://i.ibb.co/ZT170V0/mpv-shot0003x.jpg" alt="mpv-shot0003x" border="0"></a>
-<a href="https://ibb.co/PYSG0YG"><img src="https://i.ibb.co/PYSG0YG/mpv-shot0002.jpg" alt="mpv-shot0002" border="0"></a>
-<a href="https://ibb.co/WV0Qq0s"><img src="https://i.ibb.co/WV0Qq0s/mpv-shot0003.jpg" alt="mpv-shot0003" border="0"></a>
+<a href="https://ibb.co/JdrDsYH"><img src="https://i.ibb.co/JdrDsYH/g.jpg" alt="g" border="0"></a> <br>
+<a href="https://ibb.co/ZT170V0"><img src="https://i.ibb.co/ZT170V0/mpv-shot0003x.jpg" alt="mpv-shot0003x" border="0"></a> <br>
+<a href="https://ibb.co/PYSG0YG"><img src="https://i.ibb.co/PYSG0YG/mpv-shot0002.jpg" alt="mpv-shot0002" border="0"></a> <br>
+<a href="https://ibb.co/WV0Qq0s"><img src="https://i.ibb.co/WV0Qq0s/mpv-shot0003.jpg" alt="mpv-shot0003" border="0"></a> <br>
