@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://www.flaticon.com/free-icons/book" title="book icons">Book icons created by Smashicons - Flaticon</a>
+    <a href="https://github.com/Team-Ente/Libre/blob/main/client/src/Components/Logo/library.png" title="book icons"></a>
 </p>
 
 # Libre
